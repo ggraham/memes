@@ -87,6 +87,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/Old_Readme.html">readme</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -112,13 +124,13 @@
     <p>Checks if "meme/bin" directory exists, returns green check if yes, or red X if no. Returns the path it searched for.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_meme_install</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>check_meme_install</span>(<span class='kw'>meme_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
+      <th>meme_path</th>
       <td><p>path to "meme/bin" (if unset will search `MEME_BIN` environment variable or `meme_bin` option)</p></td>
     </tr>
     </table>

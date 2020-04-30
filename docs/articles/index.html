@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get sequence from GRanges — get_sequence • dremeR</title>
+<title>Articles • dremeR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Get sequence from GRanges — get_sequence" />
-<meta property="og:description" content="A light wrapper around Biostrings::getSeq to return named DNAStringSets." />
+<meta property="og:title" content="Articles" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-article-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,64 +114,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get sequence from GRanges</h1>
-    
-    <div class="hidden name"><code>get_sequence.Rd</code></div>
+      <h1>Articles</h1>
     </div>
 
-    <div class="ref-description">
-    <p>A light wrapper around Biostrings::getSeq to return named DNAStringSets.</p>
+    <div class="section ">
+      <h3>All vignettes</h3>
+      <p class="section-desc"></p>
+
+      <dl>
+        <dt><a href="Old_Readme.html">readme</a></dt>
+        <dd></dt>
+      </dl>
     </div>
-
-    <pre class="usage"><span class='fu'>get_sequence</span>(<span class='no'>regions</span>, <span class='no'>genome</span>, <span class='kw'>score_column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>regions</th>
-      <td><p>GRanges object</p></td>
-    </tr>
-    <tr>
-      <th>genome</th>
-      <td><p>object of any valid type in showMethods(Biostrings::getSeq).
-Commonly a BSgenome object, or fasta file. Used to lookup sequences in regions.</p></td>
-    </tr>
-    <tr>
-      <th>score_column</th>
-      <td><p>optional name of column (in mcols() of `regions`)
-containing a fasta score, used in AME in partitioning mode. (default: `NULL`)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional arguments passed to Biostrings::getSeq.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Biostrings::DNAStringSet object with names corresponding to genomic coordinates</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Using character string as input</span>
-<span class='no'>genomeFasta</span> <span class='kw'>&lt;-</span> <span class='st'>"path/to/genome.fa"</span>
-<span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>geonmeFasta</span>)
-
-<span class='co'># using BSgenome object for genome</span>
-<span class='no'>drosophila.genome</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>BSgenome.Dmelanogaster.UCSC.dm6</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm6/man/package.html'>BSgenome.Dmelanogaster.UCSC.dm6</a></span>
-<span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>drosophila.genome</span>)
-
-<span class='co'># using GRanges object for regions</span>
-<span class='no'>regions</span> <span class='kw'>&lt;-</span> <span class='fu'>GRanges</span>(<span class='kw'>seqnames</span><span class='kw'>=</span><span class='fu'>Rle</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'chrX'</span>, <span class='st'>'chr2L'</span>, <span class='st'>'chr3R'</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)), <span class='fu'>IRanges</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>5</span>))
-<span class='fu'>get_sequence</span>(<span class='no'>regions</span>, <span class='no'>drosophila.genome</span>)
-
-}</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
   </div>
 </div>
 
