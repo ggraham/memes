@@ -3,5 +3,6 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   Old_Readme: Old_Readme.html
-last_built: 2020-05-01T23:39Z
+  integrative_analysis: integrative_analysis.html
+last_built: 2020-05-04T22:51Z
 

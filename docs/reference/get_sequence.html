@@ -97,6 +97,9 @@
     <li>
       <a href="../articles/Old_Readme.html">readme</a>
     </li>
+    <li>
+      <a href="../articles/integrative_analysis.html">Integrative Analysis</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -124,14 +127,15 @@
     <p>A light wrapper around Biostrings::getSeq to return named DNAStringSets.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_sequence</span>(<span class='no'>regions</span>, <span class='no'>genome</span>, <span class='kw'>score_column</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_sequence</span>(<span class='no'>regions</span>, <span class='no'>genome</span>, <span class='no'>score_column</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>regions</th>
-      <td><p>GRanges object</p></td>
+      <td><p>GRanges, or GRangesList object. Will also accept a data.frame
+as long as it can be coerced to a GRanges object.</p></td>
     </tr>
     <tr>
       <th>genome</th>
@@ -157,7 +161,7 @@ containing a fasta score, used in AME in partitioning mode. (default: `NULL`)</p
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Using character string as input</span>
 <span class='no'>genomeFasta</span> <span class='kw'>&lt;-</span> <span class='st'>"path/to/genome.fa"</span>
-<span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>geonmeFasta</span>)
+<span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>genomeFasta</span>)
 
 <span class='co'># using BSgenome object for genome</span>
 <span class='no'>drosophila.genome</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>BSgenome.Dmelanogaster.UCSC.dm6</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm6/man/package.html'>BSgenome.Dmelanogaster.UCSC.dm6</a></span>

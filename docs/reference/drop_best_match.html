@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return tomtom stat information and PWMs for matched motifs — parseTomTom • dremeR</title>
+<title>Drop best match info from tomtom results — drop_best_match • dremeR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Return tomtom stat information and PWMs for matched motifs — parseTomTom" />
-<meta property="og:description" content="Return tomtom stat information and PWMs for matched motifs" />
+<meta property="og:title" content="Drop best match info from tomtom results — drop_best_match" />
+<meta property="og:description" content="Convenience function for dropping all columns created by runTomTom prefixed
+by &quot;best_match_&quot; and the &quot;best_db_name&quot; column. Keeps the &quot;tomtom&quot; data.frame
+column. Can be useful if you want to unnest the data to resort the data" />
 
 
 
@@ -118,46 +120,34 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return tomtom stat information and PWMs for matched motifs</h1>
+    <h1>Drop best match info from tomtom results</h1>
     
-    <div class="hidden name"><code>parseTomTom.Rd</code></div>
+    <div class="hidden name"><code>drop_best_match.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Return tomtom stat information and PWMs for matched motifs</p>
+    <p>Convenience function for dropping all columns created by runTomTom prefixed
+by "best_match_" and the "best_db_name" column. Keeps the "tomtom" data.frame
+column. Can be useful if you want to unnest the data to resort the data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>parseTomTom</span>(<span class='no'>tomtom_xml_path</span>)</pre>
+    <pre class="usage"><span class='fu'>drop_best_match</span>(<span class='no'>res</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tomtom_xml_path</th>
-      <td><p>path to tomtom.xml output</p></td>
+      <th>res</th>
+      <td><p>results of runTomTom</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame:
-    - id: name of query PWM
-    - alt: alternate name of query PWM
-    - match_id: name of matched PWM
-    - match_alt: alt name of matched PWM
-    - match_pvalue: p-value of match
-    - match_evalue: E-value of match
-    - match_qvalue: q-value of match
-    - match_offset: number of letters the query was offset from the target match
-    - match_strand: whether the motif was found on input strand (+) or as reverse-complement (-)
-    - db_name: database source of matched motif
-    - match_motif: universalmotif object containing the PWM that was matched
-    Returns NULL if not matches detected</p>
+    
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>parseTomTom</span>(<span class='st'>"tomtom.xml"</span>)
-}</div></pre>
+
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run FIMO on input sequences — runFimo • dremeR</title>
+<title>Force best tomtom match by id — force_best_match • dremeR</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Run FIMO on input sequences — runFimo" />
-<meta property="og:description" content="NOTE: runs best using `text = TRUE`, setting genomic coordinates in fasta
-headers, and using `parse_genomic_coord = TRUE`." />
+<meta property="og:title" content="Force best tomtom match by id — force_best_match" />
+<meta property="og:description" content="Force best tomtom match by id" />
 
 
 
@@ -119,113 +118,40 @@ headers, and using `parse_genomic_coord = TRUE`." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run FIMO on input sequences</h1>
+    <h1>Force best tomtom match by id</h1>
     
-    <div class="hidden name"><code>runFimo.Rd</code></div>
+    <div class="hidden name"><code>force_best_match.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>NOTE: runs best using `text = TRUE`, setting genomic coordinates in fasta
-headers, and using `parse_genomic_coord = TRUE`.</p>
+    <p>Force best tomtom match by id</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runFimo</span>(
-  <span class='no'>sequences</span>,
-  <span class='no'>motifs</span>,
-  <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='st'>"motif"</span>,
-  <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>parse_genomic_coord</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>skip_matched_sequence</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>max_strand</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>text</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>meme_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>force_best_match</span>(<span class='no'>res</span>, <span class='no'>matches</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sequences</th>
-      <td><p>path to fasta file, or stringset input.</p></td>
+      <th>res</th>
+      <td><p>results from runTomTom</p></td>
     </tr>
     <tr>
-      <th>motifs</th>
-      <td><p>path to .meme format file, or universalmotif/universalmotif list input.</p></td>
-    </tr>
-    <tr>
-      <th>bfile</th>
-      <td><p>path to background file, or special values: "motif", or
-"uniform" to use 0-order frequencies contained in the motif, or a uniform
-letter distribution. (default: "motif")</p></td>
-    </tr>
-    <tr>
-      <th>outdir</th>
-      <td><p>output directory location. Only used if text = FALSE. Default:
-"auto" to autogenerate directory name. Note: if not using a fasta path as
-input, this will be a temporary location unless explicity set.</p></td>
-    </tr>
-    <tr>
-      <th>parse_genomic_coord</th>
-      <td><p>`logical(1)` whether to parse genomic position
-from fasta name. Fasta names must be UCSC format positions (ie
-"chr:start-end"). If names of fasta entries are genomic coordinates and
-parse_genomic_coord == TRUE, results will contain positions of motif matches,
-otherwise FIMO will count positions from 1 to length of fasta file.</p></td>
-    </tr>
-    <tr>
-      <th>skip_matched_sequence</th>
-      <td><p>`logical(1)` whether or not to include the DNA
-sequence of the match. Default: `FALSE`. Note: jobs will complete faster if
-set to FALSE. Other utilities can be used to lookup the sequence if
-`parse_genomic_coord` is `TRUE`.</p></td>
-    </tr>
-    <tr>
-      <th>max_strand</th>
-      <td><p>if match is found on both strands, only report strand with
-best match.</p></td>
-    </tr>
-    <tr>
-      <th>text</th>
-      <td><p>`logical(1)` (default: `TRUE`). No output files will be created on the filesystem.
-The results are unsorted and no q-values are computed. This setting allows
-fast searches on very large inputs.</p></td>
-    </tr>
-    <tr>
-      <th>meme_path</th>
-      <td><p>path to `meme/bin/` (optional). Defaut: `NULL`, searches
-"MEME_PATH" environment variable or "meme_path" option.</p></td>
-    </tr>
-    <tr>
-      <th>silent</th>
-      <td><p>`logical(1)` whether to suppress stdout/stderr printing to
-terminal (default: TRUE). NOTE: if `text = TRUE`, setting `silent = TRUE`
-will print all FIMO matches to terminal if the run is successful. Can be
-useful for troubleshooting.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>additional commandline arguments to fimo see:
-<code>http://meme-suite.org/doc/fimo.html?man_type=web</code></p></td>
+      <th>matches</th>
+      <td><p>named vector where name is the input motif id, and value is the match_id to use as the new best match</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>GenomicRanges object contining positions of each match. Note: if
-  `parse_genomic_coords = FALSE`, each `seqnames` entry will be the fasta
-  header, and start/end will be the position within that sequence of the
-  match. It is a good idea to use `parse_genomic_coords = TRUE`.</p>
+    <p>`res` with new best_* columns and re-ranked tomtom data in the `tomtom` list column for the updated entries.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>seq</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_sequences.html'>create_sequences</a></span>()
-<span class='co'># sequences must have names in their fasta headers</span>
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>seq</span>) <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='no'>seq</span>)
-<span class='no'>motif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>()
-<span class='fu'>runFimo</span>(<span class='no'>seq</span>, <span class='no'>motif</span>, <span class='kw'>parse_genomic_coord</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># TODO: UPDATE THIS TO A WORKING EXAMPLE</span>
+<span class='no'>motif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>()</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'treeio':</span>
+#&gt; <span class='message'>  method     from</span>
+#&gt; <span class='message'>  root.phylo ape </span></div><div class='input'><span class='no'>db</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/db/fly_factor_survey_id.meme"</span>)
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='runTomTom.html'>runTomTom</a></span>(<span class='no'>motif</span>)</div><div class='output co'>#&gt; <span class='error'>Error in f(path = path): No path defined or detected</span></div><div class='input'><span class='fu'>force_best_match</span>(<span class='no'>res</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"id"</span> <span class='kw'>=</span> <span class='st'>"update"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'res' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
