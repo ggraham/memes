@@ -230,9 +230,23 @@
     <span class="fu"><a href="../reference/runDreme.html">runDreme</a></span>(<span class="no">.x</span>, <span class="st">"shuffle"</span>)
   }) <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"binding_type"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"dodgerblue4"</span>))(<span class="fl">255</span>)
-<span class="kw pkg">universalmotif</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/compare_motifs.html">compare_motifs</a></span>(<span class="no">dreme_by_binding</span>$<span class="no">motif</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"PCC"</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">pheatmap</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">cols</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">1</span>/<span class="fl">255</span>))</pre></body></html></div>
+<p>Rename the motifs to indicate the binding category they were discovered in.</p>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">dreme_by_binding_renamed</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_binding</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">binding_type</span>, <span class="no">seq</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"_"</span>)) <span class="kw">%&gt;%</span>
+  <span class="co"># update_motifs updates the information in the special `motif` column</span>
+  <span class="fu"><a href="../reference/update_motifs.html">update_motifs</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"dodgerblue4"</span>))(<span class="fl">255</span>)
+
+<span class="no">anno.df</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_binding_renamed</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">id</span>, <span class="no">binding_type</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tibble</span><span class="kw ns">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span>(<span class="st">"id"</span>)
+
+<span class="no">dreme_by_binding_renamed</span> <span class="kw">%&gt;%</span>
+  {<span class="kw pkg">universalmotif</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/compare_motifs.html">compare_motifs</a></span>(<span class="no">.</span>$<span class="no">motif</span>, <span class="kw">method</span> <span class="kw">=</span> <span class="st">"PCC"</span>)} <span class="kw">%&gt;%</span>
+  <span class="kw pkg">pheatmap</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">cols</span>,
+                     <span class="kw">breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">1</span>/<span class="fl">255</span>),
+                     <span class="kw">annotation_col</span> <span class="kw">=</span> <span class="no">anno.df</span>,
+                     <span class="kw">show_colnames</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 </div>
   </div>
 
