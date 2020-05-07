@@ -96,8 +96,11 @@
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/ame</span>
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/fimo</span>
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/tomtom</span></pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">#"../inst/extdata/peaks/e93_chr3.csv"</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># TODO: Change this to use system.file(extadata/etc.) once example data is finalized.</span>
+<span class="co">#"../inst/extdata/peaks/e93_chr3.csv"</span>
 <span class="co">#system.file("extdata/peaks/e93_chr3.csv")</span>
+<span class="fu"><a href="https://rdrr.io/r/base/warning.html">warning</a></span>(<span class="st">"Remember to update the correct file path"</span>)
+<span class="co">#&gt; Warning: Remember to update the correct file path</span>
 <span class="no">peaks</span> <span class="kw">&lt;-</span> <span class="st">"../inst/extdata/peaks/e93_chr3.csv"</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>() <span class="kw">%&gt;%</span>
   <span class="no">GRanges</span></pre></body></html></div>
@@ -134,10 +137,7 @@
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co">#options(meme_db = )</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="st">"../inst/extdata/db/fly_factor_survey_id.meme"</span>)
 <span class="no">all_res</span> <span class="kw">&lt;-</span> <span class="no">dreme_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="kw">dist</span> <span class="kw">=</span> <span class="st">"ed"</span>)
-<span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
-<span class="co">#&gt;   method     from</span>
-<span class="co">#&gt;   root.phylo ape</span></pre></body></html></div>
+  <span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="kw">dist</span> <span class="kw">=</span> <span class="st">"ed"</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="fl">3</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>

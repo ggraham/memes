@@ -192,8 +192,8 @@
 <p><strong>Output Types</strong>:</p>
 <p><code><a href="reference/runDreme.html">runDreme()</a></code>, and <code><a href="reference/runTomTom.html">runTomTom()</a></code> return data.frames with special columns. The <code>motif</code> column contains <code>universalmotif</code> objects, with 1 entry per row. The remaining columns describe the properties of each returned motif. The following column names are special in that their values are used when running <code>update_motifs</code> to alter the properties of the motifs stored in the <code>motif</code> column. Be careful about changing these values.</p>
 <ul>
-<li>id</li>
-<li>alt</li>
+<li>name</li>
+<li>altname</li>
 <li>family</li>
 <li>organism</li>
 <li>strand</li>
@@ -254,14 +254,14 @@
 <span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/create_motif.html">create_motif</a></span>(<span class="st">"CMATTACN"</span>, <span class="kw">altname</span> <span class="kw">=</span> <span class="st">"testMotif"</span>)
 <span class="no">tomtom_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runTomTom.html">runTomTom</a></span>(<span class="no">m</span>)</pre></div>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="no">tomtom_results</span>
-<span class="co">#&gt;      id       alt family organism consensus alphabet strand icscore nsites</span>
+<span class="co">#&gt;    name   altname family organism consensus alphabet strand icscore nsites</span>
 <span class="co">#&gt; 1 motif testMotif   &lt;NA&gt;     &lt;NA&gt;  CMATTACN      DNA     +-      13     NA</span>
 <span class="co">#&gt;   bkgsites pval qval eval</span>
 <span class="co">#&gt; 1       NA   NA   NA   NA</span>
 <span class="co">#&gt;                                                                  motif</span>
 <span class="co">#&gt; 1 &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span>
-<span class="co">#&gt;   best_match_id best_match_alt best_match_pvalue best_match_evalue</span>
-<span class="co">#&gt; 1    prd_FlyReg  FBgn0003145_2          7.38e-06           0.00449</span>
+<span class="co">#&gt;   best_match_name best_match_altname best_match_pvalue best_match_evalue</span>
+<span class="co">#&gt; 1      prd_FlyReg      FBgn0003145_2          7.38e-06           0.00449</span>
 <span class="co">#&gt;   best_match_qvalue         best_db_name</span>
 <span class="co">#&gt; 1            0.0079 fly_factor_survey_id</span>
 <span class="co">#&gt;                                                       best_match_motif</span>
