@@ -85,13 +85,18 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># temporary</span>
-<span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span>$<span class="fu">set</span>(<span class="kw">eval</span> <span class="kw">=</span> <span class="no">F</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GenomicRanges</span>))</pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/check_meme_install.html">check_meme_install</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co">#"../inst/extdata/peaks/e93_chr3.csv"</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/check_meme_install.html">check_meme_install</a></span>()
+<span class="co">#&gt; checking main install</span>
+<span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin</span>
+<span class="co">#&gt; checking util installs</span>
+<span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/dreme</span>
+<span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/ame</span>
+<span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/fimo</span>
+<span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/tomtom</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co">#"../inst/extdata/peaks/e93_chr3.csv"</span>
 <span class="co">#system.file("extdata/peaks/e93_chr3.csv")</span>
 <span class="no">peaks</span> <span class="kw">&lt;-</span> <span class="st">"../inst/extdata/peaks/e93_chr3.csv"</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>() <span class="kw">%&gt;%</span>
@@ -99,7 +104,7 @@
 <div id="motifs-in-opening-vs-closing-sites" class="section level3">
 <h3 class="hasAnchor">
 <a href="#motifs-in-opening-vs-closing-sites" class="anchor"></a>Motifs in opening vs closing sites</h3>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># These data use the dm3 reference genome</span>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># These data use the dm3 reference genome</span>
 <span class="no">dm.genome</span> <span class="kw">&lt;-</span> <span class="kw pkg">BSgenome.Dmelanogaster.UCSC.dm3</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm3/man/package.html">BSgenome.Dmelanogaster.UCSC.dm3</a></span>
 
 <span class="co"># compute summits using the summit_position column</span>
@@ -117,26 +122,34 @@
 <span class="no">by_sens</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span>(<span class="fu">mcols</span>(<span class="no">.</span>)$<span class="no">e93_sensitive_behavior</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">dreme_by_sens_vs_static</span> <span class="kw">&lt;-</span> <span class="no">by_sens</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Increasing"</span>, <span class="st">"Decreasing"</span>)] <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">dreme_by_sens_vs_static</span> <span class="kw">&lt;-</span> <span class="no">by_sens</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Increasing"</span>, <span class="st">"Decreasing"</span>)] <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="kw">function</span>(<span class="no">seq</span>){
     <span class="fu"><a href="../reference/runDreme.html">runDreme</a></span>(<span class="no">seq</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="no">by_sens</span>$<span class="no">Static</span>)
-  })</pre></body></html></div>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">dreme_results</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_sens_vs_static</span> <span class="kw">%&gt;%</span>
+  })
+<span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
+<span class="co">#&gt;   method     from</span>
+<span class="co">#&gt;   root.phylo ape</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">dreme_results</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_sens_vs_static</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"e93_response"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co">#options(meme_db = )</span>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co">#options(meme_db = )</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="st">"../inst/extdata/db/fly_factor_survey_id.meme"</span>)
 <span class="no">all_res</span> <span class="kw">&lt;-</span> <span class="no">dreme_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="kw">dist</span> <span class="kw">=</span> <span class="st">"ed"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="kw">dist</span> <span class="kw">=</span> <span class="st">"ed"</span>)
+<span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
+<span class="co">#&gt;   method     from</span>
+<span class="co">#&gt;   root.phylo ape</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="fl">3</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&lt;&gt;%</span>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&lt;&gt;%</span>
   <span class="fu"><a href="../reference/force_best_match.html">force_best_match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"m01_CSAAAAM"</span> <span class="kw">=</span> <span class="st">"Eip93F_SANGER_10"</span>,
                      <span class="st">"m03_AKGG"</span> <span class="kw">=</span> <span class="st">"pho_SANGER_10"</span>))</pre></body></html></div>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="fl">1</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">all_res</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">label</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">e93_response</span>, <span class="st">" in response to E93"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span>(<span class="no">.</span>$<span class="no">label</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span>(~{
@@ -150,7 +163,12 @@
                        <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>,
                        <span class="kw">rel_heights</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.1</span>, <span class="fl">1</span>)
     )
-  })</pre></body></html></div>
+  })
+<span class="co">#&gt; $`Decreasing in response to E93`</span></pre></body></html></div>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-10-1.png" width="768"></p>
+<pre><code>#&gt; 
+#&gt; $`Increasing in response to E93`</code></pre>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-10-2.png" width="768"></p>
 </div>
 <div id="motif-scanning-with-ame" class="section level3">
 <h3 class="hasAnchor">
@@ -172,70 +190,211 @@
 <span class="no">ame_res</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(-<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span>(<span class="no">evalue</span>))) +
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ecdf.html">stat_ecdf</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">binding_type</span>))</pre></body></html></div>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">ame_res</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">evalue</span> <span class="kw">&lt;</span> <span class="fl">1e-3</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">binding_type</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>()</pre></body></html></div>
-<p>This is too many hits to view</p>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>()
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt; # Groups:   binding_type [3]</span>
+<span class="co">#&gt;   binding_type     n</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;int&gt;</span>
+<span class="co">#&gt; 1 ectopic         32</span>
+<span class="co">#&gt; 2 entopic         28</span>
+<span class="co">#&gt; 3 orphan         131</span></pre></body></html></div>
+<p>This is too many hits to view in this vignette, but you can see that the heatmap will plot motifs by their overlap across groups, where unique motifs are on the left, and shared motifs are on the right.</p>
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">ame_res</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">binding_type</span>)</pre></body></html></div>
-<p>Return top 50 hits</p>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-16-1.png" width="1440"> There is another key consideration for the above visualization and that is that in the FlyFactorSurvey database we used, different TFs can have multiple motif entries in the database which are all detected separately by AME. Here, when returning the top 5 hits from each group, you can see, for example, that a motif matching “Aef1” is reported 3 times within the top 5 hits of the ectopic sites. In this situation, it makes sense to summarize the data at the TF level, instead of the motif level. <strong>Note:</strong> There may be exceptions to this if for example, a TF has multiple DNA binding sequences it can recognize, in which case having multiple hits may reflect a biological property of your sequences. You will have to handle this on a case-by-case basis for interesting hits and different motif databases. Here, we can see that at least for Aef1, the consensus sequences are very similar.</p>
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">ame_res</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">binding_type</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">rank</span> <span class="kw">%in%</span> <span class="fl">1</span>:<span class="fl">50</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">binding_type</span>)</pre></body></html></div>
-<p>Notice there are redundant entries</p>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">rank</span> <span class="kw">%in%</span> <span class="fl">1</span>:<span class="fl">5</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">5</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">binding_type</span>, <span class="no">rank</span>, <span class="no">motif_id</span>, <span class="no">motif_alt_id</span>, <span class="no">consensus</span>)
+<span class="co">#&gt; # A tibble: 5 x 5</span>
+<span class="co">#&gt; # Groups:   binding_type [1]</span>
+<span class="co">#&gt;   binding_type  rank motif_id           motif_alt_id  consensus      </span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;          </span>
+<span class="co">#&gt; 1 ectopic          1 Aef1_FlyReg        FBgn0005694   CAACWACW       </span>
+<span class="co">#&gt; 2 ectopic          2 CG4360-F1-3_SOLEXA FBgn0038787_2 KTTGTTGTTGTWRTN</span>
+<span class="co">#&gt; 3 ectopic          3 Aef1_SANGER_5      FBgn0005694_2 RCAACAACAAC    </span>
+<span class="co">#&gt; 4 ectopic          4 Aef1_SOLEXA        FBgn0005694_3 KGTTGTTGTTGTWRT</span>
+<span class="co">#&gt; 5 ectopic          5 CG7368_SOLEXA_2.5  FBgn0036179_2 KDGKGGGDGGGGGDR</span></pre></body></html></div>
+<p>How to solve this problem will vary with different motif databases. In the FlyFactorSurvey database, the <code>motif_alt_id</code> column contains a unique FBgn number for each TF. For entries of the same TF, the FBgn number is prepended with an <code>_&lt;number&gt;</code>. We can extract the FBgn number to use as a gene-level identifier, and reduce the matches to return 1 match per gene as follows:</p>
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">ame_res</span> <span class="kw">%&gt;%</span>
-  <span class="co"># It may not always be appropriate to do this type of subsetting,</span>
-  <span class="co"># here I do it to simplify the example.</span>
-  <span class="co"># It is a really good idea to look at ALL the data before filtering in this way</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">binding_type</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">rank</span> <span class="kw">%in%</span> <span class="fl">1</span>:<span class="fl">50</span>) <span class="kw">%&gt;%</span>
   <span class="co"># the flyfactor genes have their Flybase gene numbers appended with a _&lt;number&gt; </span>
-  <span class="co"># to make the entries unique, but the gene ID is encoded before the _</span>
+  <span class="co"># this is to make the entries unique, but the gene ID is encoded before the _</span>
+  <span class="co"># so I remove the _&lt;number&gt; with a regex, leaving the FBgn number.</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">gene_id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"_\\d+"</span>, <span class="st">""</span>, <span class="no">motif_alt_id</span>)) <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span>() <span class="kw">%&gt;%</span>
-  <span class="co"># Reduce redundant TF hits by returning only the match with the lowest p-value for each TF</span>
+  <span class="co"># Reduce redundant TF hits by returning only the match with the lowest p-value</span>
+  <span class="co"># for each TF. It is important to group by binding_type because the analyses</span>
+  <span class="co"># were run separately, so these are different results (we want to return the</span>
+  <span class="co"># lowest p-value for each group a motif was found within).</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">binding_type</span>, <span class="no">gene_id</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">adj.pvalue</span> <span class="kw">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">adj.pvalue</span>)) <span class="kw">%&gt;%</span>
   <span class="co"># add new id column to simplify motif name to TF name</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">tfid</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span>(<span class="no">motif_id</span>, <span class="st">"_"</span>)<span class="kw">[[</span><span class="fl">1</span>]][<span class="fl">1</span>]) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">binding_type</span>, <span class="kw">id</span> <span class="kw">=</span> <span class="no">tfid</span>)</pre></body></html></div>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-18-1.png" width="2400"></p>
 </div>
-<div id="experimental" class="section level2">
+<div id="fimo" class="section level2">
 <h2 class="hasAnchor">
-<a href="#experimental" class="anchor"></a>Experimental</h2>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">denovo_motifs</span> <span class="kw">&lt;-</span> <span class="no">all_res</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"denovo_"</span>, <span class="no">best_match_id</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/update_motifs.html">update_motifs</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">by_binding</span> <span class="kw">%&gt;%</span>
-  <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(~{
-    <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">.x</span>, <span class="kw">database</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">denovo_motifs</span>))
-  }) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"binding_type"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">binding_type</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">by_binding</span> <span class="kw">%&gt;%</span>
+<a href="#fimo" class="anchor"></a>FIMO</h2>
+<p>Because we discover a <em>de-novo</em> motif from DREME that matches to E93, it can be useful to scan peaks for motif occurrances to further examine properties of different peak categories.</p>
+<p>Although we could also import the motifs from our local .meme database file, it is also possible to use motifs pulled from a <a href="https://bioconductor.org/packages/release/bioc/html/MotifDb.html"><code>MotifDb</code></a> query as follows.</p>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">e93_motif</span> <span class="kw">&lt;-</span> <span class="kw pkg">MotifDb</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/MotifDb/man/MotifDb.html">MotifDb</a></span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">MotifDb</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/MotifDb/man/query.html">query</a></span>(<span class="st">"Eip93F"</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">universalmotif</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/convert_motifs.html">convert_motifs</a></span>() <span class="kw">%&gt;%</span>
+  <span class="no">.</span><span class="kw">[[</span><span class="fl">1</span>]]
+<span class="co">#&gt; See system.file("LICENSE", package="MotifDb") for use restrictions.</span>
+
+<span class="co"># Rename the motif for simplicity</span>
+<span class="no">e93_motif</span>[<span class="st">"name"</span>] <span class="kw">&lt;-</span> <span class="st">"E93"</span>
+
+<span class="no">e93_motif</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;        Motif name:   E93</span>
+<span class="co">#&gt;    Alternate name:   Eip93F_SANGER_10_FBgn0013948</span>
+<span class="co">#&gt;          Organism:   Dmelanogaster</span>
+<span class="co">#&gt;          Alphabet:   DNA</span>
+<span class="co">#&gt;              Type:   PPM</span>
+<span class="co">#&gt;           Strands:   +-</span>
+<span class="co">#&gt;          Total IC:   12.12</span>
+<span class="co">#&gt;         Consensus:   ACNSCCRAAAWT</span>
+<span class="co">#&gt;      Target sites:   18</span>
+<span class="co">#&gt;        Extra info:   [dataSource] FlyFactorSurvey </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      A    C    N    S C C    R A A    A    W    T</span>
+<span class="co">#&gt; A 0.58 0.05 0.37 0.05 0 0 0.42 1 1 0.84 0.58 0.06</span>
+<span class="co">#&gt; C 0.21 0.68 0.16 0.53 1 1 0.00 0 0 0.00 0.05 0.00</span>
+<span class="co">#&gt; G 0.21 0.11 0.11 0.32 0 0 0.58 0 0 0.00 0.00 0.06</span>
+<span class="co">#&gt; T 0.00 0.16 0.37 0.11 0 0 0.00 0 0 0.16 0.37 0.89</span></pre></body></html></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">fimo_res</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runFimo.html">runFimo</a></span>(<span class="kw">motifs</span> <span class="kw">=</span> <span class="no">e93_motif</span>, <span class="kw">thresh</span> <span class="kw">=</span> <span class="fl">1e-3</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">fimo_res</span>
+<span class="co">#&gt; GRanges object with 1542 ranges and 6 metadata columns:</span>
+<span class="co">#&gt;          seqnames            ranges strand |    motif_id</span>
+<span class="co">#&gt;             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
+<span class="co">#&gt;      [1]    chr3L       66285-66296      + |         E93</span>
+<span class="co">#&gt;      [2]    chr3L       66310-66321      - |         E93</span>
+<span class="co">#&gt;      [3]    chr3L       70891-70902      - |         E93</span>
+<span class="co">#&gt;      [4]    chr3L     135066-135077      + |         E93</span>
+<span class="co">#&gt;      [5]    chr3L     138527-138538      - |         E93</span>
+<span class="co">#&gt;      ...      ...               ...    ... .         ...</span>
+<span class="co">#&gt;   [1538]    chr3R 27548873-27548884      - |         E93</span>
+<span class="co">#&gt;   [1539]    chr3R 27754398-27754409      - |         E93</span>
+<span class="co">#&gt;   [1540]    chr3R 27754407-27754418      + |         E93</span>
+<span class="co">#&gt;   [1541]    chr3R 27780275-27780286      + |         E93</span>
+<span class="co">#&gt;   [1542]    chr3R 27853336-27853347      - |         E93</span>
+<span class="co">#&gt;                          motif_alt_id     score    pvalue    qvalue</span>
+<span class="co">#&gt;                           &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;logical&gt;</span>
+<span class="co">#&gt;      [1] Eip93F_SANGER_10_FBgn0013948      5.22  0.000436      &lt;NA&gt;</span>
+<span class="co">#&gt;      [2] Eip93F_SANGER_10_FBgn0013948     14.25  1.01e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;      [3] Eip93F_SANGER_10_FBgn0013948      5.64  0.000379      &lt;NA&gt;</span>
+<span class="co">#&gt;      [4] Eip93F_SANGER_10_FBgn0013948       4.4  0.000571      &lt;NA&gt;</span>
+<span class="co">#&gt;      [5] Eip93F_SANGER_10_FBgn0013948      10.1  8.96e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;      ...                          ...       ...       ...       ...</span>
+<span class="co">#&gt;   [1538] Eip93F_SANGER_10_FBgn0013948      5.57  0.000391      &lt;NA&gt;</span>
+<span class="co">#&gt;   [1539] Eip93F_SANGER_10_FBgn0013948      7.37  0.000222      &lt;NA&gt;</span>
+<span class="co">#&gt;   [1540] Eip93F_SANGER_10_FBgn0013948      7.84  0.000192      &lt;NA&gt;</span>
+<span class="co">#&gt;   [1541] Eip93F_SANGER_10_FBgn0013948      8.75  0.000145      &lt;NA&gt;</span>
+<span class="co">#&gt;   [1542] Eip93F_SANGER_10_FBgn0013948      4.59  0.000536      &lt;NA&gt;</span>
+<span class="co">#&gt;          matched_sequence</span>
+<span class="co">#&gt;                 &lt;logical&gt;</span>
+<span class="co">#&gt;      [1]             &lt;NA&gt;</span>
+<span class="co">#&gt;      [2]             &lt;NA&gt;</span>
+<span class="co">#&gt;      [3]             &lt;NA&gt;</span>
+<span class="co">#&gt;      [4]             &lt;NA&gt;</span>
+<span class="co">#&gt;      [5]             &lt;NA&gt;</span>
+<span class="co">#&gt;      ...              ...</span>
+<span class="co">#&gt;   [1538]             &lt;NA&gt;</span>
+<span class="co">#&gt;   [1539]             &lt;NA&gt;</span>
+<span class="co">#&gt;   [1540]             &lt;NA&gt;</span>
+<span class="co">#&gt;   [1541]             &lt;NA&gt;</span>
+<span class="co">#&gt;   [1542]             &lt;NA&gt;</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></pre></body></html></div>
+<p>Here we add a count for each motif per peak in the <code>n_motifs</code> column. We also add a column <code>has_motif</code> which will be a binary indicator of whether a peak contains any motifs.</p>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">summit_flank</span> <span class="kw">%&lt;&gt;%</span>
+  <span class="co"># Note, if running FIMO with multiple motifs, this solution will not work</span>
+  <span class="co"># as it will count all motifs within the fimo-results without splitting by motif_id</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span>(<span class="kw">n_motifs</span> <span class="kw">=</span> <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/ranges-count-overlaps.html">count_overlaps</a></span>(<span class="no">.</span>, <span class="no">fimo_res</span>),
+                    <span class="kw">has_motif</span> <span class="kw">=</span> <span class="no">n_motifs</span> <span class="kw">&gt;</span> <span class="fl">0</span>)</pre></body></html></div>
+<p>Ask whether E93 sensitive sites are more likely to have E93 motifs in certain response types. Here we can see that sensitive decreasing sites are more likely to have E93 motifs than sensitive increasing or insensitive static sites.</p>
+<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+  <span class="no">data.frame</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">has_match</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span>(<span class="no">has_motif</span>, <span class="st">"Match"</span>, <span class="st">"No Match"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">e93_sensitive_behavior</span>)) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="kw pkg">forcats</span><span class="kw ns">::</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev</a></span>(<span class="no">has_match</span>)), <span class="kw">position</span> <span class="kw">=</span> <span class="st">"fill"</span>) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span>(<span class="kw">values</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Match"</span> <span class="kw">=</span> <span class="st">"firebrick"</span>,
+                                 <span class="st">"No Match"</span> <span class="kw">=</span> <span class="st">"Black"</span>)) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">"E93 Motif Match"</span>)</pre></body></html></div>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-23-1.png" width="480"></p>
+<p>To investigate whether E93-sensitive sites that open/close/don’t change have different numbers of E93 motifs, we plot the fraction of sites with each number of motifs. Here we can see that in addition to being more likely to contain an E93 motif, sensitive decreasing sites are more likely to to contain 2 or more matches, where 10% contain at least 2 motifs.</p>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+  <span class="co"># currently, group operations are faster as data.frames, so we convert to data.frame</span>
+  <span class="no">data.frame</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">e93_sensitive_behavior</span>, <span class="no">n_motifs</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span>() <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">e93_sensitive_behavior</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">frac</span> <span class="kw">=</span> <span class="no">n</span>/<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">n</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">n_motifs</span>, <span class="no">frac</span>)) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">e93_sensitive_behavior</span>)) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">y</span> <span class="kw">=</span> <span class="st">"Fraction of Sites"</span>,
+         <span class="kw">x</span> <span class="kw">=</span> <span class="st">"Number of E93 Motifs"</span>)</pre></body></html></div>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-24-1.png" width="672"></p>
+<p>Finally, we want to assess whether the quality of E93 motifs is different between sensitivity categories. To examine this, we need to determine which motifs are found in which peaks. We use the <code><a href="https://rdrr.io/pkg/plyranges/man/overlap-joins.html">plyranges::join_overlap_intersect</a></code> to return motif entries appended with peak-level metadata, like the peak id each motif is found within.</p>
+<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="co"># return position of each motif match w/ peak meatadata</span>
+<span class="no">intersect</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/overlap-joins.html">join_overlap_intersect</a></span>(<span class="no">fimo_res</span>)</pre></body></html></div>
+<p>We use the FIMO <code>score</code> as a proxy for quality, where higher scores are better matches to the motif. Here we examine only the best match (highest score) motif within each peak.</p>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">intersect</span> <span class="kw">%&gt;%</span>
+  <span class="no">data.frame</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">id</span>) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">score</span> <span class="kw">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="no">score</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">e93_sensitive_behavior</span>, <span class="no">score</span>)) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">e93_sensitive_behavior</span>), <span class="kw">notch</span> <span class="kw">=</span> <span class="no">T</span>, <span class="kw">width</span> <span class="kw">=</span> <span class="fl">0.5</span>) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">"none"</span>) +
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Response to E93"</span>,
+         <span class="kw">y</span> <span class="kw">=</span> <span class="st">"FIMO Score"</span>)</pre></body></html></div>
+<p><img src="integrative_analysis_files/figure-html/unnamed-chunk-26-1.png" width="288"></p>
+</div>
+<div id="below-is-in-development" class="section level1">
+<h1 class="hasAnchor">
+<a href="#below-is-in-development" class="anchor"></a>Below is in development</h1>
+<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="co"># remove when done</span>
+<span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span>$<span class="fu">set</span>(<span class="kw">eval</span> <span class="kw">=</span> <span class="no">F</span>)</pre></body></html></div>
+<div id="ame-analysis-by-binding-category-using-dreme_results-as-query" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ame-analysis-by-binding-category-using-dreme_results-as-query" class="anchor"></a>AME analysis by binding category (using dreme_results as query??)</h2>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">ame_by_binding</span> <span class="kw">&lt;-</span> <span class="no">by_binding</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(~{
     <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">.x</span>, <span class="kw">database</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">dreme_results</span>))
   }) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"binding_type"</span>) <span class="kw">-&gt;</span> <span class="no">da</span></pre></body></html></div>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">da</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"binding_type"</span>)</pre></body></html></div>
+<p>Plot heatmap of results by binding type.</p>
+<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="no">ame_by_binding</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">binding_type</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">denovo_motifs</span> <span class="kw">&lt;-</span> <span class="no">all_res</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"denovo_"</span>, <span class="no">best_match_id</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/update_motifs.html">update_motifs</a></span>()</pre></body></html></div>
 </div>
 <div id="denovo-motif-similarity-by-binding" class="section level2">
 <h2 class="hasAnchor">
 <a href="#denovo-motif-similarity-by-binding" class="anchor"></a>Denovo motif similarity by binding</h2>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">dreme_by_binding</span> <span class="kw">&lt;-</span> <span class="no">by_binding</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="no">dreme_by_binding</span> <span class="kw">&lt;-</span> <span class="no">by_binding</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(~{
     <span class="fu"><a href="../reference/runDreme.html">runDreme</a></span>(<span class="no">.x</span>, <span class="st">"shuffle"</span>)
   }) <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"binding_type"</span>)</pre></body></html></div>
 <p>Rename the motifs to indicate the binding category they were discovered in.</p>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">dreme_by_binding_renamed</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_binding</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">dreme_by_binding_renamed</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_binding</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="no">binding_type</span>, <span class="no">seq</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"_"</span>)) <span class="kw">%&gt;%</span>
   <span class="co"># update_motifs updates the information in the special `motif` column</span>
   <span class="fu"><a href="../reference/update_motifs.html">update_motifs</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="no">cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"dodgerblue4"</span>))(<span class="fl">255</span>)
+<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="no">cols</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"white"</span>, <span class="st">"dodgerblue4"</span>))(<span class="fl">255</span>)
 
 <span class="no">anno.df</span> <span class="kw">&lt;-</span> <span class="no">dreme_by_binding_renamed</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">id</span>, <span class="no">binding_type</span>) <span class="kw">%&gt;%</span>
@@ -247,6 +406,7 @@
                      <span class="kw">breaks</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fl">1</span>/<span class="fl">255</span>),
                      <span class="kw">annotation_col</span> <span class="kw">=</span> <span class="no">anno.df</span>,
                      <span class="kw">show_colnames</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+</div>
 </div>
   </div>
 

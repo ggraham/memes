@@ -129,13 +129,86 @@
 <div id="the-core-tools" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-core-tools" class="anchor"></a>The Core Tools</h2>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="14%">
+<col width="12%">
+<col width="10%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Function Name</th>
+<th align="center">Use</th>
+<th align="center">Sequence Input</th>
+<th align="center">Motif Input</th>
+<th align="center">Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code><a href="reference/runDreme.html">runDreme()</a></code></td>
+<td align="center">Motif Discovery</td>
+<td align="center">Yes</td>
+<td align="center">No</td>
+<td align="center">data.frame w/ <code>motifs</code> column</td>
+</tr>
+<tr class="even">
+<td align="center"><code><a href="reference/runAme.html">runAme()</a></code></td>
+<td align="center">Motif Enrichment</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">data.frame (optional: <code>sequences</code> column)</td>
+</tr>
+<tr class="odd">
+<td align="center"><code><a href="reference/runFimo.html">runFimo()</a></code></td>
+<td align="center">Motif Scanning</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
+<td align="center">GRanges of motif positions</td>
+</tr>
+<tr class="even">
+<td align="center"><code><a href="reference/runTomTom.html">runTomTom()</a></code></td>
+<td align="center">Motif Comparison</td>
+<td align="center">No</td>
+<td align="center">Yes</td>
+<td align="center">data.frame w/ <code>best_match_motif</code> and <code>tomtom</code> columns*</td>
+</tr>
+</tbody>
+</table>
+<p>* <strong>Note:</strong> if <code><a href="reference/runTomTom.html">runTomTom()</a></code> is run using the results of <code><a href="reference/runDreme.html">runDreme()</a></code>, the results will be joined with the <code><a href="reference/runDreme.html">runDreme()</a></code> results as extra columns. This allows easy comparison of <em>de-novo</em> discovered motifs with their matches.</p>
+<p><strong>Sequence Inputs</strong> can be any of:</p>
+<ol>
+<li>Path to a .fasta formatted file</li>
+<li>
+<code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> (can be generated from GRanges using <code><a href="reference/get_sequence.html">get_sequence()</a></code> helper function)</li>
+</ol>
+<p><strong>Motif Inputs</strong> can be any of:</p>
+<ol>
+<li>A path to a .meme formatted file of motifs to scan against</li>
+<li>A <code>universalmotif</code> object, or list of <code>universalmotif</code> objects</li>
+<li>A <code><a href="reference/runDreme.html">runDreme()</a></code> results object (this allows the results of <code><a href="reference/runDreme.html">runDreme()</a></code> to pass directly to <code><a href="reference/runTomTom.html">runTomTom()</a></code>)</li>
+<li>A combination of all of the above passed as a <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> (e.g. <code><a href="https://rdrr.io/r/base/list.html">list("path/to/database.meme", "dreme_results" = dreme_res)</a></code>)</li>
+</ol>
+<p><strong>Output Types</strong>:</p>
+<p><code><a href="reference/runDreme.html">runDreme()</a></code>, and <code><a href="reference/runTomTom.html">runTomTom()</a></code> return data.frames with special columns. The <code>motif</code> column contains <code>universalmotif</code> objects, with 1 entry per row. The remaining columns describe the properties of each returned motif. The following column names are special in that their values are used when running <code>update_motifs</code> to alter the properties of the motifs stored in the <code>motif</code> column. Be careful about changing these values.</p>
 <ul>
-<li><code><a href="reference/runDreme.html">runDreme()</a></code></li>
-<li><code><a href="reference/runAme.html">runAme()</a></code></li>
-<li><code><a href="reference/runTomTom.html">runTomTom()</a></code></li>
-<li><code><a href="reference/runFimo.html">runFimo()</a></code></li>
+<li>id</li>
+<li>alt</li>
+<li>family</li>
+<li>organism</li>
+<li>strand</li>
+<li>nsites</li>
+<li>bkgsites</li>
+<li>pval</li>
+<li>qval</li>
+<li>eval</li>
 </ul>
-<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif package</a> which provides a framework for manipulating motifs in R.</p>
+<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif package</a> which provides a framework for manipulating motifs in R. The <code>motif</code> columns from <code><a href="reference/runDreme.html">runDreme()</a></code> and <code><a href="reference/runTomTom.html">runTomTom()</a></code> can be used natively with all <code>universalmotif</code> functions (eg <code><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">universalmotif::view_motifs(dreme_results$motif)</a></code>).</p>
+<p><code><a href="reference/runTomTom.html">runTomTom()</a></code> returns a special column: <code>tomtom</code> which is a <code>data.frame</code> of all match data for each input motif. This can be expanded out using <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest(tomtom_results, "tomtom")</a></code>.</p>
+</div>
+<div id="quick-examples" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quick-examples" class="anchor"></a>Quick Examples</h2>
 <div id="motif-discovery-with-dreme" class="section level3">
 <h3 class="hasAnchor">
 <a href="#motif-discovery-with-dreme" class="anchor"></a>Motif Discovery with DREME</h3>
@@ -154,17 +227,19 @@
 
 <span class="co"># Genome object</span>
 <span class="no">dm.genome</span> <span class="kw">&lt;-</span> <span class="kw pkg">BSgenome.Dmelanogaster.UCSC.dm6</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm6/man/package.html">BSgenome.Dmelanogaster.UCSC.dm6</a></span></pre></div>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="no">sequences</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
+<p>The <code>get_sequence</code> function takes a <code>GRanges</code> or <code>GRangesList</code> as input and returns the sequences as a <code>BioStrings::XStringSet</code>, or list of <code>XStringSet</code> objects, respectively. <code>get_sequence</code> will name each fasta entry by the genomic coordinates each sequence is from.</p>
+<div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Generate sequences from 200bp about the center of my peaks of interest</span>
+<span class="no">sequences</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></div>
-<p><code>runDreme</code> accepts DNAStringSet or a path to a fasta file as input. You can use other sequences or shuffled input sequences as the control dataset.</p>
+<p><code><a href="reference/runDreme.html">runDreme()</a></code> accepts XStringSet or a path to a fasta file as input. You can use other sequences or shuffled input sequences as the control dataset.</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="co"># runDreme accepts all arguments that the commandline version of dreme accepts</span>
 <span class="co"># here I set e = 50 to detect motifs in the limited example peak list</span>
 <span class="no">dreme_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runDreme.html">runDreme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">50</span>)
 <span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
 <span class="co">#&gt;   method     from</span>
 <span class="co">#&gt;   root.phylo ape</span></pre></div>
-<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif</a> package. The runDreme results object includes a <code>motif</code> column of <code>universalmotif</code> objects which can be used in all <code>universalmotif</code> functions.</p>
+<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif</a> package. The <code>motif</code> column of the runDreme results object contains <code>universalmotif</code> objects which can be used natively in all <code>universalmotif</code> functions.</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>(<span class="no">dreme_results</span>$<span class="no">motif</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png"><!-- --></p>
@@ -172,7 +247,7 @@
 <div id="matching-motifs-using-tomtom" class="section level3">
 <h3 class="hasAnchor">
 <a href="#matching-motifs-using-tomtom" class="anchor"></a>Matching motifs using TOMTOM</h3>
-<p>Discovered motifs can be matched to known TF motifs using <code>runTomTom</code>, which can accept as input a path to a .meme formatted file, a <code>universalmotif</code> list, or the results of <code>runDreme</code>.</p>
+<p>Discovered motifs can be matched to known TF motifs using <code><a href="reference/runTomTom.html">runTomTom()</a></code>, which can accept as input a path to a .meme formatted file, a <code>universalmotif</code> list, or the results of <code><a href="reference/runDreme.html">runDreme()</a></code>.</p>
 <p>TomTom uses a database of known motifs which can be passed to the <code>database</code> parameter as a path to a .meme format file, or a <code>universalmotif</code> object.</p>
 <p>Optionally, you can set the environment variable <code>MEME_DB</code> in <code>.Renviron</code>, or the <code>meme_db</code> value in <code>options</code> to a valid .meme format file and dremeR will use that file as the database. dremeR will always prefer user input to the function call.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))
@@ -194,10 +269,18 @@
 <span class="co">#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        tomtom</span>
 <span class="co">#&gt; 1 prd_FlyReg, Ubx_FlyReg, Dr_SOLEXA, ftz_FlyReg, Hmx_SOLEXA, Dll_SOLEXA, BH1_SOLEXA, Exex_SOLEXA, Tup_Cell, Tup_SOLEXA, ovo_FlyReg, NK7.1_SOLEXA, Hmx_Cell, en_FlyReg, Bsh_Cell, tup_SOLEXA_10, Exex_Cell, CG34031_Cell, Dr_Cell, Unc4_Cell, CG11085_Cell, CG13424_SOLEXA, NK7.1_Cell, Abd-A_FlyReg, Dll_Cell, Dfd_FlyReg, CG13424_Cell, CG32532_Cell, Odsh_Cell, pho_FlyReg, CG34031_SOLEXA, Ftz_SOLEXA, Scr_SOLEXA, C15_Cell, CG15696_Cell, CG15696_SOLEXA, BH2_Cell, Bsh_SOLEXA, En_SOLEXA, Slou_SOLEXA, Antp_SOLEXA, Slou_Cell, ap_FlyReg, C15_SOLEXA, AbdA_SOLEXA, Zen2_SOLEXA, E5_SOLEXA, Awh_SOLEXA, Ems_SOLEXA, Lab_SOLEXA, Repo_SOLEXA, Unpg_SOLEXA, Ubx_Cell, Unpg_Cell, Ap_SOLEXA, Btn_SOLEXA, Pb_SOLEXA, Dfd_SOLEXA, Odsh_SOLEXA, Unc4_SOLEXA, FBgn0003145_2, FBgn0003944_2, FBgn0000492_2, FBgn0001077_2, FBgn0085448_2, FBgn0000157_2, FBgn0011758_2, FBgn0041156_2, FBgn0003896, FBgn0003896_2, FBgn0003028, FBgn0024321_2, FBgn0085448, FBgn0000577_2, FBgn0000529, FBgn0003896_3, FBgn0041156, FBgn0054031, FBgn0000492, FBgn0024184, FBgn0030408, FBgn0034520_2, FBgn0024321, FBgn0000014_2, FBgn0000157, FBgn0000439_2, FBgn0034520, FBgn0052532, FBgn0026058, FBgn0002521, FBgn0054031_2, FBgn0001077_3, FBgn0003339_2, FBgn0004863, FBgn0038833, FBgn0038833_2, FBgn0004854, FBgn0000529_2, FBgn0000577_3, FBgn0002941_2, FBgn0000095_3, FBgn0002941, FBgn0000099_2, FBgn0004863_2, FBgn0000014_3, FBgn0004054_2, FBgn0008646_2, FBgn0013751_2, FBgn0000576_3, FBgn0002522_2, FBgn0011701_2, FBgn0015561_2, FBgn0003944, FBgn0015561, FBgn0000099_3, FBgn0014949_2, FBgn0051481_2, FBgn0000439_3, FBgn0026058_2, FBgn0024184_2, 7.38e-06, 4.24e-05, 0.00111, 0.00116, 0.00118, 0.00123, 0.00137, 0.00137, 0.00166, 0.00174, 0.00201, 0.00287, 0.00352, 0.00357, 0.00403, 0.00403, 0.00498, 0.00498, 0.00513, 0.0055, 0.00574, 0.00579, 0.00662, 0.00662, 0.00711, 0.00721, 0.00782, 0.00831, 0.00831, 0.00841, 0.00845, 0.00895, 0.00895, 0.0091, 0.0091, 0.00977, 0.0102, 0.0103, 0.0103, 0.0103, 0.0105, 0.0105, 0.0106, 0.0112, 0.0119, 0.0126, 0.0134, 0.0142, 0.0142, 0.0142, 0.0142, 0.0142, 0.0147, 0.0147, 0.0151, 0.0151, 0.0151, 0.0157, 0.0157, 0.0157, 0.00449, 0.0258, 0.673, 0.705, 0.719, 0.751, 0.83, 0.83, 1.01, 1.06, 1.22, 1.74, 2.14, 2.17, 2.45, 2.45, 3.03, 3.03, 3.12, 3.35, 3.49, 3.52, 4.02, 4.02, 4.32, 4.38, 4.75, 5.05, 5.05, 5.12, 5.14, 5.44, 5.44, 5.53, 5.53, 5.94, 6.19, 6.27, 6.27, 6.27, 6.37, 6.37, 6.46, 6.81, 7.26, 7.64, 8.13, 8.65, 8.65, 8.65, 8.65, 8.65, 8.96, 8.96, 9.21, 9.21, 9.21, 9.57, 9.57, 9.57, 0.0079, 0.0227, 0.183, 0.183, 0.183, 0.183, 0.183, 0.183, 0.186, 0.186, 0.196, 0.256, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.258, 0.266, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, 0.273, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, fly_factor_survey_id, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;, &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span></pre></div>
 </div>
+<div id="using-rundreme-results-as-tomtom-input" class="section level3">
+<h3 class="hasAnchor">
+<a href="#using-rundreme-results-as-tomtom-input" class="anchor"></a>Using runDreme results as TOMTOM input</h3>
+<p><code><a href="reference/runTomTom.html">runTomTom()</a></code> will add its results as columns to a <code><a href="reference/runDreme.html">runDreme()</a></code> results data.frame.</p>
+<div class="sourceCode" id="cb10"><pre class="r"><span class="no">full_results</span> <span class="kw">&lt;-</span> <span class="no">dreme_results</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/runTomTom.html">runTomTom</a></span>()</pre></div>
+</div>
 <div id="motif-enrichment-using-ame" class="section level3">
 <h3 class="hasAnchor">
 <a href="#motif-enrichment-using-ame" class="anchor"></a>Motif Enrichment using AME</h3>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">ame_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runAme.html">runAme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">30</span>)
+<p>AME is used to test for enrichment of known motifs in target sequences. <code><a href="reference/runAme.html">runAme()</a></code> will use the <code>MEME_DB</code> entry in <code>.Renviron</code> or <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code> as the motif database. Alternately, it will accept all valid inputs as <code><a href="reference/runTomTom.html">runTomTom()</a></code>.</p>
+<div class="sourceCode" id="cb11"><pre class="r"><span class="no">ame_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runAme.html">runAme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">30</span>)
 <span class="no">ame_results</span>
 <span class="co">#&gt; # A tibble: 2 x 17</span>
 <span class="co">#&gt;    rank motif_db motif_id motif_alt_id consensus  pvalue adj.pvalue evalue tests</span>
@@ -211,14 +294,16 @@
 <div id="visualizing-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#visualizing-results" class="anchor"></a>Visualizing Results</h2>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="no">dreme_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/runTomTom.html">runTomTom</a></span>() <span class="kw">%&gt;%</span>
+<p><code>view_tomtom_hits</code> allows comparing the input motifs to the top hits from TomTom. Manual inspection of these matches is important, as sometimes the top match is not always the correct assignment. Altering <code>top_n</code> allows you to show additional matches in descending order of their rank.</p>
+<div class="sourceCode" id="cb12"><pre class="r"><span class="no">full_results</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="kw">top_n</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># Here I use the cowplot library simply to combine each plot into a 4-panel grid</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>)</pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png"><!-- --></p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="no">ame_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-11-1.png"><!-- --></p>
+<p>It can be useful to view the results from <code><a href="reference/runAme.html">runAme()</a></code> as a heatmap. <code><a href="reference/ame_plot_heatmap.html">ame_plot_heatmap()</a></code> can create complex visualizations for analysis of enrichment between different region types (see vignettes for details). Here is a simple example heatmap.</p>
+<div class="sourceCode" id="cb13"><pre class="r"><span class="no">ame_results</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png"><!-- --></p>
 </div>
 </div>
 <div id="faqs" class="section level1">
@@ -229,6 +314,19 @@
 <a href="#how-do-i-use-dremermeme-on-windows" class="anchor"></a>How do I use dremeR/MEME on Windows?</h3>
 <p>The MEME Suite does not currently support Windows, although it can be installed under <a href="https://www.cygwin.com/">Cygwin</a> or the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows Linux Subsytem</a> (WSL). Please note that if MEME is installed on Cygwin or WSL, you must also run R inside Cygwin or WSL to use dremeR.</p>
 </div>
+</div>
+<div id="citation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h1>
+<p>dremeR is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing dremeR, please cite the MEME Suite tools corresponding to the tools you use.</p>
+<p>If you use <code><a href="reference/runDreme.html">runDreme()</a></code> in your analysis, please cite:</p>
+<p>Timothy L. Bailey, “DREME: Motif discovery in transcription factor ChIP-seq data”, Bioinformatics, 27(12):1653-1659, 2011. <a href="https://academic.oup.com/bioinformatics/article/27/12/1653/257754">full text</a></p>
+<p>If you use <code><a href="reference/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
+<p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford Noble, “Quantifying similarity between motifs”, Genome Biology, 8(2):R24, 2007. <a href="http://genomebiology.com/2007/8/2/R24">full text</a></p>
+<p>If you use <code><a href="reference/runAme.html">runAme()</a></code> in your analysis, please cite:</p>
+<p>Robert McLeay and Timothy L. Bailey, “Motif Enrichment Analysis: A unified framework and method evaluation”, BMC Bioinformatics, 11:165, 2010, <a href="doi:10.1186/1471-2105-11-165" class="uri">doi:10.1186/1471-2105-11-165</a>. <a href="http://www.biomedcentral.com/1471-2105/11/165">full text</a></p>
+<p>If you use <code><a href="reference/runFimo.html">runFimo()</a></code> in your analysis, please cite:</p>
+<p>Charles E. Grant, Timothy L. Bailey, and William Stafford Noble, “FIMO: Scanning for occurrences of a given motif”, Bioinformatics, 27(7):1017-1018, 2011. <a href="http://bioinformatics.oxfordjournals.org/content/early/2011/02/16/bioinformatics.btr064.full">full text</a></p>
 </div>
 
   </div>
