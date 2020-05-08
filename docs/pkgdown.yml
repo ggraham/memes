@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   Old_Readme: Old_Readme.html
   integrative_analysis: integrative_analysis.html
-last_built: 2020-05-08T21:42Z
+  tidy_motifs: tidy_motifs.html
+last_built: 2020-05-08T23:00Z
 
