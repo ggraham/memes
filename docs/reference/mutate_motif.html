@@ -162,12 +162,25 @@ https://github.com/snystrom/dremeR/issues/31</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>motif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>()
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>as_universalmotif_dataframe</span>(<span class='no'>motif</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as_universalmotif_dataframe(motif): could not find function "as_universalmotif_dataframe"</span></div><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>df</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"newName"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `mutate_()` is deprecated as of dplyr 0.7.0.</span>
-#&gt; <span class='warning'>Please use `mutate()` instead.</span>
-#&gt; <span class='warning'>See vignette('programming') for more help</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("mutate_"): no applicable method for 'mutate_' applied to an object of class "function"</span></div><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate_motif</span>(<span class='no'>df</span>, <span class='st'>"name"</span> <span class='kw'>=</span> <span class='st'>"id"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in mutate_motif(df, name = "id"): .motif %in% names(.data) is not TRUE</span></div><div class='input'><span class='co'># renamed motif</span>
-<span class='no'>df</span>$<span class='no'>motif</span></div><div class='output co'>#&gt; <span class='error'>Error in df$motif: object of type 'closure' is not subsettable</span></div></span></pre>
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe</a></span>(<span class='no'>motif</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>df</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"newName"</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>mutate_motif</span>(<span class='no'>df</span>, <span class='st'>"name"</span> <span class='kw'>=</span> <span class='st'>"id"</span>)
+<span class='co'># renamed motif</span>
+<span class='no'>df</span>$<span class='no'>motif</span></div><div class='output co'>#&gt; [[1]]
+#&gt; 
+#&gt;        Motif name:   newName
+#&gt;          Alphabet:   DNA
+#&gt;              Type:   PPM
+#&gt;           Strands:   +-
+#&gt;          Total IC:   8.53
+#&gt;         Consensus:   RRTNGGARTN
+#&gt; 
+#&gt;      R   R    T    N    G    G    A    R    T    N
+#&gt; A 0.52 0.3 0.03 0.37 0.00 0.02 0.77 0.41 0.14 0.22
+#&gt; C 0.00 0.0 0.11 0.29 0.02 0.13 0.00 0.05 0.00 0.23
+#&gt; G 0.48 0.7 0.00 0.23 0.85 0.62 0.06 0.51 0.00 0.25
+#&gt; T 0.00 0.0 0.86 0.12 0.13 0.23 0.17 0.02 0.86 0.30
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

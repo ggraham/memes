@@ -152,7 +152,10 @@
     </tr>
     <tr>
       <th>value</th>
-      <td><p>value to display as heatmap intensity. Default: -log10(adj.pvalue). Takes function or column name as input.</p></td>
+      <td><p>value to display as heatmap intensity. Default:
+-log10(adj.pvalue). Takes function or column name as input. If set to
+"normalize", will use normalized rank within `group` as the heatmap values.
+This can be a more appropriate visualization for between-group comparisons.</p></td>
     </tr>
     <tr>
       <th>group_name</th>
@@ -165,6 +168,11 @@
     
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Common mistake: if `value` is set to a string that is not "normalize", it
+will return: "Error: Discrete value supplied to continuous scale". To use a
+column by name, do not quote the column name.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
