@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>An R Interface to the MEME Suite • dremeR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -58,6 +58,9 @@
       <a href="articles/Old_Readme.html">readme</a>
     </li>
     <li>
+      <a href="articles/dreme.html">Denovo Motif Discovery Using DREME</a>
+    </li>
+    <li>
       <a href="articles/integrative_analysis.html">Integrative Analysis</a>
     </li>
     <li>
@@ -66,7 +69,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/snystrom/dremeR/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -145,7 +155,7 @@
 <th align="center">Use</th>
 <th align="center">Sequence Input</th>
 <th align="center">Motif Input</th>
-<th align="center">Output</th>
+<th align="left">Output</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -153,28 +163,28 @@
 <td align="center">Motif Discovery</td>
 <td align="center">Yes</td>
 <td align="center">No</td>
-<td align="center">data.frame w/ <code>motifs</code> column</td>
+<td align="left">data.frame w/ <code>motifs</code> column</td>
 </tr>
 <tr class="even">
 <td align="center"><code><a href="reference/runAme.html">runAme()</a></code></td>
 <td align="center">Motif Enrichment</td>
 <td align="center">Yes</td>
 <td align="center">Yes</td>
-<td align="center">data.frame (optional: <code>sequences</code> column)</td>
+<td align="left">data.frame (optional: <code>sequences</code> column)</td>
 </tr>
 <tr class="odd">
 <td align="center"><code><a href="reference/runFimo.html">runFimo()</a></code></td>
 <td align="center">Motif Scanning</td>
 <td align="center">Yes</td>
 <td align="center">Yes</td>
-<td align="center">GRanges of motif positions</td>
+<td align="left">GRanges of motif positions</td>
 </tr>
 <tr class="even">
 <td align="center"><code><a href="reference/runTomTom.html">runTomTom()</a></code></td>
 <td align="center">Motif Comparison</td>
 <td align="center">No</td>
 <td align="center">Yes</td>
-<td align="center">data.frame w/ <code>best_match_motif</code> and <code>tomtom</code> columns*</td>
+<td align="left">data.frame w/ <code>best_match_motif</code> and <code>tomtom</code> columns*</td>
 </tr>
 </tbody>
 </table>
@@ -308,6 +318,44 @@
   <span class="fu"><a href="reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-12-1.png"><!-- --></p>
 </div>
+<div id="importing-data-from-previous-runs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#importing-data-from-previous-runs" class="anchor"></a>Importing Data from previous runs</h2>
+<p>dremeR also supports importing results generated using the MEME suite outside of R (for example, running jobs on <a href="meme-suite.org">meme-suite.org</a>, or running on the commandline).</p>
+<table class="table">
+<thead><tr class="header">
+<th align="center">MEME Tool</th>
+<th align="center">Function Name</th>
+<th align="center">File Type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Dreme</td>
+<td align="center"><code><a href="reference/importDremeXML.html">importDremeXML()</a></code></td>
+<td align="center">dreme.xml</td>
+</tr>
+<tr class="even">
+<td align="center">TomTom</td>
+<td align="center"><code><a href="reference/importTomTomXML.html">importTomTomXML()</a></code></td>
+<td align="center">tomtom.xml</td>
+</tr>
+<tr class="odd">
+<td align="center">AME</td>
+<td align="center"><code><a href="reference/importAme.html">importAme()</a></code></td>
+<td align="center">ame.tsv*</td>
+</tr>
+<tr class="even">
+<td align="center">FIMO</td>
+<td align="center"><code>importFIMO()</code></td>
+<td align="center">fimo.tsv</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<code>importAME()</code> can also use the “sequences.tsv” output when AME used <code>method = "fisher"</code>, this is optional.</li>
+</ul>
+</div>
 </div>
 <div id="faqs" class="section level1">
 <h1 class="hasAnchor">
@@ -335,7 +383,14 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/snystrom/dremeR/">https://​github.com/​snystrom/​dremeR/​</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

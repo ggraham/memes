@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -97,6 +97,9 @@
       <a href="../articles/Old_Readme.html">readme</a>
     </li>
     <li>
+      <a href="../articles/dreme.html">Denovo Motif Discovery Using DREME</a>
+    </li>
+    <li>
       <a href="../articles/integrative_analysis.html">Integrative Analysis</a>
     </li>
     <li>
@@ -106,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/snystrom/dremeR/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -134,7 +142,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-core-tools" class="hasAnchor"><a href="#section-core-tools" class="anchor"></a>Core Tools</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -146,105 +154,9 @@
       <tr>
         
         <td>
-          <p><code><a href="ame_plot_heatmap.html">ame_plot_heatmap()</a></code> </p>
-        </td>
-        <td><p>Plot AME heatmap clustered by similarity in detected motifs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_universalmotif.html">as_universalmotif()</a></code> </p>
-        </td>
-        <td><p>Convert special data.frames back into universalmotifs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as_universalmotif_dataframe.html">as_universalmotif_dataframe()</a></code> </p>
-        </td>
-        <td><p>Convert universalmotif to data.frame with motif column</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="check_meme_install.html">check_meme_install()</a></code> </p>
-        </td>
-        <td><p>Check user's MEME install</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drop_best_match.html">drop_best_match()</a></code> </p>
-        </td>
-        <td><p>Drop best match info from tomtom results</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="force_best_match.html">force_best_match()</a></code> </p>
-        </td>
-        <td><p>Force best tomtom match by id</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_sequence.html">get_sequence()</a></code> </p>
-        </td>
-        <td><p>Get sequence from GRanges</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="importAme.html">importAme()</a></code> </p>
-        </td>
-        <td><p>Parse ame output</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="importDremeXML.html">importDremeXML()</a></code> </p>
-        </td>
-        <td><p>Import Dreme output from previous run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="importFimo.html">importFimo()</a></code> </p>
-        </td>
-        <td><p>Import FIMO results</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="importTomTomXML.html">importTomTomXML()</a></code> </p>
-        </td>
-        <td><p>Import tomtom data from previous run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mutate_motif.html">mutate_motif()</a></code> </p>
-        </td>
-        <td><p>Update motif columns by data values</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nest_tomtom.html">nest_tomtom()</a></code> </p>
-        </td>
-        <td><p>Nest TomTom results columns into a data.frame column named "tomtom"</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parseTomTom.html">parseTomTom()</a></code> </p>
-        </td>
-        <td><p>Return tomtom stat information and PWMs for matched motifs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="runAme.html">runAme()</a></code> </p>
-        </td>
-        <td><p>Motif enrichment using AME</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="runDreme.html">runDreme()</a></code> </p>
         </td>
         <td><p>Denovo motif discovery of target regions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="runFimo.html">runFimo()</a></code> </p>
-        </td>
-        <td><p>Run FIMO on input sequences</p></td>
       </tr><tr>
         
         <td>
@@ -254,9 +166,96 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="update_best_match.html">update_best_match()</a></code> </p>
+          <p><code><a href="runAme.html">runAme()</a></code> </p>
         </td>
-        <td><p>Update best match info by ranking of tomtom data</p></td>
+        <td><p>Motif enrichment using AME</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="runFimo.html">runFimo()</a></code> </p>
+        </td>
+        <td><p>Run FIMO on input sequences</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="check_meme_install.html">check_meme_install()</a></code> </p>
+        </td>
+        <td><p>Check user's MEME install</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_sequence.html">get_sequence()</a></code> </p>
+        </td>
+        <td><p>Get sequence from GRanges</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="write_fasta.html">write_fasta()</a></code> </p>
+        </td>
+        <td><p>Write fasta file from stringset</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-visualization" class="hasAnchor"><a href="#section-data-visualization" class="anchor"></a>Data Visualization</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="view_tomtom_hits.html">view_tomtom_hits()</a></code> </p>
+        </td>
+        <td><p>Compare top tomtom hits to original motif</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ame_plot_heatmap.html">ame_plot_heatmap()</a></code> </p>
+        </td>
+        <td><p>Plot AME heatmap clustered by similarity in detected motifs</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-motif-manipulation" class="hasAnchor"><a href="#section-motif-manipulation" class="anchor"></a>Motif Manipulation</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="as_universalmotif_dataframe.html">as_universalmotif_dataframe()</a></code> </p>
+        </td>
+        <td><p>Convert universalmotif to data.frame with motif column</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as_universalmotif.html">as_universalmotif()</a></code> </p>
+        </td>
+        <td><p>Convert special data.frames back into universalmotifs</p></td>
       </tr><tr>
         
         <td>
@@ -266,15 +265,83 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="view_tomtom_hits.html">view_tomtom_hits()</a></code> </p>
+          <p><code><a href="mutate_motif.html">mutate_motif()</a></code> </p>
         </td>
-        <td><p>Compare top tomtom hits to original motif</p></td>
+        <td><p>Update motif columns by data values</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-helpers" class="hasAnchor"><a href="#section-data-helpers" class="anchor"></a>Data Helpers</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="force_best_match.html">force_best_match()</a></code> </p>
+        </td>
+        <td><p>Force best tomtom match by id</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="write_fasta.html">write_fasta()</a></code> </p>
+          <p><code><a href="update_best_match.html">update_best_match()</a></code> </p>
         </td>
-        <td><p>Write fasta file from stringset</p></td>
+        <td><p>Update best match info by ranking of tomtom data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="drop_best_match.html">drop_best_match()</a></code> </p>
+        </td>
+        <td><p>Drop best match info from tomtom results</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nest_tomtom.html">nest_tomtom()</a></code> </p>
+        </td>
+        <td><p>Nest TomTom results columns into a data.frame column named "tomtom"</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data-import" class="hasAnchor"><a href="#section-data-import" class="anchor"></a>Data Import</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="importDremeXML.html">importDremeXML()</a></code> </p>
+        </td>
+        <td><p>Import Dreme output from previous run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="importTomTomXML.html">importTomTomXML()</a></code> </p>
+        </td>
+        <td><p>Import tomtom data from previous run</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="importAme.html">importAme()</a></code> </p>
+        </td>
+        <td><p>Parse ame output</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="importFimo.html">importFimo()</a></code> </p>
+        </td>
+        <td><p>Import FIMO results</p></td>
       </tr>
     </tbody>
     </table>
