@@ -57,13 +57,22 @@
       <a href="../articles/Old_Readme.html">readme</a>
     </li>
     <li>
+      <a href="../articles/ame.html">Motif Enrichment Testing using AME</a>
+    </li>
+    <li>
       <a href="../articles/dreme.html">Denovo Motif Discovery Using DREME</a>
+    </li>
+    <li>
+      <a href="../articles/fimo.html">Motif Scanning using FIMO</a>
     </li>
     <li>
       <a href="../articles/integrative_analysis.html">Integrative Analysis</a>
     </li>
     <li>
       <a href="../articles/tidy_motifs.html">Tidying Motif Metadata</a>
+    </li>
+    <li>
+      <a href="../articles/tomtom.html">Motif Comparison using TomTom</a>
     </li>
   </ul>
 </li>
@@ -114,9 +123,9 @@
 
 <span class="co"># Verify that dremeR detects your meme install</span>
 <span class="co"># should return all green checks if so.</span>
-<span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/check_meme_install.html">check_meme_install</a></span>()</pre></body></html></div>
+<span class="fu"><a href="../reference/check_meme_install.html">check_meme_install</a></span>()</pre></body></html></div>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">fa</span> <span class="kw">&lt;-</span> <span class="kw pkg">dremeR</span><span class="kw ns">:::</span><span class="fu">duplicate_file</span>(<span class="st">"inst/extdata/fasta_ex/fa1.fa"</span>)
-<span class="no">dreme_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme</a></span>(<span class="no">fa</span>, <span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">39</span>)</pre></body></html></div>
+<span class="no">dreme_out</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runDreme.html">runDreme</a></span>(<span class="no">fa</span>, <span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">39</span>)</pre></body></html></div>
 <p>dreme results are a <code>data.frame</code>. The <code>motif</code> column contains a <code>universalmotif</code> object with the PCM information for each <em>de-novo</em> discovered motif. This is so that any filtering of the results object also simply filter the available motifs.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">dreme_out</span></pre></body></html></div>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
@@ -137,15 +146,15 @@
 <h2 class="hasAnchor">
 <a href="#tomtom" class="anchor"></a>TomTom</h2>
 <p>TomTom can be used to match <em>de-novo</em> motifs from dreme to a database of known motifs. If run on the output of <code>runDreme</code> it will append information for the best match in columns prefixed <code>best_</code>. Secondary matches found by tomtom will be stored in the list column <code>tomtom</code>.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">full_res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom</a></span>(<span class="no">dreme_out</span>, <span class="kw">database</span> <span class="kw">=</span> <span class="st">"inst/extdata/db/fly_factor_survey_id.meme"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">full_res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="no">dreme_out</span>, <span class="kw">database</span> <span class="kw">=</span> <span class="st">"inst/extdata/db/fly_factor_survey_id.meme"</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">full_res</span></pre></body></html></div>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">full_res</span>$<span class="no">tomtom</span></pre></body></html></div>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">full_res</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">id</span>, <span class="no">alt</span>, <span class="no">seq</span>, <span class="no">best_match_id</span>, <span class="no">best_match_pvalue</span>, <span class="no">best_match_evalue</span>, <span class="no">best_match_motif</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">full_res</span>$<span class="no">best_match_motif</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">full_res</span>, <span class="fl">1</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">full_res</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+<span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">full_res</span>, <span class="fl">1</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">full_res</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>
 </div>
 <div id="denovo-motif-pipeline-w-dremer" class="section level2">
@@ -161,21 +170,21 @@
 
 <span class="no">motif_analysis</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme</a></span>(<span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">50</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom</a></span>()</pre></body></html></div>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runDreme.html">runDreme</a></span>(<span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">50</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>()</pre></body></html></div>
 </div>
 <div id="compare-denovo-motif-with-best-match" class="section level2">
 <h2 class="hasAnchor">
 <a href="#compare-denovo-motif-with-best-match" class="anchor"></a>Compare denovo motif with best match</h2>
 <p>use <code>cowplot</code> to arrange plots in a grid.</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">motif_analysis</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">motif_analysis</span>, <span class="fl">1</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>
 </div>
 <div id="evaluate-top-3-hits-from-tomtom" class="section level2">
 <h2 class="hasAnchor">
 <a href="#evaluate-top-3-hits-from-tomtom" class="anchor"></a>Evaluate top 3 hits from TOMTOM</h2>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">motif_analysis</span>, <span class="fl">3</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="no">motif_analysis</span>, <span class="fl">3</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
 
 <span class="no">frac_plot</span> <span class="kw">&lt;-</span> <span class="no">motif_analysis</span> <span class="kw">%&gt;%</span>
@@ -196,10 +205,10 @@
 <a href="#motif-scanning-enrichment-testing-with-ame" class="anchor"></a>Motif scanning &amp; enrichment testing with AME</h2>
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">ame_analysis</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme</a></span>(<span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">50</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">50</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">ame_analysis</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></body></html></div>
+  <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></body></html></div>
 <div id="example-for-converting-gene-ids" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-for-converting-gene-ids" class="anchor"></a>Example for converting gene ids</h3>
@@ -225,19 +234,19 @@
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">score</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">start</span>)) <span class="kw">%&gt;%</span>
   <span class="no">GRanges</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>, <span class="kw">score</span> <span class="kw">=</span> <span class="st">"score"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme</a></span>(<span class="kw">control</span> <span class="kw">=</span> <span class="fl">NA</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">50</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>, <span class="kw">score</span> <span class="kw">=</span> <span class="st">"score"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="kw">control</span> <span class="kw">=</span> <span class="fl">NA</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">50</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="no">ame_partition</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">tfid</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"(.+)_{1}.+"</span>, <span class="st">"\\1"</span>, <span class="no">motif_id</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="no">tfid</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="no">tfid</span>)</pre></body></html></div>
 </div>
 <div id="dotargs-backend-error-checking" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dotargs-backend-error-checking" class="anchor"></a>Dotargs backend &amp; error checking</h3>
 <div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="no">ame_analysis</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme</a></span>(<span class="kw">evalue_reportt_threshold</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="kw">evalue_reportt_threshold</span> <span class="kw">=</span> <span class="fl">30</span>)</pre></body></html></div>
 </div>
 </div>
   </div>

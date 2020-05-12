@@ -98,13 +98,22 @@
       <a href="../articles/Old_Readme.html">readme</a>
     </li>
     <li>
+      <a href="../articles/ame.html">Motif Enrichment Testing using AME</a>
+    </li>
+    <li>
       <a href="../articles/dreme.html">Denovo Motif Discovery Using DREME</a>
+    </li>
+    <li>
+      <a href="../articles/fimo.html">Motif Scanning using FIMO</a>
     </li>
     <li>
       <a href="../articles/integrative_analysis.html">Integrative Analysis</a>
     </li>
     <li>
       <a href="../articles/tidy_motifs.html">Tidying Motif Metadata</a>
+    </li>
+    <li>
+      <a href="../articles/tomtom.html">Motif Comparison using TomTom</a>
     </li>
   </ul>
 </li>
@@ -157,7 +166,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>as_universalmotif_dataframe</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe</a></span>() <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>altname</span> <span class='kw'>=</span> <span class='st'>"new_alt_name"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in universalmotif::create_motif() %&gt;% as_universalmotif_dataframe() %&gt;%     dplyr::mutate(altname = "new_alt_name"): could not find function "%&gt;%"</span></div><div class='input'>
 <span class='no'>motifs</span> <span class='kw'>&lt;-</span> <span class='fu'>as_universalmotif</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; <span class='error'>Error in mutate_motif(., .override = to_mutate): .motif %in% names(.data) is not TRUE</span></div></pre>
   </div>

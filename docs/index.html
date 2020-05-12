@@ -55,16 +55,22 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/Old_Readme.html">readme</a>
+      <a href="articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
-      <a href="articles/dreme.html">Denovo Motif Discovery Using DREME</a>
+      <a href="articles/core_tomtom.html">Motif Matching</a>
+    </li>
+    <li>
+      <a href="articles/core_ame.html">Motif Enrichment</a>
+    </li>
+    <li>
+      <a href="articles/core_fimo.html">Motif Scanning</a>
+    </li>
+    <li>
+      <a href="articles/tidy_motifs.html">Motif Manipulation</a>
     </li>
     <li>
       <a href="articles/integrative_analysis.html">Integrative Analysis</a>
-    </li>
-    <li>
-      <a href="articles/tidy_motifs.html">Tidying Motif Metadata</a>
     </li>
   </ul>
 </li>
@@ -119,13 +125,13 @@
 </li>
 </ol>
 <p>If dremeR fails to detect your install at the specified location, it will fall back to the next option.</p>
-<p>To verify dremeR can detect your MEME install, use <code><a href="https://rdrr.io/pkg/dremeR/man/check_meme_install.html">check_meme_install()</a></code> which uses the search herirarchy above to find a valid MEME install. It will report whether any tools are missing, and print the path to MEME that it sees. This can be useful for troubleshooting issues with your install.</p>
+<p>To verify dremeR can detect your MEME install, use <code><a href="reference/check_meme_install.html">check_meme_install()</a></code> which uses the search herirarchy above to find a valid MEME install. It will report whether any tools are missing, and print the path to MEME that it sees. This can be useful for troubleshooting issues with your install.</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
 
 <span class="co"># Verify that dremeR detects your meme install</span>
 <span class="co"># (returns all green checks if so)</span>
 <span class="co"># (I have MEME installed to the default location)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/check_meme_install.html">check_meme_install</a></span>()
+<span class="fu"><a href="reference/check_meme_install.html">check_meme_install</a></span>()
 <span class="co">#&gt; checking main install</span>
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin</span>
 <span class="co">#&gt; checking util installs</span>
@@ -135,7 +141,7 @@
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/tomtom</span></pre></div>
 <div class="sourceCode" id="cb3"><pre class="r"><span class="co"># You can manually input a path to meme_path</span>
 <span class="co"># If no meme/bin is detected, will return a red X</span>
-<span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/check_meme_install.html">check_meme_install</a></span>(<span class="kw">meme_path</span> <span class="kw">=</span> <span class="st">'bad/path'</span>)
+<span class="fu"><a href="reference/check_meme_install.html">check_meme_install</a></span>(<span class="kw">meme_path</span> <span class="kw">=</span> <span class="st">'bad/path'</span>)
 <span class="co">#&gt; checking main install</span>
 <span class="co">#&gt; ✖ bad/path</span></pre></div>
 </div>
@@ -159,28 +165,28 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code></td>
+<td align="center"><code><a href="reference/runDreme.html">runDreme()</a></code></td>
 <td align="center">Motif Discovery</td>
 <td align="center">Yes</td>
 <td align="center">No</td>
 <td align="left">data.frame w/ <code>motifs</code> column</td>
 </tr>
 <tr class="even">
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme()</a></code></td>
+<td align="center"><code><a href="reference/runAme.html">runAme()</a></code></td>
 <td align="center">Motif Enrichment</td>
 <td align="center">Yes</td>
 <td align="center">Yes</td>
 <td align="left">data.frame (optional: <code>sequences</code> column)</td>
 </tr>
 <tr class="odd">
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/runFimo.html">runFimo()</a></code></td>
+<td align="center"><code><a href="reference/runFimo.html">runFimo()</a></code></td>
 <td align="center">Motif Scanning</td>
 <td align="center">Yes</td>
 <td align="center">Yes</td>
 <td align="left">GRanges of motif positions</td>
 </tr>
 <tr class="even">
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code></td>
+<td align="center"><code><a href="reference/runTomTom.html">runTomTom()</a></code></td>
 <td align="center">Motif Comparison</td>
 <td align="center">No</td>
 <td align="center">Yes</td>
@@ -188,22 +194,23 @@
 </tr>
 </tbody>
 </table>
-<p>* <strong>Note:</strong> if <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code> is run using the results of <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code>, the results will be joined with the <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> results as extra columns. This allows easy comparison of <em>de-novo</em> discovered motifs with their matches.</p>
+<p>* <strong>Note:</strong> if <code><a href="reference/runTomTom.html">runTomTom()</a></code> is run using the results of <code><a href="reference/runDreme.html">runDreme()</a></code>, the results will be joined with the <code><a href="reference/runDreme.html">runDreme()</a></code> results as extra columns. This allows easy comparison of <em>de-novo</em> discovered motifs with their matches.</p>
 <p><strong>Sequence Inputs</strong> can be any of:</p>
 <ol>
 <li>Path to a .fasta formatted file</li>
 <li>
-<code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> (can be generated from GRanges using <code><a href="https://rdrr.io/pkg/dremeR/man/get_sequence.html">get_sequence()</a></code> helper function)</li>
+<code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> (can be generated from GRanges using <code><a href="reference/get_sequence.html">get_sequence()</a></code> helper function)</li>
+<li>A named list of <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> objects (generated by <code><a href="reference/get_sequence.html">get_sequence()</a></code>)</li>
 </ol>
 <p><strong>Motif Inputs</strong> can be any of:</p>
 <ol>
 <li>A path to a .meme formatted file of motifs to scan against</li>
 <li>A <code>universalmotif</code> object, or list of <code>universalmotif</code> objects</li>
-<li>A <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> results object (this allows the results of <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> to pass directly to <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code>)</li>
+<li>A <code><a href="reference/runDreme.html">runDreme()</a></code> results object (this allows the results of <code><a href="reference/runDreme.html">runDreme()</a></code> to pass directly to <code><a href="reference/runTomTom.html">runTomTom()</a></code>)</li>
 <li>A combination of all of the above passed as a <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> (e.g. <code><a href="https://rdrr.io/r/base/list.html">list("path/to/database.meme", "dreme_results" = dreme_res)</a></code>)</li>
 </ol>
 <p><strong>Output Types</strong>:</p>
-<p><code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code>, and <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code> return data.frames with special columns. The <code>motif</code> column contains <code>universalmotif</code> objects, with 1 entry per row. The remaining columns describe the properties of each returned motif. The following column names are special in that their values are used when running <code>update_motifs</code> to alter the properties of the motifs stored in the <code>motif</code> column. Be careful about changing these values.</p>
+<p><code><a href="reference/runDreme.html">runDreme()</a></code>, and <code><a href="reference/runTomTom.html">runTomTom()</a></code> return data.frames with special columns. The <code>motif</code> column contains <code>universalmotif</code> objects, with 1 entry per row. The remaining columns describe the properties of each returned motif. The following column names are special in that their values are used when running <code>update_motifs</code> to alter the properties of the motifs stored in the <code>motif</code> column. Be careful about changing these values.</p>
 <ul>
 <li>name</li>
 <li>altname</li>
@@ -216,8 +223,8 @@
 <li>qval</li>
 <li>eval</li>
 </ul>
-<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif package</a> which provides a framework for manipulating motifs in R. The <code>motif</code> columns from <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> and <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code> can be used natively with all <code>universalmotif</code> functions (eg <code><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">universalmotif::view_motifs(dreme_results$motif)</a></code>).</p>
-<p><code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code> returns a special column: <code>tomtom</code> which is a <code>data.frame</code> of all match data for each input motif. This can be expanded out using <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest(tomtom_results, "tomtom")</a></code>.</p>
+<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif package</a> which provides a framework for manipulating motifs in R. The <code>motif</code> columns from <code><a href="reference/runDreme.html">runDreme()</a></code> and <code><a href="reference/runTomTom.html">runTomTom()</a></code> can be used natively with all <code>universalmotif</code> functions (eg <code><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">universalmotif::view_motifs(dreme_results$motif)</a></code>).</p>
+<p><code><a href="reference/runTomTom.html">runTomTom()</a></code> returns a special column: <code>tomtom</code> which is a <code>data.frame</code> of all match data for each input motif. This can be expanded out using <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest(tomtom_results, "tomtom")</a></code>.</p>
 </div>
 <div id="quick-examples" class="section level2">
 <h2 class="hasAnchor">
@@ -244,11 +251,11 @@
 <div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Generate sequences from 200bp about the center of my peaks of interest</span>
 <span class="no">sequences</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></div>
-<p><code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> accepts XStringSet or a path to a fasta file as input. You can use other sequences or shuffled input sequences as the control dataset.</p>
+  <span class="fu"><a href="reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></div>
+<p><code><a href="reference/runDreme.html">runDreme()</a></code> accepts XStringSet or a path to a fasta file as input. You can use other sequences or shuffled input sequences as the control dataset.</p>
 <div class="sourceCode" id="cb6"><pre class="r"><span class="co"># runDreme accepts all arguments that the commandline version of dreme accepts</span>
 <span class="co"># here I set e = 50 to detect motifs in the limited example peak list</span>
-<span class="no">dreme_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">50</span>)
+<span class="no">dreme_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runDreme.html">runDreme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">e</span> <span class="kw">=</span> <span class="fl">50</span>)
 <span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
 <span class="co">#&gt;   method     from</span>
 <span class="co">#&gt;   root.phylo ape</span></pre></div>
@@ -260,12 +267,12 @@
 <div id="matching-motifs-using-tomtom" class="section level3">
 <h3 class="hasAnchor">
 <a href="#matching-motifs-using-tomtom" class="anchor"></a>Matching motifs using TOMTOM</h3>
-<p>Discovered motifs can be matched to known TF motifs using <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code>, which can accept as input a path to a .meme formatted file, a <code>universalmotif</code> list, or the results of <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code>.</p>
+<p>Discovered motifs can be matched to known TF motifs using <code><a href="reference/runTomTom.html">runTomTom()</a></code>, which can accept as input a path to a .meme formatted file, a <code>universalmotif</code> list, or the results of <code><a href="reference/runDreme.html">runDreme()</a></code>.</p>
 <p>TomTom uses a database of known motifs which can be passed to the <code>database</code> parameter as a path to a .meme format file, or a <code>universalmotif</code> object.</p>
 <p>Optionally, you can set the environment variable <code>MEME_DB</code> in <code>.Renviron</code>, or the <code>meme_db</code> value in <code>options</code> to a valid .meme format file and dremeR will use that file as the database. dremeR will always prefer user input to the function call.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))
 <span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/create_motif.html">create_motif</a></span>(<span class="st">"CMATTACN"</span>, <span class="kw">altname</span> <span class="kw">=</span> <span class="st">"testMotif"</span>)
-<span class="no">tomtom_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom</a></span>(<span class="no">m</span>)</pre></div>
+<span class="no">tomtom_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runTomTom.html">runTomTom</a></span>(<span class="no">m</span>)</pre></div>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="no">tomtom_results</span>
 <span class="co">#&gt;    name   altname family organism consensus alphabet strand icscore nsites</span>
 <span class="co">#&gt; 1 motif testMotif   &lt;NA&gt;     &lt;NA&gt;  CMATTACN      DNA     +-      13     NA</span>
@@ -285,15 +292,15 @@
 <div id="using-rundreme-results-as-tomtom-input" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-rundreme-results-as-tomtom-input" class="anchor"></a>Using runDreme results as TOMTOM input</h3>
-<p><code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code> will add its results as columns to a <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> results data.frame.</p>
+<p><code><a href="reference/runTomTom.html">runTomTom()</a></code> will add its results as columns to a <code><a href="reference/runDreme.html">runDreme()</a></code> results data.frame.</p>
 <div class="sourceCode" id="cb10"><pre class="r"><span class="no">full_results</span> <span class="kw">&lt;-</span> <span class="no">dreme_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom</a></span>()</pre></div>
+  <span class="fu"><a href="reference/runTomTom.html">runTomTom</a></span>()</pre></div>
 </div>
 <div id="motif-enrichment-using-ame" class="section level3">
 <h3 class="hasAnchor">
 <a href="#motif-enrichment-using-ame" class="anchor"></a>Motif Enrichment using AME</h3>
-<p>AME is used to test for enrichment of known motifs in target sequences. <code><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme()</a></code> will use the <code>MEME_DB</code> entry in <code>.Renviron</code> or <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code> as the motif database. Alternately, it will accept all valid inputs as <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="no">ame_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">30</span>)
+<p>AME is used to test for enrichment of known motifs in target sequences. <code><a href="reference/runAme.html">runAme()</a></code> will use the <code>MEME_DB</code> entry in <code>.Renviron</code> or <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code> as the motif database. Alternately, it will accept all valid inputs as <code><a href="reference/runTomTom.html">runTomTom()</a></code>.</p>
+<div class="sourceCode" id="cb11"><pre class="r"><span class="no">ame_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runAme.html">runAme</a></span>(<span class="no">sequences</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"shuffle"</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">30</span>)
 <span class="no">ame_results</span>
 <span class="co">#&gt; # A tibble: 2 x 17</span>
 <span class="co">#&gt;    rank motif_db motif_id motif_alt_id consensus  pvalue adj.pvalue evalue tests</span>
@@ -309,13 +316,13 @@
 <a href="#visualizing-results" class="anchor"></a>Visualizing Results</h2>
 <p><code>view_tomtom_hits</code> allows comparing the input motifs to the top hits from TomTom. Manual inspection of these matches is important, as sometimes the top match is not always the correct assignment. Altering <code>top_n</code> allows you to show additional matches in descending order of their rank.</p>
 <div class="sourceCode" id="cb12"><pre class="r"><span class="no">full_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="kw">top_n</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="kw">top_n</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
   <span class="co"># Here I use the cowplot library simply to combine each plot into a 4-panel grid</span>
   <span class="kw pkg">cowplot</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/plot_grid.html">plot_grid</a></span>(<span class="kw">plotlist</span> <span class="kw">=</span> <span class="no">.</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-11-1.png"><!-- --></p>
-<p>It can be useful to view the results from <code><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme()</a></code> as a heatmap. <code><a href="https://rdrr.io/pkg/dremeR/man/ame_plot_heatmap.html">ame_plot_heatmap()</a></code> can create complex visualizations for analysis of enrichment between different region types (see vignettes for details). Here is a simple example heatmap.</p>
+<p>It can be useful to view the results from <code><a href="reference/runAme.html">runAme()</a></code> as a heatmap. <code><a href="reference/ame_plot_heatmap.html">ame_plot_heatmap()</a></code> can create complex visualizations for analysis of enrichment between different region types (see vignettes for details). Here is a simple example heatmap.</p>
 <div class="sourceCode" id="cb13"><pre class="r"><span class="no">ame_results</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/dremeR/man/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></div>
+  <span class="fu"><a href="reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>()</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-12-1.png"><!-- --></p>
 </div>
 <div id="importing-data-from-previous-runs" class="section level2">
@@ -331,17 +338,17 @@
 <tbody>
 <tr class="odd">
 <td align="center">Dreme</td>
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/importDremeXML.html">importDremeXML()</a></code></td>
+<td align="center"><code><a href="reference/importDremeXML.html">importDremeXML()</a></code></td>
 <td align="center">dreme.xml</td>
 </tr>
 <tr class="even">
 <td align="center">TomTom</td>
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/importTomTomXML.html">importTomTomXML()</a></code></td>
+<td align="center"><code><a href="reference/importTomTomXML.html">importTomTomXML()</a></code></td>
 <td align="center">tomtom.xml</td>
 </tr>
 <tr class="odd">
 <td align="center">AME</td>
-<td align="center"><code><a href="https://rdrr.io/pkg/dremeR/man/importAme.html">importAme()</a></code></td>
+<td align="center"><code><a href="reference/importAme.html">importAme()</a></code></td>
 <td align="center">ame.tsv*</td>
 </tr>
 <tr class="even">
@@ -370,13 +377,13 @@
 <h1 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h1>
 <p>dremeR is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing dremeR, please cite the MEME Suite tools corresponding to the tools you use.</p>
-<p>If you use <code><a href="https://rdrr.io/pkg/dremeR/man/runDreme.html">runDreme()</a></code> in your analysis, please cite:</p>
+<p>If you use <code><a href="reference/runDreme.html">runDreme()</a></code> in your analysis, please cite:</p>
 <p>Timothy L. Bailey, “DREME: Motif discovery in transcription factor ChIP-seq data”, Bioinformatics, 27(12):1653-1659, 2011. <a href="https://academic.oup.com/bioinformatics/article/27/12/1653/257754">full text</a></p>
-<p>If you use <code><a href="https://rdrr.io/pkg/dremeR/man/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
+<p>If you use <code><a href="reference/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
 <p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford Noble, “Quantifying similarity between motifs”, Genome Biology, 8(2):R24, 2007. <a href="http://genomebiology.com/2007/8/2/R24">full text</a></p>
-<p>If you use <code><a href="https://rdrr.io/pkg/dremeR/man/runAme.html">runAme()</a></code> in your analysis, please cite:</p>
+<p>If you use <code><a href="reference/runAme.html">runAme()</a></code> in your analysis, please cite:</p>
 <p>Robert McLeay and Timothy L. Bailey, “Motif Enrichment Analysis: A unified framework and method evaluation”, BMC Bioinformatics, 11:165, 2010, <a href="doi:10.1186/1471-2105-11-165" class="uri">doi:10.1186/1471-2105-11-165</a>. <a href="http://www.biomedcentral.com/1471-2105/11/165">full text</a></p>
-<p>If you use <code><a href="https://rdrr.io/pkg/dremeR/man/runFimo.html">runFimo()</a></code> in your analysis, please cite:</p>
+<p>If you use <code><a href="reference/runFimo.html">runFimo()</a></code> in your analysis, please cite:</p>
 <p>Charles E. Grant, Timothy L. Bailey, and William Stafford Noble, “FIMO: Scanning for occurrences of a given motif”, Bioinformatics, 27(7):1017-1018, 2011. <a href="http://bioinformatics.oxfordjournals.org/content/early/2011/02/16/bioinformatics.btr064.full">full text</a></p>
 </div>
 
