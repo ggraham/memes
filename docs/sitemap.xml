@@ -67,21 +67,21 @@
     <loc>https://snystrom.github.io/dremeR//articles/Old_Readme.html</loc>
   </url>
   <url>
-    <loc>https://snystrom.github.io/dremeR//articles/ame.html</loc>
+    <loc>https://snystrom.github.io/dremeR//articles/core_ame.html</loc>
   </url>
   <url>
-    <loc>https://snystrom.github.io/dremeR//articles/dreme.html</loc>
+    <loc>https://snystrom.github.io/dremeR//articles/core_dreme.html</loc>
   </url>
   <url>
-    <loc>https://snystrom.github.io/dremeR//articles/fimo.html</loc>
+    <loc>https://snystrom.github.io/dremeR//articles/core_fimo.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//articles/core_tomtom.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//articles/integrative_analysis.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//articles/tidy_motifs.html</loc>
-  </url>
-  <url>
-    <loc>https://snystrom.github.io/dremeR//articles/tomtom.html</loc>
   </url>
 </urlset>
