@@ -1,12 +1,8 @@
 pandoc: 2.3.1
 pkgdown: 1.5.1
 pkgdown_sha: ~
-articles:
-  Old_Readme: Old_Readme.html
-  dreme: dreme.html
-  integrative_analysis: integrative_analysis.html
-  tidy_motifs: tidy_motifs.html
-last_built: 2020-05-11T22:43Z
+articles: []
+last_built: 2020-05-12T19:02Z
 urls:
   reference: https://snystrom.github.io/dremeR//reference
   article: https://snystrom.github.io/dremeR//articles

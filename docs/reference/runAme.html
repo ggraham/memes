@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Motif enrichment using AME</h1>
-    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/ame.R'><code>R/ame.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/generics.R'><code>R/generics.R</code></a></small>
     <div class="hidden name"><code>runAme.Rd</code></div>
     </div>
 
@@ -162,8 +162,13 @@ names contain fasta score, required for partitioning mode)</p></td>
       <th>control</th>
       <td><p>default: "shuffle", or set to
 DNAstringset or path to fasta file to use those sequences in discriminative
-mode. Set to `NA` for partitioning based on input fasta score (see
-get_sequence for assigning fasta score).</p></td>
+mode. If `input` is a list of DNAStringSet objects, and `control` is set to
+a character vector of names in `input`, those regions will be used as
+background in discriminitive mode and AME will skip running on any
+`control` entries (NOTE: if `input` contains an entry named "shuffle" and
+control is set to "shuffle", it will use the `input` entry, not the AME
+shuffle algorithm). Set to `NA` for partitioning based on input fasta score
+(see `get_sequence()` for assigning fasta score).</p></td>
     </tr>
     <tr>
       <th>outdir</th>
@@ -184,6 +189,11 @@ example, if the input is: list("motifs.meme", list_of_motifs), the database
 id's will be: "motifs.meme" and "2". If the input is list("motifs.meme",
 "customMotifs" = list_of_motifs), the database id's will be "motifs.meme"
 and "customMotifs".</p></td>
+    </tr>
+    <tr>
+      <th>meme_path</th>
+      <td><p>path to "meme/bin/" (default: `NULL`). Will use default
+search behavior as described in `check_meme_install()` if unset.</p></td>
     </tr>
     <tr>
       <th>sequences</th>
@@ -210,7 +220,7 @@ webpage for more information.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>dreme_out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='runDreme.html'>runDreme</a></span>(<span class='st'>"input.fa"</span>)
+<span class='no'>dreme_out</span> <span class='kw'>&lt;-</span> <span class='fu'>runDreme</span>(<span class='st'>"input.fa"</span>)
 <span class='fu'>runAme</span>(<span class='st'>"input.fa"</span>, <span class='kw'>database</span> <span class='kw'>=</span> <span class='st'>"jasparmotifs.meme"</span>)
 <span class='fu'>runAme</span>(<span class='st'>"input.fa"</span>, <span class='kw'>database</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"jasparmotifs.meme"</span>, <span class='st'>"my_dreme_motifs"</span> <span class='kw'>=</span> <span class='no'>dreme_out</span>))
 }</div></pre>

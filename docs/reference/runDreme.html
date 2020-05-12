@@ -130,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Denovo motif discovery of target regions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/dreme.R'><code>R/dreme.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/generics.R'><code>R/generics.R</code></a></small>
     <div class="hidden name"><code>runDreme.Rd</code></div>
     </div>
 
@@ -147,7 +147,8 @@
       <th>input</th>
       <td><p>regions to scan for motifs. Can be any of:</p><ul>
 <li><p>path to fasta file</p></li>
-<li><p>DNAStringSet object (can be generated from GRanges using get_sequence)</p></li>
+<li><p>DNAStringSet object (can be generated from GRanges using <code>get_sequence()</code>)</p></li>
+<li><p>List of DNAStringSet objects (generated from <code>get_sequence()</code>)</p></li>
 <li><p><em>NOTE:</em> If you want to retain the raw dreme output files, you must use a
 path to fasta file as input, or specify an "outdir"</p></li>
 </ul></td>
@@ -157,7 +158,12 @@ path to fasta file as input, or specify an "outdir"</p></li>
       <td><p>regions to use as background for motif search. Can be any of:</p><ul>
 <li><p>path to fasta file</p></li>
 <li><p>DNAStringSet object (can be generated from GRanges using get_sequence)</p></li>
-<li><p>"shuffle" to use dreme's built-in dinucleotide shuffle feature.
+<li><p>if <code>input</code> is a list of DNAStringSet objects, a character vector of names
+in <code>input</code> will use those sequences as background. runDreme will not scan
+those regions as input.</p></li>
+<li><p>"shuffle" to use dreme's built-in dinucleotide shuffle feature (NOTE: if
+<code>input</code> is a list object with an entry named "shuffle", the list entry will
+be used instead).
 Optionally can also pass <code>s = &lt;any number&gt;</code> to <code>...</code> to use as the random
 seed during shuffling. If no seed is passed, dreme will use 1 as the random
 seed, so results will be reproducible if rerunning. <strong>NOTE:</strong> beware
@@ -180,8 +186,8 @@ overwrites files in a directory. Directories will be recursively created if need
       <th>meme_path</th>
       <td><p>optional, path to "meme/bin/" on your local machine.
 runDreme will search 3 places in order for meme if this flag is unset:</p><ol>
-<li><p>the environment variable "MEME_PATH" (set in .Renviron)</p></li>
 <li><p>the option "meme_bin" (set with options(meme_bin = "path/to/meme/bin"))</p></li>
+<li><p>the environment variable "MEME_PATH" (set in .Renviron)</p></li>
 <li><p>"~/meme/bin/" as the default location</p></li>
 </ol>
 <ul>
