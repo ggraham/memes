@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/install_guide.html">Install MEME</a>
+    </li>
+    <li>
       <a href="../articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
@@ -69,7 +72,7 @@
       <a href="../articles/tidy_motifs.html">Motif Manipulation</a>
     </li>
     <li>
-      <a href="../articles/integrative_analysis.html">Integrative Analysis</a>
+      <a href="../articles/integrative_analysis.html">ChIP-Seq Data Analysis</a>
     </li>
   </ul>
 </li>
@@ -105,6 +108,43 @@
     
     
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)</pre></body></html></div>
+<div id="input-types" class="section level2">
+<h2 class="hasAnchor">
+<a href="#input-types" class="anchor"></a>Input types</h2>
+<ul>
+<li>universalmotif</li>
+<li>dreme results</li>
+</ul>
+</div>
+<div id="database-types" class="section level2">
+<h2 class="hasAnchor">
+<a href="#database-types" class="anchor"></a>database types</h2>
+<ul>
+<li>.meme file</li>
+<li>universalmotif list</li>
+<li>dreme_results</li>
+<li>
+<code><a href="https://rdrr.io/r/base/list.html">list()</a></code> of all the above (named will use that name as db id)</li>
+</ul>
+</div>
+<div id="output-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#output-data" class="anchor"></a>output data</h2>
+<ul>
+<li>
+<code>tomtom</code> column</li>
+<li>
+<code><a href="../reference/drop_best_match.html">drop_best_match()</a></code> to remove the best_match columns</li>
+<li>
+<code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest(tomtom)</a></code> to expand list column</li>
+<li>
+<code>nest_tomtom</code> to re-nest</li>
+<li>
+<code><a href="../reference/update_best_match.html">update_best_match()</a></code> adds best_match columns to data from <code>tomtom</code> ranks</li>
+<li>
+<code><a href="../reference/force_best_match.html">force_best_match()</a></code> to manually set best match motif for certain entries.</li>
+</ul>
+</div>
 <div id="saving-data-from-tomtom-web-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#saving-data-from-tomtom-web-server" class="anchor"></a>Saving Data from TomTom Web Server</h2>

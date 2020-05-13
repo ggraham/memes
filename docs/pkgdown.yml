@@ -7,9 +7,10 @@ articles:
   core_dreme: core_dreme.html
   core_fimo: core_fimo.html
   core_tomtom: core_tomtom.html
+  install_guide: install_guide.html
   integrative_analysis: integrative_analysis.html
   tidy_motifs: tidy_motifs.html
-last_built: 2020-05-12T22:33Z
+last_built: 2020-05-13T21:55Z
 urls:
   reference: https://snystrom.github.io/dremeR//reference
   article: https://snystrom.github.io/dremeR//articles

@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/install_guide.html">Install MEME</a>
+    </li>
+    <li>
       <a href="../articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
@@ -69,7 +72,7 @@
       <a href="../articles/tidy_motifs.html">Motif Manipulation</a>
     </li>
     <li>
-      <a href="../articles/integrative_analysis.html">Integrative Analysis</a>
+      <a href="../articles/integrative_analysis.html">ChIP-Seq Data Analysis</a>
     </li>
   </ul>
 </li>
@@ -105,6 +108,18 @@
     
     
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)</pre></body></html></div>
+<div id="ame-in-partitioning-mode" class="section level3">
+<h3 class="hasAnchor">
+<a href="#ame-in-partitioning-mode" class="anchor"></a>Ame in partitioning mode</h3>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">ame_partition</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
+  <span class="no">data.frame</span> <span class="kw">%&gt;%</span>
+  <span class="co"># NOTE: never actually do this, just a quick way to generate example data</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">score</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">start</span>)) <span class="kw">%&gt;%</span>
+  <span class="no">GRanges</span> <span class="kw">%&gt;%</span>
+  <span class="fu">resize</span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>, <span class="kw">score</span> <span class="kw">=</span> <span class="st">"score"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="kw">control</span> <span class="kw">=</span> <span class="fl">NA</span>, <span class="kw">evalue_report_threshold</span> <span class="kw">=</span> <span class="fl">50</span>)</pre></body></html></div>
+</div>
 <div id="saving-data-from-ame-web-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#saving-data-from-ame-web-server" class="anchor"></a>Saving data from AME Web Server</h2>
