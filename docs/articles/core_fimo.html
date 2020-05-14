@@ -108,6 +108,29 @@
     
     
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)</pre></body></html></div>
+<div id="inputs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#inputs" class="anchor"></a>Inputs</h2>
+<ul>
+<li>sequences (list not supported since no reason to split, instead use plyranges joins after fimo to add metadata)</li>
+<li>copy info from Chip-seq example</li>
+<li>explain about why <code><a href="../reference/get_sequence.html">get_sequence()</a></code> is good to use, becaues of <code>parse_genomic_coord</code>
+</li>
+<li>motifs: path or universalmotif</li>
+</ul>
+</div>
+<div id="note-about-settings" class="section level2">
+<h2 class="hasAnchor">
+<a href="#note-about-settings" class="anchor"></a>Note about settings</h2>
+<ul>
+<li>I use nondefault fimo settings to make it work better with R interface and run faster.</li>
+<li>text = TRUE
+<ul>
+<li>if running on huge sequence, may overflow memory. Link to article about running FIMO on whole genome.</li>
+</ul>
+</li>
+</ul>
+</div>
 <div id="saving-data-from-fimo-web-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#saving-data-from-fimo-web-server" class="anchor"></a>Saving data from FIMO Web Server</h2>
