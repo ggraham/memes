@@ -118,12 +118,7 @@
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/ame</span>
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/fimo</span>
 <span class="co">#&gt; ✔ /nas/longleaf/home/snystrom/meme/bin/tomtom</span></pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># TODO: Change this to use system.file(extadata/etc.) once example data is finalized.</span>
-<span class="co">#"../inst/extdata/peaks/e93_chr3.csv"</span>
-<span class="co">#system.file("extdata/peaks/e93_chr3.csv")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/warning.html">warning</a></span>(<span class="st">"Remember to update the correct file path"</span>)
-<span class="co">#&gt; Warning: Remember to update the correct file path</span>
-<span class="no">peaks</span> <span class="kw">&lt;-</span> <span class="st">"../inst/extdata/peaks/e93_chr3.csv"</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">peaks</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/peaks/e93_chr3.csv"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span>() <span class="kw">%&gt;%</span>
   <span class="no">GRanges</span></pre></body></html></div>
 <div id="motifs-in-opening-vs-closing-sites" class="section level3">

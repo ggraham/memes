@@ -107,57 +107,164 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)</pre></body></html></div>
+<p>TomTom is a tool for comparing motifs to a known set of motifs. It takes as input a set of motifs and a database of known motifs to return a ranked list of the significance of the match between the input and known motifs. TomTom can be run using the <code><a href="../reference/runTomTom.html">runTomTom()</a></code> function.</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)</pre></body></html></div>
+<div id="accepted-database-formats" class="section level2">
+<h2 class="hasAnchor">
+<a href="#accepted-database-formats" class="anchor"></a>Accepted database formats</h2>
+<p><code><a href="../reference/runTomTom.html">runTomTom()</a></code> can accept a variety of inputs to use as the “known” motif database. The formats are as follows: - a path to a .meme format file (eg <code>"fly_factor_survey.meme"</code>) - a list of universalmotifs - the output object from <code><a href="../reference/runDreme.html">runDreme()</a></code> - a <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> of all the above. If entries are named, <code><a href="../reference/runTomTom.html">runTomTom()</a></code> will use those names as the database identifier</p>
+<div id="setting-a-default-database" class="section level3">
+<h3 class="hasAnchor">
+<a href="#setting-a-default-database" class="anchor"></a>Setting a default database</h3>
+<p>dremeR can be configured to use a default .meme format file as the query database, which it will use if the user does not provide a value to <code>database</code> when calling <code><a href="../reference/runTomTom.html">runTomTom()</a></code>. The following locations will be searched in order.</p>
+<ol style="list-style-type: decimal">
+<li>The <code>meme_db</code> option, defined using <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code>
+</li>
+<li>The <code>MEME_DB</code> environment variable defined in <code>.Renviron</code>
+</li>
+</ol>
+<p><strong>NOTE:</strong> if an invalid location is found at one option, <code><a href="../reference/runTomTom.html">runTomTom()</a></code> will fall back to the next location if valid (eg if the <code>meme_db</code> option is set to an invalid file, but the <code>MEME_DB</code> environment variable is a valid file, the <code>MEME_DB</code> path will be used.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"inst/extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))</pre></body></html></div>
+</div>
+</div>
 <div id="input-types" class="section level2">
 <h2 class="hasAnchor">
 <a href="#input-types" class="anchor"></a>Input types</h2>
-<ul>
-<li>universalmotif</li>
-<li>dreme results</li>
-</ul>
-</div>
-<div id="database-types" class="section level2">
-<h2 class="hasAnchor">
-<a href="#database-types" class="anchor"></a>database types</h2>
-<ul>
-<li>.meme file</li>
-<li>universalmotif list</li>
-<li>dreme_results</li>
-<li>
-<code><a href="https://rdrr.io/r/base/list.html">list()</a></code> of all the above (named will use that name as db id)</li>
-</ul>
+<p>To use TomTom on existing motifs, <code><a href="../reference/runTomTom.html">runTomTom()</a></code> will accept any motifs in <code>universalmotif</code> format. The <code>universalmotif</code> package provides several utilities for importing data from various sources.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
+<span class="no">example_motif</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/create_motif.html">create_motif</a></span>(<span class="st">"CCRAAAW"</span>)
+<span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="no">example_motif</span>)</pre></body></html></div>
+<p><code><a href="../reference/runTomTom.html">runTomTom()</a></code> can also take the output of <code>runDreme</code> as input. This allows users to easily discover denovo motifs, then match them to as set of known motifs. When run on the output of <code>runDreme</code>, all <code><a href="../reference/runTomTom.html">runTomTom()</a></code> output columns will be appended to the <code><a href="../reference/runDreme.html">runDreme()</a></code> output data.frame, so no information will be lost.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"dreme_example"</span>)
+<span class="fu"><a href="../reference/runTomTom.html">runTomTom</a></span>(<span class="no">dreme_example</span>)</pre></body></html></div>
 </div>
 <div id="output-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#output-data" class="anchor"></a>output data</h2>
-<ul>
-<li>
-<code>tomtom</code> column</li>
-<li>
-<code><a href="../reference/drop_best_match.html">drop_best_match()</a></code> to remove the best_match columns</li>
-<li>
-<code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest(tomtom)</a></code> to expand list column</li>
-<li>
-<code>nest_tomtom</code> to re-nest</li>
-<li>
-<code><a href="../reference/update_best_match.html">update_best_match()</a></code> adds best_match columns to data from <code>tomtom</code> ranks</li>
-<li>
-<code><a href="../reference/force_best_match.html">force_best_match()</a></code> to manually set best match motif for certain entries.</li>
-</ul>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># This is a pre-build dataset packaged with dremeR </span>
+<span class="co"># that mirrors running:</span>
+<span class="co"># options(meme_db = system.file("inst/extdata/db/fly_factor_survey_id.meme", package = "dremeR"))</span>
+<span class="co"># example_motif &lt;- create_motif("CCRAAAW")</span>
+<span class="co"># example_tomtom &lt;- runTomTom(example_motif)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_tomtom"</span>)</pre></body></html></div>
+<p>When run using a <code>universalmotif</code> object as input, <code>runTomTom</code> returns the following columns:</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">example_tomtom</span>)
+<span class="co">#&gt;  [1] "name"               "altname"            "family"            </span>
+<span class="co">#&gt;  [4] "organism"           "consensus"          "alphabet"          </span>
+<span class="co">#&gt;  [7] "strand"             "icscore"            "nsites"            </span>
+<span class="co">#&gt; [10] "bkgsites"           "pval"               "qval"              </span>
+<span class="co">#&gt; [13] "eval"               "motif"              "best_match_name"   </span>
+<span class="co">#&gt; [16] "best_match_altname" "best_match_pvalue"  "best_match_evalue" </span>
+<span class="co">#&gt; [19] "best_match_qvalue"  "best_db_name"       "best_match_motif"  </span>
+<span class="co">#&gt; [22] "tomtom"</span></pre></body></html></div>
+<p>Columns preappended with <code>best_</code> indicate the data corresponding to the best match to the motif listed in <code>name</code>.</p>
+<p>The <code>tomtom</code> column is a special column which contains a nested <code>data.frame</code> of the rank-order list of TomTom hits for the motif listed in <code>name</code>.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">example_tomtom</span>$<span class="no">tomtom</span><span class="kw">[[</span><span class="fl">1</span>]])
+<span class="co">#&gt; [1] "match_name"    "match_altname" "match_pvalue"  "match_evalue" </span>
+<span class="co">#&gt; [5] "match_qvalue"  "db_name"       "match_motif"</span></pre></body></html></div>
+<p>the <code>best_match_motif</code> column contains the universalmotif representation of the best match motif.</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
+<span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
+<span class="co">#&gt;   method     from</span>
+<span class="co">#&gt;   root.phylo ape</span>
+<span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>(<span class="no">example_tomtom</span>$<span class="no">best_match_motif</span>)</pre></body></html></div>
+<p><img src="core_tomtom_files/figure-html/unnamed-chunk-8-1.png" width="480"></p>
+<p>The <code>match_motif</code> column of <code>tomtom</code> contains the universalmotif format motif from the database corresponding to each match in descending order.</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">example_tomtom</span>$<span class="no">tomtom</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">match_motif</span>[<span class="fl">1</span>:<span class="fl">2</span>] <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>()</pre></body></html></div>
+<p><img src="core_tomtom_files/figure-html/unnamed-chunk-9-1.png" width="480"></p>
+<p>The <code><a href="../reference/drop_best_match.html">drop_best_match()</a></code> function drops all the <code>best_match_*</code> columns from the <code><a href="../reference/runTomTom.html">runTomTom()</a></code> output.</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">example_tomtom</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/drop_best_match.html">drop_best_match</a></span>() <span class="kw">%&gt;%</span>
+  <span class="no">names</span>
+<span class="co">#&gt;  [1] "name"      "altname"   "family"    "organism"  "consensus" "alphabet" </span>
+<span class="co">#&gt;  [7] "strand"    "icscore"   "nsites"    "bkgsites"  "pval"      "qval"     </span>
+<span class="co">#&gt; [13] "eval"      "motif"     "tomtom"</span></pre></body></html></div>
+<p>To unnest the <code>tomtom</code> data.frame column, use <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest()</a></code>. The <code><a href="../reference/drop_best_match.html">drop_best_match()</a></code> function can be useful when doing this to clean up the unnested data.frame.</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">unnested</span> <span class="kw">&lt;-</span> <span class="no">example_tomtom</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/drop_best_match.html">drop_best_match</a></span>() <span class="kw">%&gt;%</span>
+  <span class="kw pkg">tidyr</span><span class="kw ns">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="no">tomtom</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">unnested</span>)
+<span class="co">#&gt;  [1] "name"          "altname"       "family"        "organism"     </span>
+<span class="co">#&gt;  [5] "consensus"     "alphabet"      "strand"        "icscore"      </span>
+<span class="co">#&gt;  [9] "nsites"        "bkgsites"      "pval"          "qval"         </span>
+<span class="co">#&gt; [13] "eval"          "motif"         "match_name"    "match_altname"</span>
+<span class="co">#&gt; [17] "match_pvalue"  "match_evalue"  "match_qvalue"  "db_name"      </span>
+<span class="co">#&gt; [21] "match_motif"</span></pre></body></html></div>
+<p>To re-nest the tomtom results, use <code><a href="../reference/nest_tomtom.html">nest_tomtom()</a></code> (Note: that <code>best_match_</code> columns will be automatically updated based on the rank-order of the <code>tomtom</code> data.frame)</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">unnested</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/nest_tomtom.html">nest_tomtom</a></span>() <span class="kw">%&gt;%</span>
+  <span class="no">names</span>
+<span class="co">#&gt;  [1] "name"               "altname"            "family"            </span>
+<span class="co">#&gt;  [4] "organism"           "consensus"          "alphabet"          </span>
+<span class="co">#&gt;  [7] "strand"             "icscore"            "nsites"            </span>
+<span class="co">#&gt; [10] "bkgsites"           "pval"               "qval"              </span>
+<span class="co">#&gt; [13] "eval"               "motif"              "best_match_name"   </span>
+<span class="co">#&gt; [16] "best_match_altname" "best_match_pvalue"  "best_match_evalue" </span>
+<span class="co">#&gt; [19] "best_match_qvalue"  "best_match_motif"   "best_db_name"      </span>
+<span class="co">#&gt; [22] "tomtom"</span></pre></body></html></div>
+<div id="manipulating-the-assigned-best-match" class="section level3">
+<h3 class="hasAnchor">
+<a href="#manipulating-the-assigned-best-match" class="anchor"></a>Manipulating the assigned best match</h3>
+<p>While TomTom can be useful for limiting the search-space for potential true motif matches, often times the default “best match” is not the correct assignment. Users should use their domain-specific knowledge in conjunction with the data returned by TomTom to make this judgement (see below for more details). dremeR provides a few convenience functions for reassigning these values.</p>
+<p>First, the <code><a href="../reference/update_best_match.html">update_best_match()</a></code> function will update the values of the <code>best_match*</code> columns to reflect the values stored in the first row of the <code>tomtom</code> data.frame entry. This means that <strong>the rank of the <code>tomtom</code> data is meaningful</strong>, and users should only manipulate it if intending to create side-effects.</p>
+<p>If the user can force motifs to contain a certain motif as their best match using the <code><a href="../reference/force_best_match.html">force_best_match()</a></code> function. <code><a href="../reference/force_best_match.html">force_best_match()</a></code> takes a named vector as input, where the name corresponds to the input motif <code>name</code>, and the value corresponds to a <code>match_name</code> found in the <code>tomtom</code> list data (<strong>NOTE:</strong> this means that users cannot force the best match to be a motif that TomTom did not return as a potential match).</p>
+<p>For example, below the example motif could match either “Eip93F_SANGER_10”, or “Lag1_Cell”.</p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">example_tomtom</span>$<span class="no">tomtom</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">3</span>)
+<span class="co">#&gt;         match_name match_altname match_pvalue match_evalue match_qvalue</span>
+<span class="co">#&gt; 1 Eip93F_SANGER_10   FBgn0013948     6.29e-07     0.000382     0.000765</span>
+<span class="co">#&gt; 2        Lag1_Cell   FBgn0040918     1.67e-03     1.010000     0.791000</span>
+<span class="co">#&gt; 3     pho_SOLEXA_5 FBgn0002521_3     2.28e-03     1.390000     0.791000</span>
+<span class="co">#&gt;                db_name</span>
+<span class="co">#&gt; 1 fly_factor_survey_id</span>
+<span class="co">#&gt; 2 fly_factor_survey_id</span>
+<span class="co">#&gt; 3 fly_factor_survey_id</span>
+<span class="co">#&gt;                                                            match_motif</span>
+<span class="co">#&gt; 1 &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span>
+<span class="co">#&gt; 2 &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span>
+<span class="co">#&gt; 3 &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span></pre></body></html></div>
+<p>The current best match is listed as “Eip93F_SANGER_10”.</p>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">example_tomtom</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">name</span>, <span class="no">best_match_name</span>)
+<span class="co">#&gt;            name  best_match_name</span>
+<span class="co">#&gt; 1 example_motif Eip93F_SANGER_10</span></pre></body></html></div>
+<p>To force “example_motif” to have the best match as “Lag1_Cell”, do the following:</p>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">example_tomtom</span> <span class="kw">%&gt;%</span>
+  <span class="co"># multiple motifs can be updated at a time by passing additional name-value pairs.</span>
+  <span class="fu"><a href="../reference/force_best_match.html">force_best_match</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"example_motif"</span> <span class="kw">=</span> <span class="st">"Lag1_Cell"</span>)) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">name</span>, <span class="no">best_match_name</span>)
+<span class="co">#&gt;            name best_match_name</span>
+<span class="co">#&gt; 1 example_motif       Lag1_Cell</span></pre></body></html></div>
+</div>
 </div>
 <div id="visualize-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#visualize-data" class="anchor"></a>Visualize data</h2>
-<ul>
-<li><code>view_tomtom_matches()</code></li>
-</ul>
+<p><code><a href="../reference/view_tomtom_hits.html">view_tomtom_hits()</a></code> can be used to compare the hits from tomtom to each input motif. Hits are shown in descending order by rank. By default, all hits are shown, or the user can pass an integer to <code>top_n</code> to view the top number of motifs. This can be a useful plot for determining which of the matches appear to be the “best” hit.</p>
+<p>For example, it appears that indeed “Eip93F_SANGER_10” is the best of the top 3 hits, as most of the matching sequences in the “Lag1_Cell” and “pho_SOLEXA_5” motifs correspond to low information-content regions of the matched motifs.</p>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">example_tomtom</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/view_tomtom_hits.html">view_tomtom_hits</a></span>(<span class="kw">top_n</span> <span class="kw">=</span> <span class="fl">3</span>)
+<span class="co">#&gt; [[1]]</span></pre></body></html></div>
+<p><img src="core_tomtom_files/figure-html/unnamed-chunk-16-1.png" width="480"></p>
 </div>
-<div id="saving-data-from-tomtom-web-server" class="section level2">
+<div id="importing-previous-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#saving-data-from-tomtom-web-server" class="anchor"></a>Saving Data from TomTom Web Server</h2>
-<div class="figure">
-<img src="save_tomtom.png" alt="saving TomTom XML results"><p class="caption">saving TomTom XML results</p>
+<a href="#importing-previous-data" class="anchor"></a>Importing previous data</h2>
+<p><code><a href="../reference/importTomTomXML.html">importTomTomXML()</a></code> can be used to import a <code>tomtom.xml</code> file from a previous run on the MEME server or on the commandline. Details for how to save data from the TomTom webserver are below.</p>
+<div id="saving-data-from-tomtom-web-server" class="section level3">
+<h3 class="hasAnchor">
+<a href="#saving-data-from-tomtom-web-server" class="anchor"></a>Saving data from TomTom Web Server</h3>
+<p>To download XML data from the MEME Server, right-click the TomTom XML output link and “Save Target As” or “Save Link As” (see example image below), and save as <code>&lt;filename&gt;.xml</code>. This file can be read using <code><a href="../reference/importTomTomXML.html">importTomTomXML()</a></code></p>
+<p><img src="save_tomtom.png"></p>
 </div>
+</div>
+<div id="citation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#citation" class="anchor"></a>Citation</h1>
+<p>dremeR is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing dremeR, please cite the MEME Suite tools corresponding to the tools you use.</p>
+<p>If you use <code><a href="../reference/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
+<p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford Noble, “Quantifying similarity between motifs”, Genome Biology, 8(2):R24, 2007. <a href="http://genomebiology.com/2007/8/2/R24">full text</a></p>
 </div>
   </div>
 

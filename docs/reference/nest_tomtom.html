@@ -40,7 +40,10 @@
 
 
 <meta property="og:title" content="Nest TomTom results columns into a data.frame column named "tomtom" — nest_tomtom" />
-<meta property="og:description" content="Nest TomTom results columns into a data.frame column named &quot;tomtom&quot;" />
+<meta property="og:description" content="This will also update the best_match information automatically to avoid any
+ambiguities after manipulating unnested data. **NOTE:** that the resulting
+columns may not be in the same order, so operations like `identical()` may
+fail even though the column values are unchanged." />
 
 
 
@@ -144,7 +147,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Nest TomTom results columns into a data.frame column named "tomtom"</p>
+    <p>This will also update the best_match information automatically to avoid any
+ambiguities after manipulating unnested data. **NOTE:** that the resulting
+columns may not be in the same order, so operations like `identical()` may
+fail even though the column values are unchanged.</p>
     </div>
 
     <pre class="usage"><span class='fu'>nest_tomtom</span>(<span class='no'>data</span>)</pre>
