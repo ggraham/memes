@@ -107,35 +107,157 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)</pre></body></html></div>
-<div id="running-ame" class="section level2">
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GenomicRanges</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)</pre></body></html></div>
+<div id="sequence-input" class="section level2">
 <h2 class="hasAnchor">
-<a href="#running-ame" class="anchor"></a>Running AME</h2>
+<a href="#sequence-input" class="anchor"></a>Sequence Input</h2>
+<p>AME requires a series of input sequences to scan for motif enrichment. <code><a href="../reference/runAme.html">runAme()</a></code> accepts sequence input in the following formats:</p>
 <ul>
-<li>shuffle sequences (copy core_dreme shuffle info)</li>
-<li>discriminative mode</li>
-<li>partitioning mode (<code>get_sequences(score = "col")</code>, <code><a href="../reference/runAme.html">runAme(control = NA)</a></code>)</li>
+<li>a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> object</li>
+<li>a named list of <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> objects</li>
+<li>a path to a .fasta file</li>
 </ul>
+<p><strong>NOTE</strong> <code>XStringSet</code> inputs can be easily generated for DNA sequences from a GRanges object using the <code><a href="../reference/get_sequence.html">get_sequence()</a></code> function</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_peaks"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>)
+
+<span class="no">dm.genome</span> <span class="kw">&lt;-</span> <span class="kw pkg">BSgenome.Dmelanogaster.UCSC.dm3</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm3/man/package.html">BSgenome.Dmelanogaster.UCSC.dm3</a></span>
+
+<span class="no">sequence</span> <span class="kw">&lt;-</span> <span class="no">example_peaks</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></body></html></div>
 </div>
 <div id="database-input" class="section level2">
 <h2 class="hasAnchor">
-<a href="#database-input" class="anchor"></a>Database input</h2>
+<a href="#database-input" class="anchor"></a>Database Input</h2>
+<p>AME scans input sequences against a database of known motifs and tests for enrichment of each motif in the database. <code><a href="../reference/runAme.html">runAme()</a></code> can accept a database in the following formats:</p>
 <ul>
-<li>different from tomtom (no list input), but can be universalmotif, dreme results, or path to file.</li>
+<li>a list of universalmotif objects</li>
+<li>a single universalmotif object</li>
+<li>the results object from <code>runDreme</code>
+</li>
+<li>a path to a .meme format file</li>
 </ul>
+<div id="setting-a-default-database" class="section level3">
+<h3 class="hasAnchor">
+<a href="#setting-a-default-database" class="anchor"></a>Setting a default database</h3>
+<p>dremeR can be configured to use a default .meme format file as the query database, which it will use if the user does not provide a value to <code>database</code> when calling <code><a href="../reference/runAme.html">runAme()</a></code>. The following locations will be searched in order.</p>
+<ol style="list-style-type: decimal">
+<li>The <code>meme_db</code> option, defined using <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code>
+</li>
+<li>The <code>MEME_DB</code> environment variable defined in <code>.Renviron</code>
+</li>
+</ol>
+<p><strong>NOTE:</strong> if an invalid location is found at one option, <code><a href="../reference/runAme.html">runAme()</a></code> will fall back to the next location if valid (eg if the <code>meme_db</code> option is set to an invalid file, but the <code>MEME_DB</code> environment variable is a valid file, the <code>MEME_DB</code> path will be used.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))</pre></body></html></div>
 </div>
-<div id="visualizing-data" class="section level2">
+</div>
+<div id="running-ame" class="section level2">
 <h2 class="hasAnchor">
-<a href="#visualizing-data" class="anchor"></a>visualizing data</h2>
+<a href="#running-ame" class="anchor"></a>Running AME</h2>
+<p><code><a href="../reference/runAme.html">runAme()</a></code> supports running AME using three modes:</p>
+<table class="table">
+<colgroup>
+<col width="19%">
+<col width="29%">
+<col width="51%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">AME Mode</th>
+<th align="center">Description</th>
+<th align="left">Command</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Vs Shuffled</td>
+<td align="center">Input vs Shuffled Sequence</td>
+<td align="left"><code><a href="../reference/runAme.html">runAme(input = sequence, control = "shuffle")</a></code></td>
+</tr>
+<tr class="even">
+<td align="center">Discriminative</td>
+<td align="center">Input vs Control Sequence</td>
+<td align="left"><code><a href="../reference/runAme.html">runAme(input = sequence, control = control)</a></code></td>
+</tr>
+<tr class="odd">
+<td align="center">Partitioning</td>
+<td align="center">Rank Input by fasta score</td>
+<td align="left"><code><a href="../reference/runAme.html">runAme(input = sequence, control = NA)</a></code></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ame_vs_shuffle</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">sequence</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">ame_vs_control</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">sequence</span>[<span class="fl">1</span>:<span class="fl">5</span>], <span class="no">sequence</span>[<span class="fl">6</span>:<span class="fl">10</span>])</pre></body></html></div>
+<p>To run AME using partitioning mode, the fasta header must contain a score value for each entry in the form: “&gt;entry_name score”. The <code>get_sequences()</code> <code>score</code> argument allows users to set the score value to a column value from input regions.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">sequence_scored</span> <span class="kw">&lt;-</span> <span class="no">example_peaks</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span>(<span class="kw">score</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="no">.</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>, <span class="kw">score</span> <span class="kw">=</span> <span class="st">"score"</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">sequence_scored</span>)[<span class="fl">1</span>]
+<span class="co">#&gt; [1] "chr3L:14551117-14551323 1"</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ame_partition</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">sequence_scored</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="fl">NA</span>)</pre></body></html></div>
+<div id="running-ame-on-multiple-groups" class="section level3">
+<h3 class="hasAnchor">
+<a href="#running-ame-on-multiple-groups" class="anchor"></a>Running AME on multiple groups</h3>
+<p>If using a list input to <code><a href="../reference/runAme.html">runAme()</a></code>, it will dispatch multiple AME runs for each object in the list.</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_chip_summits"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>)
+
+<span class="no">seq_by_behavior</span> <span class="kw">&lt;-</span> <span class="no">example_chip_summits</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span>(<span class="kw">width</span> <span class="kw">=</span> <span class="fl">100</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span>(<span class="fu">mcols</span>(<span class="no">.</span>)$<span class="no">e93_sensitive_behavior</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">ame_by_behavior</span> <span class="kw">&lt;-</span> <span class="fu">runAme.list</span>(<span class="no">seq_by_behavior</span>)</pre></body></html></div>
+<div id="discriminative-analysis-using-list-input" class="section level4">
+<h4 class="hasAnchor">
+<a href="#discriminative-analysis-using-list-input" class="anchor"></a>Discriminative analysis using list input</h4>
+<p>If the input to <code><a href="../reference/runAme.html">runAme()</a></code> is a named list of <code>XStringSet</code> objects, <code>control</code> can be set to one or more values from <code><a href="https://rdrr.io/r/base/names.html">names(input)</a></code> to use those regions as background. It will skip running those regions as the input. The following code will result in these comparisons:</p>
+<ol style="list-style-type: decimal">
+<li>Increasing vs Static</li>
+<li>Decreasing vs Static</li>
+</ol>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">ame_by_behavior_vs_static</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">seq_by_behavior</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="st">"Static"</span>)</pre></body></html></div>
+<p>If multiple names are used in the <code>control</code> section, they will be combined together to make a single control set which will be used for all comparisons. Here, we use “Static” and “Decreasing” sites as the control, which will result in only running 1 comparison: Increasing vs Static+Decreasing.</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/runAme.html">runAme</a></span>(<span class="no">seq_by_behavior</span>, <span class="kw">control</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Static"</span>, <span class="st">"Decreasing"</span>))</pre></body></html></div>
+</div>
+</div>
+</div>
+<div id="output-format" class="section level2">
+<h2 class="hasAnchor">
+<a href="#output-format" class="anchor"></a>Output Format</h2>
+<p>AME will return different output formats depending on the <code>method</code> used. For detailed information about these values see the <a href="http://meme-suite.org/doc/ame-output-format.html">AME Output description webpage</a>. As a general rule of thumb, <code><a href="../reference/runAme.html">runAme()</a></code> will return the same column names described in the webpage, except dashes are removed and all column names are lowercase.</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">ame_by_behavior_vs_static</span>$<span class="no">Decreasing</span> <span class="kw">%&gt;%</span>
+  <span class="no">names</span>
+<span class="co">#&gt;  [1] "rank"         "motif_db"     "motif_id"     "motif_alt_id" "consensus"   </span>
+<span class="co">#&gt;  [6] "pvalue"       "adj.pvalue"   "evalue"       "tests"        "fasta_max"   </span>
+<span class="co">#&gt; [11] "pos"          "neg"          "pwm_min"      "tp"           "tp_percent"  </span>
+<span class="co">#&gt; [16] "fp"           "fp_percent"</span></pre></body></html></div>
+<p>If <code><a href="../reference/runAme.html">runAme()</a></code> is run with <code>method = "fisher"</code>, the sequences output can be added to the results by setting <code>sequences = TRUE</code>. This will be added as a list column named <code>sequences</code> that can be unnested using <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest()</a></code>.</p>
+</div>
+<div id="visualizing-results-as-heatmap" class="section level2">
+<h2 class="hasAnchor">
+<a href="#visualizing-results-as-heatmap" class="anchor"></a>Visualizing Results as Heatmap</h2>
 <ul>
 <li>move heatmap information here</li>
 </ul>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">ame_by_behavior_vs_static</span> <span class="kw">%&gt;%</span>
+  <span class="co"># AME results in list format are easily combined using dplyr::bind_rows</span>
+  <span class="co"># .id will specify a column to hold the list object names</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="kw">.id</span> <span class="kw">=</span> <span class="st">"behavior"</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># setting group to a column name will split the results on the y-axis</span>
+  <span class="fu"><a href="../reference/ame_plot_heatmap.html">ame_plot_heatmap</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">behavior</span>)</pre></body></html></div>
+<p><img src="core_ame_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 </div>
-<div id="saving-data-from-ame-web-server" class="section level2">
+<div id="importing-previous-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#saving-data-from-ame-web-server" class="anchor"></a>Saving data from AME Web Server</h2>
+<a href="#importing-previous-data" class="anchor"></a>Importing Previous Data</h2>
+<p><code><a href="../reference/importAme.html">importAme()</a></code> can be used to import an <code>ame.tsv</code> file from a previous run on the MEME server or on the commandline. Details for how to save data from the AME webserver are below.</p>
+<p>Optionally, if AME was run on the commandline with <code>--method fisher</code>, the user can pass a path to the <code>sequences.tsv</code> file to the <code>sequences</code> argument of <code><a href="../reference/importAme.html">importAme()</a></code> to append the sequence information to the AME results.</p>
+<div id="saving-data-from-ame-web-server" class="section level3">
+<h3 class="hasAnchor">
+<a href="#saving-data-from-ame-web-server" class="anchor"></a>Saving data from AME Web Server</h3>
+<p>To download TSV data from the MEME Server, right-click the AME TSV output link and “Save Target As” or “Save Link As” (see example image below), and save as <code>&lt;filename&gt;.tsv</code>. This file can be read using <code><a href="../reference/importAme.html">importAme()</a></code>.</p>
 <div class="figure">
 <img src="save_ame.png" alt="saving AME tsv results"><p class="caption">saving AME tsv results</p>
+</div>
 </div>
 </div>
 <div id="citation" class="section level1">

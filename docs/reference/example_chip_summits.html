@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse ame output — importAme • dremeR</title>
+<title>Annotated Transcription Factor ChIP-seq summits — example_chip_summits • dremeR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Parse ame output — importAme" />
-<meta property="og:description" content="Parse ame output" />
+<meta property="og:title" content="Annotated Transcription Factor ChIP-seq summits — example_chip_summits" />
+<meta property="og:description" content="ChIP-seq summit positions on Drosophila melanogaster chromosome 3 for the
+transcription factor E93 using a union set of peaks from third-instar larval
+wings (&quot;Early&quot;) and 24 hour Pupal (&quot;Late&quot;) wings." />
 
 
 
@@ -138,48 +140,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse ame output</h1>
-    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/ame.R'><code>R/ame.R</code></a></small>
-    <div class="hidden name"><code>importAme.Rd</code></div>
+    <h1>Annotated Transcription Factor ChIP-seq summits</h1>
+    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>example_chip_summits.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse ame output</p>
+    <p>ChIP-seq summit positions on Drosophila melanogaster chromosome 3 for the
+transcription factor E93 using a union set of peaks from third-instar larval
+wings ("Early") and 24 hour Pupal ("Late") wings.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>importAme</span>(<span class='no'>path</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"fisher"</span>, <span class='kw'>sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='no'>example_chip_summits</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>path to ame results file ("ame.tsv")</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>ame run method used (one of: c("fisher", "ranksum", "dmhg3",
-"dmhg4", "pearson", "spearman")). Default: "fisher". **NOTE:**</p></td>
-    </tr>
-    <tr>
-      <th>sequences</th>
-      <td><p>FALSE or path to sequences file (only valid for method = "fisher")</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>data.frame with method-specific results. See [AME
-  results](http://meme-suite.org/doc/ame-output-format.html) webpage for more
-  information. If sequences is set to a path to the sequences.tsv and method
-  = "fisher", the list-column `sequences` will be appended to resulting
-  data.frame.</p>
+    <p>A GRanges object of ChIP summit position with 2 metadata columns</p><dl'>
+<dt>peak_binding_description</dt><dd><p>Binding profiles between Early and Late E93
+were compared. Peaks are annotated as whether they are bound in Early wings
+only ("ectopic"), both Early and Late wings ("entopic"), or only bound in
+Late wings ("orphan").</p></dd>
+  <dt>e93_sensitive_behavior</dt><dd><p>change in chromatin accessibility in response to E93 binding: Increasing, Decreasing, or Static</p></dd>
+ 
+</dl>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>importAme</span>(<span class='st'>"path/to/ame.tsv"</span>)
-<span class='fu'>importAme</span>(<span class='st'>"path/to/ame.tsv"</span>, <span class='kw'>sequence</span> <span class='kw'>=</span> <span class='st'>"path/to/sequences.tsv"</span>)
-}</div></pre>
+    <p>https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE141738&amp;format=file&amp;file=GSE141738<!-- %5Funion%5Fchip%5Fpeaks%5Fannotated%2Ecsv%2Egz --></p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>E93 is a transcription factor normally present only in Late wings. An
+experimental perturbation precociously expressed E93 during Early stages.
+Binding profiles between Early and Late E93 were compared. Peaks are
+annotated as whether they are bound in Early wings only ("ectopic"), both
+Early and Late wings ("entopic"), or only bound in Late
+wings ("orphan").</p>
+<p>DNA elements can be made "open" or "closed" in response to binding of
+transcription factors like E93. Accessibility of E93 binding sites before and
+after E93 expression was measured using FAIRE-seq. ChIP peaks are annotated
+by how their accessibility changes in response to E93 binding . Peaks can
+become more open ("Increasing"), more closed ("Decreasing"), or unchanged in
+accessibility ("Static"). These experiments demonstrate a causal relationship
+between E93 binding and both opening and closing of DNA elements.</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

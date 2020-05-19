@@ -429,21 +429,15 @@
 <div id="centrality-of-e93-motif" class="section level3">
 <h3 class="hasAnchor">
 <a href="#centrality-of-e93-motif" class="anchor"></a>Centrality of E93 motif</h3>
-<p>Next we want to visualize whether the E93 motif has altered positioning across the response categories. To do this we</p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">distance_to_nearest</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">query</span>, <span class="no">subject</span>, <span class="no">...</span>){
-  <span class="no">hits</span> <span class="kw">&lt;-</span> <span class="kw pkg">GenomicRanges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/nearest-methods.html">distanceToNearest</a></span>(<span class="no">query</span>, <span class="no">subject</span>, <span class="no">...</span>)
-  <span class="fu">mcols</span>(<span class="no">hits</span>)$<span class="no">distance</span>
-}
-
-<span class="no">summit_nearest_e93_motif</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+<p>Next we want to visualize whether the E93 motif has altered positioning across the response categories. To do this we add the metadata for each nearest motif to our peak summits. Setting <code>distance = TRUE</code> in <code><a href="https://rdrr.io/pkg/plyranges/man/ranges-nearest.html">plyranges::join_nearest</a></code> adds a <code>distance</code> column indicating the distance to the nearest joined region.</p>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">summit_nearest_e93_motif</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/ranges-anchor.html">anchor_center</a></span>() <span class="kw">%&gt;%</span>
   <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span>(<span class="kw">width</span> <span class="kw">=</span> <span class="fl">1</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/ranges-nearest.html">join_nearest</a></span>(<span class="no">fimo_res</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span>(<span class="kw">dist_to_motif</span> <span class="kw">=</span> <span class="fu">distance_to_nearest</span>(<span class="no">.</span>, <span class="no">fimo_res</span>))</pre></body></html></div>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/ranges-nearest.html">join_nearest</a></span>(<span class="no">fimo_res</span>, <span class="kw">distance</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="no">summit_nearest_e93_motif</span> <span class="kw">%&gt;%</span>
   <span class="no">data.frame</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">has_motif</span> <span class="kw">==</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">dist_to_motif</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">distance</span>)) +
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ecdf.html">stat_ecdf</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="no">e93_sensitive_behavior</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">pad</span> <span class="kw">=</span> <span class="fl">FALSE</span>) +
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Distance to nearest E93 Motif"</span>,
          <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Fraction of Sites"</span>,
@@ -455,10 +449,10 @@
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">has_motif</span> <span class="kw">==</span> <span class="fl">TRUE</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">behavior</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">e93_sensitive_behavior</span>)) <span class="kw">%&gt;%</span>
   <span class="co"># Anderson-darling test for multiple distributions</span>
-  <span class="kw pkg">PMCMRplus</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/PMCMRplus/man/adAllPairsTest.html">adAllPairsTest</a></span>(<span class="no">dist_to_motif</span> ~ <span class="no">behavior</span>, <span class="no">.</span>, <span class="kw">p.adjust.method</span> <span class="kw">=</span> <span class="st">"fdr"</span>)
+  <span class="kw pkg">PMCMRplus</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/PMCMRplus/man/adAllPairsTest.html">adAllPairsTest</a></span>(<span class="no">distance</span> ~ <span class="no">behavior</span>, <span class="no">.</span>, <span class="kw">p.adjust.method</span> <span class="kw">=</span> <span class="st">"fdr"</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Pairwise comparisons using Anderson-Darling All-Pairs Test</span>
-<span class="co">#&gt; data: dist_to_motif by behavior</span>
+<span class="co">#&gt; data: distance by behavior</span>
 <span class="co">#&gt;            Decreasing Increasing</span>
 <span class="co">#&gt; Increasing 0.058      -         </span>
 <span class="co">#&gt; Static     0.021      0.945</span>

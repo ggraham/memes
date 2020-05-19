@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse ame output — importAme • dremeR</title>
+<title>Example runDreme() output — example_dreme • dremeR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Parse ame output — importAme" />
-<meta property="og:description" content="Parse ame output" />
+<meta property="og:title" content="Example runDreme() output — example_dreme" />
+<meta property="og:description" content="Result when running dreme using 100bp window around example_chip_summits
+using &quot;Decreasing&quot; sites as foreground, and &quot;Static&quot; sites as background." />
 
 
 
@@ -138,48 +139,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse ame output</h1>
-    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/ame.R'><code>R/ame.R</code></a></small>
-    <div class="hidden name"><code>importAme.Rd</code></div>
+    <h1>Example runDreme() output</h1>
+    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>example_dreme.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse ame output</p>
+    <p>Result when running dreme using 100bp window around example_chip_summits
+using "Decreasing" sites as foreground, and "Static" sites as background.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>importAme</span>(<span class='no'>path</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"fisher"</span>, <span class='kw'>sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='no'>example_dreme</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>path to ame results file ("ame.tsv")</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p>ame run method used (one of: c("fisher", "ranksum", "dmhg3",
-"dmhg4", "pearson", "spearman")). Default: "fisher". **NOTE:**</p></td>
-    </tr>
-    <tr>
-      <th>sequences</th>
-      <td><p>FALSE or path to sequences file (only valid for method = "fisher")</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>data.frame with method-specific results. See [AME
-  results](http://meme-suite.org/doc/ame-output-format.html) webpage for more
-  information. If sequences is set to a path to the sequences.tsv and method
-  = "fisher", the list-column `sequences` will be appended to resulting
-  data.frame.</p>
+    <p>a data.frame</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>importAme</span>(<span class='st'>"path/to/ame.tsv"</span>)
-<span class='fu'>importAme</span>(<span class='st'>"path/to/ame.tsv"</span>, <span class='kw'>sequence</span> <span class='kw'>=</span> <span class='st'>"path/to/sequences.tsv"</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

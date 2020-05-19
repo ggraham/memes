@@ -238,21 +238,14 @@
 <div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>))
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GenomicRanges</span>))
 
-<span class="co"># Transcription factor peaks</span>
-<span class="no">peaks</span> <span class="kw">&lt;-</span> <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_tsv</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/peaks/peaks.tsv"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>)) <span class="kw">%&gt;%</span>
-  <span class="no">GRanges</span>
-<span class="co">#&gt; Parsed with column specification:</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   seqnames = col_character(),</span>
-<span class="co">#&gt;   start = col_double(),</span>
-<span class="co">#&gt;   end = col_double()</span>
-<span class="co">#&gt; )</span>
+<span class="co"># Example transcription factor peaks as GRanges</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_peaks"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>)
 
 <span class="co"># Genome object</span>
 <span class="no">dm.genome</span> <span class="kw">&lt;-</span> <span class="kw pkg">BSgenome.Dmelanogaster.UCSC.dm6</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm6/man/package.html">BSgenome.Dmelanogaster.UCSC.dm6</a></span></pre></div>
 <p>The <code>get_sequence</code> function takes a <code>GRanges</code> or <code>GRangesList</code> as input and returns the sequences as a <code>BioStrings::XStringSet</code>, or list of <code>XStringSet</code> objects, respectively. <code>get_sequence</code> will name each fasta entry by the genomic coordinates each sequence is from.</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="co"># Generate sequences from 200bp about the center of my peaks of interest</span>
-<span class="no">sequences</span> <span class="kw">&lt;-</span> <span class="no">peaks</span> <span class="kw">%&gt;%</span>
+<span class="no">sequences</span> <span class="kw">&lt;-</span> <span class="no">example_peaks</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/pkg/GenomicRanges/man/intra-range-methods.html">resize</a></span>(<span class="fl">200</span>, <span class="st">"center"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)</pre></div>
 <p><code><a href="reference/runDreme.html">runDreme()</a></code> accepts XStringSet or a path to a fasta file as input. You can use other sequences or shuffled input sequences as the control dataset.</p>
