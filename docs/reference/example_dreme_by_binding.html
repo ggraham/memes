@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Write fasta file from stringset — write_fasta • dremeR</title>
+<title>runDreme() output for example_chip_summits split by binding description — example_dreme_by_binding • dremeR</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Write fasta file from stringset — write_fasta" />
-<meta property="og:description" content="Write fasta file from stringset" />
+<meta property="og:title" content="runDreme() output for example_chip_summits split by binding description — example_dreme_by_binding" />
+<meta property="og:description" content="See vignette(&quot;integrative_analysis&quot;, package = &quot;dremeR&quot;) for details" />
 
 
 
@@ -138,39 +138,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Write fasta file from stringset</h1>
-    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>write_fasta.Rd</code></div>
+    <h1>runDreme() output for example_chip_summits split by binding description</h1>
+    <small class="dont-index">Source: <a href='https://github.com/snystrom/dremeR/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>example_dreme_by_binding.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Write fasta file from stringset</p>
+    <p>See vignette("integrative_analysis", package = "dremeR") for details</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_fasta</span>(<span class='no'>seq</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".fa"</span>))</pre>
+    <pre class="usage"><span class='no'>example_dreme_by_binding</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>seq</th>
-      <td><p>`Biostrings::XStringSet`</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>path of fasta file to write (default: temporary file)</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>path to created fasta file</p>
+    <p>a runDreme results data.frame</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>seq</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_sequences.html'>create_sequences</a></span>()
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>write_fasta</span>(<span class='no'>seq</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

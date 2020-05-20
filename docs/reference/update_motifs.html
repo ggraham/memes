@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dremeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
       </span>
     </div>
 
@@ -182,9 +182,8 @@ cannot be updated.</p>
 | eval     | eval         |</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>motif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>()</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'treeio':</span>
-#&gt; <span class='message'>  method     from</span>
-#&gt; <span class='message'>  root.phylo ape </span></div><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe</a></span>(<span class='no'>motif</span>)
+    <pre class="examples"><div class='input'><span class='no'>motif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>()
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe</a></span>(<span class='no'>motif</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='no'>df</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"newName"</span>)
 <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>update_motifs</span>(<span class='no'>df</span>)
 <span class='co'># renamed motif</span>
@@ -194,14 +193,14 @@ cannot be updated.</p>
 #&gt;          Alphabet:   DNA
 #&gt;              Type:   PPM
 #&gt;           Strands:   +-
-#&gt;          Total IC:   10.7
-#&gt;         Consensus:   AGGTVGGART
+#&gt;          Total IC:   8.53
+#&gt;         Consensus:   RRTNGGARTN
 #&gt; 
-#&gt;      A    G    G    T    V    G    G    A    R    T
-#&gt; A 0.90 0.07 0.19 0.01 0.26 0.00 0.01 0.69 0.29 0.08
-#&gt; C 0.00 0.00 0.00 0.13 0.33 0.03 0.14 0.00 0.07 0.00
-#&gt; G 0.05 0.93 0.80 0.00 0.27 0.83 0.61 0.08 0.61 0.00
-#&gt; T 0.05 0.00 0.00 0.86 0.14 0.14 0.25 0.22 0.03 0.92
+#&gt;      R   R    T    N    G    G    A    R    T    N
+#&gt; A 0.52 0.3 0.03 0.37 0.00 0.02 0.77 0.41 0.14 0.22
+#&gt; C 0.00 0.0 0.11 0.29 0.02 0.13 0.00 0.05 0.00 0.23
+#&gt; G 0.48 0.7 0.00 0.23 0.85 0.62 0.06 0.51 0.00 0.25
+#&gt; T 0.00 0.0 0.86 0.12 0.13 0.23 0.17 0.02 0.86 0.30
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

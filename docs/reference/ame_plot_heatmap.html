@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dremeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
       </span>
     </div>
 
@@ -175,7 +175,9 @@
       <td><p>value to display as heatmap intensity. Default:
 -log10(adj.pvalue). Takes function or column name as input. If set to
 "normalize", will use normalized rank within `group` as the heatmap values.
-This can be a more appropriate visualization for between-group comparisons.</p></td>
+**If in doubt**, prefer the -log10(adj.pvalue) plot. (See "Normalized rank
+visualization" section below for more details on how to interpret these
+data)</p></td>
     </tr>
     <tr>
       <th>group_name</th>
@@ -190,7 +192,17 @@ This can be a more appropriate visualization for between-group comparisons.</p><
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Common mistake: if `value` is set to a string that is not "normalize", it
+    <p>Normalized rank visualization
+**NOTE:** The normalized rank visualization eliminates all real values
+related to statistical significance! Instead, this visualization represents
+the relative ranks of hits within an AME run, which already pass a
+significance threshold set during `runAME()`. This means that even if several
+motifs have similar or even identical pvalues, their heatmap representation
+will be a different color value based on their ranked order in the results
+list. Both visualizations can be useful and reveal different properties of
+the data to the user. **If in doubt**, prefer the
+`-log10(adj.pvalue)` representation.</p>
+<p>Common mistake: if `value` is set to a string that is not "normalize", it
 will return: "Error: Discrete value supplied to continuous scale". To use a
 column by name, do not quote the column name.</p>
 

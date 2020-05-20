@@ -22,10 +22,19 @@
     <loc>https://snystrom.github.io/dremeR//reference/example_ame.html</loc>
   </url>
   <url>
+    <loc>https://snystrom.github.io/dremeR//reference/example_ame_large.html</loc>
+  </url>
+  <url>
     <loc>https://snystrom.github.io/dremeR//reference/example_chip_summits.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/example_dreme.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//reference/example_dreme_by_binding.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//reference/example_dreme_by_sens_vs_static.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/example_dreme_tomtom.html</loc>

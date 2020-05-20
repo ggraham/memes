@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dremeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
       </span>
     </div>
 
@@ -171,7 +171,7 @@
 <span class='no'>motif</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>universalmotif</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span>()</div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'treeio':</span>
 #&gt; <span class='message'>  method     from</span>
 #&gt; <span class='message'>  root.phylo ape </span></div><div class='input'><span class='no'>db</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/db/fly_factor_survey_id.meme"</span>)
-<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='runTomTom.html'>runTomTom</a></span>(<span class='no'>motif</span>)</div><div class='output co'>#&gt; <span class='error'>Error in f(path = path): No path defined or detected</span></div><div class='input'><span class='fu'>force_best_match</span>(<span class='no'>res</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"id"</span> <span class='kw'>=</span> <span class='st'>"update"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'res' not found</span></div></pre>
+<span class='no'>res</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='runTomTom.html'>runTomTom</a></span>(<span class='no'>motif</span>)</div><div class='output co'>#&gt; <span class='error'>Error in f(path = path): No path defined or detected</span></div><div class='input'><span class='fu'>force_best_match</span>(<span class='no'>res</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"id"</span> <span class='kw'>=</span> <span class='st'>"update"</span>))</div><div class='output co'>#&gt; <span class='error'>Error in names(matches) %in% res$name: object 'res' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

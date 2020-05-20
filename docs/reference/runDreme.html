@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dremeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
       </span>
     </div>
 
@@ -168,6 +168,8 @@ path to fasta file as input, or specify an "outdir"</p></li>
       <td><p>regions to use as background for motif search. Can be any of:</p><ul>
 <li><p>path to fasta file</p></li>
 <li><p>DNAStringSet object (can be generated from GRanges using get_sequence)</p></li>
+<li><p>A Biostrings::BStringSetList (generated using <code>get_sequence</code>), in which
+case all sequences in the list will be combined as the control set.</p></li>
 <li><p>if <code>input</code> is a list of DNAStringSet objects, a character vector of names
 in <code>input</code> will use those sequences as background. runDreme will not scan
 those regions as input.</p></li>
