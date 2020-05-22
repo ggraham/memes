@@ -171,23 +171,25 @@ names contain fasta score, required for partitioning mode)</p></td>
       <th>control</th>
       <td><p>default: "shuffle", or set to
 DNAstringset or path to fasta file to use those sequences in discriminative
-mode. If `input` is a list of DNAStringSet objects, and `control` is set to
-a character vector of names in `input`, those regions will be used as
+mode. If <code>input</code> is a list of DNAStringSet objects, and <code>control</code> is set to
+a character vector of names in <code>input</code>, those regions will be used as
 background in discriminitive mode and AME will skip running on any
-`control` entries (NOTE: if `input` contains an entry named "shuffle" and
-control is set to "shuffle", it will use the `input` entry, not the AME
-shuffle algorithm). If `control` is a Biostrings::BStringSetList (generated
-using `get_sequence`), all sequences in the list will be combined as the
-control set. Set to `NA` for partitioning based on input fasta score (see
-`get_sequence()` for assigning fasta score).</p></td>
+<code>control</code> entries (NOTE: if <code>input</code> contains an entry named "shuffle" and
+control is set to "shuffle", it will use the <code>input</code> entry, not the AME
+shuffle algorithm). If <code>control</code> is a Biostrings::BStringSetList (generated
+using <code>get_sequence</code>), all sequences in the list will be combined as the
+control set. Set to <code>NA</code> for partitioning based on input fasta score (see
+<code><a href='get_sequence.html'>get_sequence()</a></code> for assigning fasta score).</p></td>
     </tr>
     <tr>
       <th>outdir</th>
-      <td><p>default: auto</p></td>
+      <td><p>Path to output directory location to save data files. If set to "auto",
+will use location of input files if passing file paths, otherwise will
+write to a temporary directory. default: "auto"</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>default: fisher</p></td>
+      <td><p>default: fisher (allowed values: fisher, ranksum, pearson , spearman, 3dmhg, 4dmhg)</p></td>
     </tr>
     <tr>
       <th>database</th>
@@ -203,14 +205,14 @@ and "customMotifs".</p></td>
     </tr>
     <tr>
       <th>meme_path</th>
-      <td><p>path to "meme/bin/" (default: `NULL`). Will use default
-search behavior as described in `check_meme_install()` if unset.</p></td>
+      <td><p>path to "meme/bin/" (default: <code>NULL</code>). Will use default
+search behavior as described in <code><a href='check_meme_install.html'>check_meme_install()</a></code> if unset.</p></td>
     </tr>
     <tr>
       <th>sequences</th>
-      <td><p>`logical(1)` add results from `sequences.tsv` to `sequences`
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> add results from <code>sequences.tsv</code> to <code>sequences</code>
 list column to returned data.frame. Valid only if method = "fisher". See
-[AME outputs](http://alternate.meme-suite.org/doc/ame-output-format.html)
+<a href='http://alternate.meme-suite.org/doc/ame-output-format.html'>AME outputs</a>
 webpage for more information.</p></td>
     </tr>
     <tr>
@@ -228,6 +230,41 @@ webpage for more information.</p></td>
     
 
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Additional AME arguments</p>
+<p>dremeR allows passing any valid flag to it's target programs via <code>...</code>. For
+additional details for all valid AME arguments, see the <a href='http://meme-suite.org/doc/ame.html'>AME Manual</a> webpage. For convenience, a table
+of valid parameters, and brief descriptions of their function are provided
+below:</p><table class='table'>
+<tr><td>AME Flag</td><td>allowed values</td><td>default</td><td>description</td></tr>
+<tr><td>kmer</td><td><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code></td><td>2</td><td>kmer frequency to preserve when shuffling control sequences</td></tr>
+<tr><td>seed</td><td><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code></td><td>1</td><td>seed for random number generator when shuffling control sequences</td></tr>
+<tr><td>scoring</td><td>"avg", "max", "sum", "totalhits"</td><td>"avg"</td><td>Method for scoring a sequence for matches to a PWM (avg, max, sum, totalhits)</td></tr>
+<tr><td>hit_lo_fraction</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>0.25</td><td>fraction of hit log odds score to exceed to be considered a "hit"</td></tr>
+<tr><td>evalue_report_threshold</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>10</td><td>E-value threshold for reporting a motif as significantly enriched</td></tr>
+<tr><td>fasta_threshold</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>0.001</td><td>AME will classify sequences with FASTA scores below this value as positives. Only valid when <code>method = "fisher", poslist = "pwm", control = NA, fix_partition = NULL</code>.</td></tr>
+<tr><td>fix_partition</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td><code>NULL</code></td><td>AME evaluates only the partition of the first N sequences. Only works when <code>control = NA</code> and <code>poslist = "fasta"</code></td></tr>
+<tr><td>poslist</td><td>"pwm", "fasta"</td><td>"fasta"</td><td>When using paritioning mode (<code>control = NA</code>), test thresholds on either PWM or Fasta score</td></tr>
+<tr><td>log_fscores</td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>FALSE</td><td>Convert FASTA scores into log-space (only used when <code>method = "pearson"</code>)</td></tr>
+<tr><td>log_pwmscores</td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>FALSE</td><td>Convert PWM scores into log-space (only used for <code>method = "pearson"</code> or <code>method = "spearman</code>)</td></tr>
+<tr><td>lingreg_switchxy</td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>FALSE</td><td>Make the x-points FASTA scores and y-points PWM scores (only used for <code>method = "pearson"</code> or <code>method = "spearman</code>)</td></tr>
+<tr><td>xalph</td><td>file path</td><td><code>NULL(1)</code></td><td>alphabet file to use if input motifs are in different alphabet than input sequences</td></tr>
+<tr><td>bfile</td><td>"motif", "motif-file", "uniform", path to file</td><td><code>NULL</code></td><td>source of 0-order background model. If "motif" or "motif-file" 0-order letter frequencies in the first motif file are used. If "uniform" uses uniform letter frequencies.</td></tr>
+<tr><td>motif_pseudo</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>0.1</td><td>Addd this pseudocount when converting from frequency matrix to log-odds matrix</td></tr>
+<tr><td>inc</td><td><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code></td><td><code>NULL</code></td><td>use only motifs with names matching this regex</td></tr>
+<tr><td>exc</td><td><code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code></td><td><code>NULL</code></td><td>exclude motifs with names matching this regex</td></tr>
+</table>
+
+
+    <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
+
+    
+
+<p>If you use <code>runAme()</code> in your analysis, please cite:</p>
+<p>Robert McLeay and Timothy L. Bailey, "Motif Enrichment Analysis: A unified
+framework and method evaluation", BMC Bioinformatics, 11:165, 2010,
+doi:10.1186/1471-2105-11-165. <a href='http://www.biomedcentral.com/1471-2105/11/165'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

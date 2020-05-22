@@ -253,18 +253,40 @@ values are as follows:</p><ul>
     <p>In addition to allowing any valid flag of dreme to be passed to <code>...</code>, we
 provide a few user-friendly aliases for common flags which are more readable (see list below).
 For example, e = 1 will use a max evalue cutoff of 1. This is equivalent to
-setting evalue = 1.</p>
-<p>List of aliased values which can be passed to <code>...</code></p><ul>
-<li><p>nmotifs = max number of motifs to search for</p></li>
-<li><p>sec = max runtime in seconds</p></li>
-<li><p>evalue = max evalue cutoff</p></li>
-<li><p>seed = random seed if using "shuffle" as control</p></li>
-<li><p>ngen = number of REs to generalize</p></li>
-</ul>
+setting evalue = 1. For additional details about each DREME flag, see the
+<a href='http://meme-suite.org/doc/dreme.html'>DREME Manual Webpage</a>.</p>
+<p>List of aliased values which can be passed to <code>...</code></p><table class='table'>
+<tr><td>dremeR alias</td><td>DREME Flag</td><td>description</td><td>default</td></tr>
+<tr><td>nmotifs</td><td>m</td><td>max number of motifs to discover</td><td>NULL</td></tr>
+<tr><td>sec</td><td>t</td><td>max number of seconds to run</td><td>NULL</td></tr>
+<tr><td>evalue</td><td>e</td><td>max E-value cutoff</td><td>0.05</td></tr>
+<tr><td>seed</td><td>s</td><td>random seed if using "shuffle" as control</td><td>1</td></tr>
+<tr><td>ngen</td><td>g</td><td>nuber of REs to generalize</td><td>100</td></tr>
+</table>
 
-<p><strong>NOTE:</strong> <code>nmotifs</code> is an alias for the dreme <code>-m</code> flag. If you want to set
-<code>-m</code> you <strong>must</strong> use the <code>nmotifs</code> alias, not <code>m</code>. The same is true for
-<code>seed</code> and <code>s</code>.</p>
+
+
+<p><strong>NOTE:</strong> aliased values must be set using their alias, not the DREME Flag name.</p>
+<p>Additional DREME parameters which can be passed to <code>...</code></p><table class='table'>
+<tr><td>DREME Flag</td><td>description</td><td>default</td></tr>
+<tr><td>mink</td><td>minimum motif width to search</td><td>3</td></tr>
+<tr><td>maxk</td><td>maximum motif width to search</td><td>7</td></tr>
+<tr><td>k</td><td>set mink and maxk to this value</td><td>NULL</td></tr>
+<tr><td>norc</td><td>search only the input strand for sequences</td><td>FALSE</td></tr>
+<tr><td>dna</td><td>use DNA alphabet</td><td>TRUE</td></tr>
+<tr><td>rna</td><td>use RNA alphabet</td><td>FALSE</td></tr>
+<tr><td>protein</td><td>use protein alphabet (NOT RECCOMENDED)</td><td>FALSE</td></tr>
+</table>
+
+
+    <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
+
+    
+
+<p>If you use <code>runDreme()</code> in your analysis, please cite:</p>
+<p>Timothy L. Bailey, "DREME: Motif discovery in transcription factor ChIP-seq
+data", Bioinformatics, 27(12):1653-1659, 2011.
+<a href='https://academic.oup.com/bioinformatics/article/27/12/1653/257754'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

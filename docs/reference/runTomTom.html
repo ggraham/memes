@@ -189,33 +189,60 @@ the minimum value</p></td>
     </tr>
     <tr>
       <th>dist</th>
-      <td><p>distance metric. Valid arguments: `allr | ed | kullback | pearson | sandelin | blic1 | blic5 | llr1 | llr5`.
-Default: `pearson`.</p></td>
+      <td><p>distance metric. Valid arguments: <code>allr | ed | kullback | pearson | sandelin | blic1 | blic5 | llr1 | llr5</code>.
+Default: <code>pearson</code>.</p></td>
     </tr>
     <tr>
       <th>evalue</th>
       <td><p>whether to use E-value as significance threshold (default:
-`TRUE`). If evalue = FALSE, uses *q-value* instead.</p></td>
+<code>TRUE</code>). If evalue = FALSE, uses <em>q-value</em> instead.</p></td>
     </tr>
     <tr>
       <th>meme_path</th>
       <td><p>path to "meme/bin/" (optional). If unset, will check R
-environment variable "MEME_DB (set in `.Renviron`), or option
-"meme_db" (set with `option(meme_db = "path/to/meme/bin")`)</p></td>
+environment variable "MEME_DB (set in <code>.Renviron</code>), or option
+"meme_db" (set with <code><a href='https://rdrr.io/r/base/options.html'>option(meme_db = "path/to/meme/bin")</a></code>)</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional flags passed to tomtom using dotargs formating (see
-[tomtom commandline reference](http://meme-suite.org/doc/tomtom.html?man_type=web) for details)</p></td>
+      <td><p>additional flags passed to tomtom using dotargs formating (see table below for details)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame of match results. Contains `match_motif` column of
-  `universalmotif` objects with the matched PWM from the database. If no
-  matches are returned, `tomtom` and `best_match_motif` columns will be set
-  to `NA` and a message indicating this will print.</p>
+    <p>data.frame of match results. Contains <code>match_motif</code> column of
+<code>universalmotif</code> objects with the matched PWM from the database. If no
+matches are returned, <code>tomtom</code> and <code>best_match_motif</code> columns will be set
+to <code>NA</code> and a message indicating this will print.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Additional arguments</p>
+<p>runTomTom() can accept all valid tomtom arguments passed to <code>...</code> as described in the
+<a href='http://meme-suite.org/doc/tomtom.html?man_type=web'>tomtom commandline reference</a>. For
+convenience, below is a table of valid arguments, their default values, and
+their description.</p><table class='table'>
+<tr><td>TomTom Flag</td><td>allowed values</td><td>default</td><td>description</td></tr>
+<tr><td>bfile</td><td>file path</td><td><code>NULL</code></td><td>path to background model for converting frequency matrix to log-odds score (not used when <code>dist</code> is set to "ed", "kullback", "pearson", or "sandelin"</td></tr>
+<tr><td>motif_pseudo</td><td><code>numeric</code></td><td>0.1</td><td>pseudocount to add to motifs</td></tr>
+<tr><td>xalph</td><td><code>logical</code></td><td>FALSE</td><td>convert alphabet of target database to alphabet of query database</td></tr>
+<tr><td>norc</td><td><code>logical</code></td><td>FALSE</td><td>Do not score reverse complements of motifs</td></tr>
+<tr><td>incomplete_scores</td><td><code>logical</code></td><td>FALSE</td><td>Compute scores using only aligned columns</td></tr>
+<tr><td>thresh</td><td><code>numeric</code></td><td>0.5</td><td>only report matches with significance values &lt;= this value. Unless <code>evalue = TRUE</code>, this value must be &lt; 1.</td></tr>
+<tr><td>internal</td><td><code>logical</code></td><td>FALSE</td><td>forces the shorter motif to be completely contained in the longer motif</td></tr>
+<tr><td>min_overlap</td><td><code>integer</code></td><td>1</td><td>only report matches that overlap by this number of positions or more. If query motif is smaller than this value, its width is used as the min overlap for that query</td></tr>
+<tr><td>time</td><td><code>integer</code></td><td><code>NULL</code></td><td>Maximum runtime in CPU seconds (default: no limit)</td></tr>
+</table>
+
+
+    <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
+
+    
+
+<p>If you use <code>runTomTom()</code> in your analysis, please cite:</p>
+<p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford
+Noble, "Quantifying similarity between motifs", Genome Biology, 8(2):R24,
+2007. <a href='http://genomebiology.com/2007/8/2/R24'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

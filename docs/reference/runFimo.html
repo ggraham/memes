@@ -40,8 +40,8 @@
 
 
 <meta property="og:title" content="Run FIMO on input sequences — runFimo" />
-<meta property="og:description" content="NOTE: runs best using `text = TRUE`, setting genomic coordinates in fasta
-headers, and using `parse_genomic_coord = TRUE`." />
+<meta property="og:description" content="NOTE: runs best using text = TRUE, setting genomic coordinates in fasta
+headers, and using parse_genomic_coord = TRUE." />
 
 
 
@@ -145,8 +145,8 @@ headers, and using `parse_genomic_coord = TRUE`." />
     </div>
 
     <div class="ref-description">
-    <p>NOTE: runs best using `text = TRUE`, setting genomic coordinates in fasta
-headers, and using `parse_genomic_coord = TRUE`.</p>
+    <p>NOTE: runs best using <code>text = TRUE</code>, setting genomic coordinates in fasta
+headers, and using <code>parse_genomic_coord = TRUE</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>runFimo</span>(
@@ -188,7 +188,7 @@ input, this will be a temporary location unless explicity set.</p></td>
     </tr>
     <tr>
       <th>parse_genomic_coord</th>
-      <td><p>`logical(1)` whether to parse genomic position
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether to parse genomic position
 from fasta name. Fasta names must be UCSC format positions (ie
 "chr:start-end"). If names of fasta entries are genomic coordinates and
 parse_genomic_coord == TRUE, results will contain positions of motif matches,
@@ -196,10 +196,10 @@ otherwise FIMO will count positions from 1 to length of fasta file.</p></td>
     </tr>
     <tr>
       <th>skip_matched_sequence</th>
-      <td><p>`logical(1)` whether or not to include the DNA
-sequence of the match. Default: `FALSE`. Note: jobs will complete faster if
-set to FALSE. Other utilities can be used to lookup the sequence if
-`parse_genomic_coord` is `TRUE`.</p></td>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether or not to include the DNA
+sequence of the match. Default: <code>FALSE</code>. Note: jobs will complete faster if
+set to FALSE. <code>get_sequences()</code> can be used to lookup the sequence after data import if
+<code>parse_genomic_coord</code> is <code>TRUE</code>, so setting this flag is not needed except for convenience.</p></td>
     </tr>
     <tr>
       <th>max_strand</th>
@@ -208,19 +208,19 @@ best match.</p></td>
     </tr>
     <tr>
       <th>text</th>
-      <td><p>`logical(1)` (default: `TRUE`). No output files will be created on the filesystem.
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> (default: <code>TRUE</code>). No output files will be created on the filesystem.
 The results are unsorted and no q-values are computed. This setting allows
 fast searches on very large inputs.</p></td>
     </tr>
     <tr>
       <th>meme_path</th>
-      <td><p>path to `meme/bin/` (optional). Defaut: `NULL`, searches
+      <td><p>path to <code>meme/bin/</code> (optional). Defaut: <code>NULL</code>, searches
 "MEME_PATH" environment variable or "meme_path" option.</p></td>
     </tr>
     <tr>
       <th>silent</th>
-      <td><p>`logical(1)` whether to suppress stdout/stderr printing to
-terminal (default: TRUE). NOTE: if `text = TRUE`, setting `silent = TRUE`
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether to suppress stdout/stderr printing to
+terminal (default: TRUE). NOTE: if <code>text = TRUE</code>, setting <code>silent = TRUE</code>
 will print all FIMO matches to terminal if the run is successful. Can be
 useful for troubleshooting.</p></td>
     </tr>
@@ -234,10 +234,35 @@ useful for troubleshooting.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>GenomicRanges object contining positions of each match. Note: if
-  `parse_genomic_coords = FALSE`, each `seqnames` entry will be the fasta
-  header, and start/end will be the position within that sequence of the
-  match. It is a good idea to use `parse_genomic_coords = TRUE` if using
-  `get_sequence()` to create input sequences.</p>
+<code>parse_genomic_coords = FALSE</code>, each <code>seqnames</code> entry will be the fasta
+header, and start/end will be the position within that sequence of the
+match. It is a good idea to use <code>parse_genomic_coords = TRUE</code> if using
+<code><a href='get_sequence.html'>get_sequence()</a></code> to create input sequences.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Additional arguments passed to <code>...</code></p><table class='table'>
+<tr><td>FIMO Flag</td><td>allowed values</td><td>default</td><td>description</td></tr>
+<tr><td>alpha</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>1</td><td>alpha for calculating position-specific priors. Represents fraction of sites that are binding sites of TF of interest. Used in conjunction with <code>psp</code></td></tr>
+<tr><td>bfile</td><td>"motif", "motif-file", "uniform", file path,</td><td>"motif"</td><td>If "motif" or "motif-file", use 0-order letter frequencies from motif. "uniform" sets uniform letter frequencies.</td></tr>
+<tr><td>max_stored_scores</td><td><code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code></td><td>NULL</td><td>maximum number of scores to be stored for computing q-values. used when <code>text = FALSE</code>, see FIMO webpage for details</td></tr>
+<tr><td>motif_pseudo</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>0.1</td><td>pseudocount added to motif matrix</td></tr>
+<tr><td>no_qvalue</td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>FALSE</td><td>only needed when <code>text = FALSE</code>, do not compute q-value for each p-value</td></tr>
+<tr><td>norc</td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>FALSE</td><td>Do not score reverse complement strand</td></tr>
+<tr><td>prior_dist</td><td>file path</td><td>NULL</td><td>file containing binned distribution of priors</td></tr>
+<tr><td>psp</td><td>file path</td><td>NULL</td><td>file containing position specific priors. Requires <code>prior_dist</code></td></tr>
+<tr><td>qv_thresh</td><td><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code></td><td>FALSE</td><td>use q-values for the output threshold</td></tr>
+<tr><td>thresh</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td><code>1e-4</code></td><td>output threshold for returning a match, only matches with values less than <code>thresh</code> are returned.</td></tr>
+</table>
+
+
+    <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
+
+    
+
+<p>If you use <code>runFimo()</code> in your analysis, please cite:</p>
+<p>Charles E. Grant, Timothy L. Bailey, and William Stafford Noble, "FIMO:
+Scanning for occurrences of a given motif", Bioinformatics, 27(7):1017-1018,
+2011. <a href='http://bioinformatics.oxfordjournals.org/content/early/2011/02/16/bioinformatics.btr064.full'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
