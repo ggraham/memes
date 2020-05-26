@@ -107,35 +107,209 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
+<span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
+<span class="co">#&gt;   method     from</span>
+<span class="co">#&gt;   root.phylo ape</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GenomicRanges</span>)
+<span class="co">#&gt; Loading required package: stats4</span>
+<span class="co">#&gt; Loading required package: BiocGenerics</span>
+<span class="co">#&gt; Loading required package: parallel</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'BiocGenerics'</span>
+<span class="co">#&gt; The following objects are masked from 'package:parallel':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,</span>
+<span class="co">#&gt;     clusterExport, clusterMap, parApply, parCapply, parLapply,</span>
+<span class="co">#&gt;     parLapplyLB, parRapply, parSapply, parSapplyLB</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     IQR, mad, sd, var, xtabs</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     anyDuplicated, append, as.data.frame, basename, cbind, colnames,</span>
+<span class="co">#&gt;     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,</span>
+<span class="co">#&gt;     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span>
+<span class="co">#&gt;     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span>
+<span class="co">#&gt;     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span>
+<span class="co">#&gt;     union, unique, unsplit, which, which.max, which.min</span>
+<span class="co">#&gt; Loading required package: S4Vectors</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'S4Vectors'</span>
+<span class="co">#&gt; The following object is masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     expand.grid</span>
+<span class="co">#&gt; Loading required package: IRanges</span>
+<span class="co">#&gt; Loading required package: GenomeInfoDb</span></pre></body></html></div>
 <div id="inputs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#inputs" class="anchor"></a>Inputs</h2>
-<ul>
-<li>sequences (list not supported since no reason to split, instead use plyranges joins after fimo to add metadata)</li>
-<li>copy info from Chip-seq example</li>
-<li>explain about why <code><a href="../reference/get_sequence.html">get_sequence()</a></code> is good to use, becaues of <code>parse_genomic_coord</code>
-</li>
-<li>motifs: path or universalmotif</li>
-</ul>
+<p>FIMO searches input sequences for occurrances of a motif. <code><a href="../reference/runFimo.html">runFimo()</a></code> has two required inputs: fasta-format sequences, with optional genomic coordinate headers, and a set of motifs to detect within the input sequences.</p>
+<div id="sequence-inputs" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sequence-inputs" class="anchor"></a>Sequence Inputs:</h3>
+<p>Sequence input to <code><a href="../reference/runFimo.html">runFimo()</a></code> can be as a path to a .fasta formatted file, or as a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSet-class.html">Biostrings::XStringSet</a></code> object. Unlike other dremeR functions, <code><a href="../reference/runFimo.html">runFimo()</a></code> <strong>does not</strong> accept a <code><a href="https://rdrr.io/pkg/Biostrings/man/XStringSetList-class.html">Biostrings::BStringSetList</a></code> as input. This is to simplify ranged join operations (see <a href="#joins">joins</a>) on output data.</p>
+<p>By default, <code><a href="../reference/runFimo.html">runFimo()</a></code> will parse genomic coordinates from sequence entries from the fasta headers. These are generated automatically if using <code>get_sequences()</code> to generate sequences for input from a <code>GRanges</code> object.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_chip_summits"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>)
+
+<span class="no">dm.genome</span> <span class="kw">&lt;-</span> <span class="kw pkg">BSgenome.Dmelanogaster.UCSC.dm3</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm3/man/package.html">BSgenome.Dmelanogaster.UCSC.dm3</a></span>
+
+<span class="co"># Take 100bp windows around ChIP-seq summits</span>
+<span class="no">summit_flank</span> <span class="kw">&lt;-</span> <span class="no">example_chip_summits</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/ranges-anchor.html">anchor_center</a></span>() <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/tidyverse-reexports.html">mutate</a></span>(<span class="kw">width</span> <span class="kw">=</span> <span class="fl">100</span>)
+
+<span class="co"># Get sequences in peaks as Biostring::BStringSet</span>
+<span class="no">sequences</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/get_sequence.html">get_sequence</a></span>(<span class="no">dm.genome</span>)
+
+<span class="co"># get_sequence includes genomic coordinate as the fasta header name</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">sequences</span>)[<span class="fl">1</span>:<span class="fl">2</span>]
+<span class="co">#&gt; [1] "chr3L:40482-40581" "chr3L:49795-49894"</span></pre></body></html></div>
 </div>
-<div id="note-about-settings" class="section level2">
-<h2 class="hasAnchor">
-<a href="#note-about-settings" class="anchor"></a>Note about settings</h2>
-<ul>
-<li>I use nondefault fimo settings to make it work better with R interface and run faster.</li>
-<li>text = TRUE
-<ul>
-<li>if running on huge sequence, may overflow memory. Link to article about running FIMO on whole genome.</li>
-</ul>
-</li>
-</ul>
+<div id="motif-inputs" class="section level3">
+<h3 class="hasAnchor">
+<a href="#motif-inputs" class="anchor"></a>Motif Inputs:</h3>
+<p>Motif input to <code><a href="../reference/runFimo.html">runFimo()</a></code> can be as a path to a .meme formatted file, a list of <code>universalmotif</code> objects, or a singular <code>universalmotif</code> object. <code><a href="../reference/runFimo.html">runFimo()</a></code> will not use any of the default search path behavior for a motif database as in <code><a href="../reference/runAme.html">runAme()</a></code> or <code><a href="../reference/runTomTom.html">runTomTom()</a></code>.</p>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">e93_motif</span> <span class="kw">&lt;-</span> <span class="kw pkg">MotifDb</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/MotifDb/man/MotifDb.html">MotifDb</a></span> <span class="kw">%&gt;%</span>
+  <span class="co"># Query the database for the E93 motif using it's gene name</span>
+  <span class="kw pkg">MotifDb</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/MotifDb/man/query.html">query</a></span>(<span class="st">"Eip93F"</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># Convert from motifdb format to universalmotif format</span>
+  <span class="kw pkg">universalmotif</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/convert_motifs.html">convert_motifs</a></span>() <span class="kw">%&gt;%</span>
+  <span class="co"># The result is a list, to simplify the object, return it as a single universalmotif</span>
+  <span class="no">.</span><span class="kw">[[</span><span class="fl">1</span>]]
+<span class="co">#&gt; See system.file("LICENSE", package="MotifDb") for use restrictions.</span>
+
+<span class="co"># Rename the motif from it's flybase gene number to a more user-friendly name</span>
+<span class="no">e93_motif</span>[<span class="st">"name"</span>] <span class="kw">&lt;-</span> <span class="st">"E93_FlyFactor"</span></pre></body></html></div>
 </div>
-<div id="saving-data-from-fimo-web-server" class="section level2">
+</div>
+<div id="note-about-default-settings" class="section level2">
 <h2 class="hasAnchor">
-<a href="#saving-data-from-fimo-web-server" class="anchor"></a>Saving data from FIMO Web Server</h2>
-<div class="figure">
-<img src="save_fimo.png" alt="saving FIMO tsv results"><p class="caption">saving FIMO tsv results</p>
+<a href="#note-about-default-settings" class="anchor"></a>Note about default settings</h2>
+<p><code><a href="../reference/runFimo.html">runFimo()</a></code> is configured to use different default behavior relative to the commandline and MEME-Suite Server versions. By default, <code><a href="../reference/runFimo.html">runFimo()</a></code> runs using <code>text</code> mode, which greatly increases speed and allows returning all detected matches to the input motifs. <code><a href="../reference/runFimo.html">runFimo()</a></code> also runs using <code>skip_matched_sequence = FALSE</code> to further increase speed and decrease output data size. Sequence information can be recovered using <code>get_sequences()</code>.</p>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">fimo_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/runFimo.html">runFimo</a></span>(<span class="no">sequences</span>, <span class="no">e93_motif</span>)</pre></body></html></div>
+</div>
+<div id="joins" class="section level2">
+<h2 class="hasAnchor">
+<a href="#joins" class="anchor"></a>Data integration with join operations</h2>
+<p>The <code>plyranges</code> package provides an extended framework for performing range-based operations in R. While several of its utilities are useful for range-based analyses, the <code>join_</code> functions are particularly useful for integrating FIMO results with input peak information. A few common examples are briefly highlighted below:</p>
+<p><code><a href="https://rdrr.io/pkg/plyranges/man/overlap-joins.html">plyranges::join_overlap_left()</a></code> can be used to add peak-level metadata to motif position information:</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">fimo_results_with_peak_info</span> <span class="kw">&lt;-</span> <span class="no">fimo_results</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/overlap-joins.html">join_overlap_left</a></span>(<span class="no">summit_flank</span>)
+
+<span class="no">fimo_results_with_peak_info</span>[<span class="fl">1</span>:<span class="fl">5</span>]
+<span class="co">#&gt; GRanges object with 5 ranges and 9 metadata columns:</span>
+<span class="co">#&gt;       seqnames        ranges strand |      motif_id</span>
+<span class="co">#&gt;          &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; |   &lt;character&gt;</span>
+<span class="co">#&gt;   [1]    chr3L   66310-66321      - | E93_FlyFactor</span>
+<span class="co">#&gt;   [2]    chr3L 138527-138538      - | E93_FlyFactor</span>
+<span class="co">#&gt;   [3]    chr3L 384344-384355      - | E93_FlyFactor</span>
+<span class="co">#&gt;   [4]    chr3L 714116-714127      - | E93_FlyFactor</span>
+<span class="co">#&gt;   [5]    chr3L 714145-714156      - | E93_FlyFactor</span>
+<span class="co">#&gt;                       motif_alt_id     score    pvalue    qvalue</span>
+<span class="co">#&gt;                        &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;logical&gt;</span>
+<span class="co">#&gt;   [1] Eip93F_SANGER_10_FBgn0013948     14.25  1.01e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;   [2] Eip93F_SANGER_10_FBgn0013948      10.1  8.96e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;   [3] Eip93F_SANGER_10_FBgn0013948     10.87  6.65e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;   [4] Eip93F_SANGER_10_FBgn0013948      12.9  2.43e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;   [5] Eip93F_SANGER_10_FBgn0013948     10.25  8.51e-05      &lt;NA&gt;</span>
+<span class="co">#&gt;       matched_sequence          id peak_binding_description</span>
+<span class="co">#&gt;              &lt;logical&gt; &lt;character&gt;              &lt;character&gt;</span>
+<span class="co">#&gt;   [1]             &lt;NA&gt;   peak_4627                  ectopic</span>
+<span class="co">#&gt;   [2]             &lt;NA&gt;   peak_4647                   orphan</span>
+<span class="co">#&gt;   [3]             &lt;NA&gt;   peak_4670                   orphan</span>
+<span class="co">#&gt;   [4]             &lt;NA&gt;   peak_4752                  entopic</span>
+<span class="co">#&gt;   [5]             &lt;NA&gt;   peak_4752                  entopic</span>
+<span class="co">#&gt;       e93_sensitive_behavior</span>
+<span class="co">#&gt;                  &lt;character&gt;</span>
+<span class="co">#&gt;   [1]                 Static</span>
+<span class="co">#&gt;   [2]                 Static</span>
+<span class="co">#&gt;   [3]             Decreasing</span>
+<span class="co">#&gt;   [4]                 Static</span>
+<span class="co">#&gt;   [5]                 Static</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></pre></body></html></div>
+<p><code>plyranges::intersect_()</code> can be used to simultaneously subset input peaks to the ranges overlapping motif hits while appending motif-level metadata to each overlap.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">input_intersect_hits</span> <span class="kw">&lt;-</span> <span class="no">summit_flank</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/overlap-joins.html">join_overlap_intersect</a></span>(<span class="no">fimo_results</span>)
+
+<span class="no">input_intersect_hits</span>[<span class="fl">1</span>:<span class="fl">5</span>]
+<span class="co">#&gt; GRanges object with 5 ranges and 9 metadata columns:</span>
+<span class="co">#&gt;       seqnames        ranges strand |          id peak_binding_description</span>
+<span class="co">#&gt;          &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;              &lt;character&gt;</span>
+<span class="co">#&gt;   [1]    chr3L   66310-66321      * |   peak_4627                  ectopic</span>
+<span class="co">#&gt;   [2]    chr3L 138527-138538      * |   peak_4647                   orphan</span>
+<span class="co">#&gt;   [3]    chr3L 384344-384355      * |   peak_4670                   orphan</span>
+<span class="co">#&gt;   [4]    chr3L 714116-714127      * |   peak_4752                  entopic</span>
+<span class="co">#&gt;   [5]    chr3L 714145-714156      * |   peak_4752                  entopic</span>
+<span class="co">#&gt;       e93_sensitive_behavior      motif_id                 motif_alt_id</span>
+<span class="co">#&gt;                  &lt;character&gt;   &lt;character&gt;                  &lt;character&gt;</span>
+<span class="co">#&gt;   [1]                 Static E93_FlyFactor Eip93F_SANGER_10_FBgn0013948</span>
+<span class="co">#&gt;   [2]                 Static E93_FlyFactor Eip93F_SANGER_10_FBgn0013948</span>
+<span class="co">#&gt;   [3]             Decreasing E93_FlyFactor Eip93F_SANGER_10_FBgn0013948</span>
+<span class="co">#&gt;   [4]                 Static E93_FlyFactor Eip93F_SANGER_10_FBgn0013948</span>
+<span class="co">#&gt;   [5]                 Static E93_FlyFactor Eip93F_SANGER_10_FBgn0013948</span>
+<span class="co">#&gt;           score    pvalue    qvalue matched_sequence</span>
+<span class="co">#&gt;       &lt;numeric&gt; &lt;numeric&gt; &lt;logical&gt;        &lt;logical&gt;</span>
+<span class="co">#&gt;   [1]     14.25  1.01e-05      &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="co">#&gt;   [2]      10.1  8.96e-05      &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="co">#&gt;   [3]     10.87  6.65e-05      &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="co">#&gt;   [4]      12.9  2.43e-05      &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="co">#&gt;   [5]     10.25  8.51e-05      &lt;NA&gt;             &lt;NA&gt;</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span></pre></body></html></div>
+</div>
+<div id="matched-sequence" class="section level2">
+<h2 class="hasAnchor">
+<a href="#matched-sequence" class="anchor"></a>Identifying matched sequence</h2>
+<p>When setting <code>skip_match_sequence = TRUE</code>, FIMO does not automatically return the matched sequence within each hit. These sequences can be easily recovered in R using <code><a href="../reference/add_sequence.html">add_sequence()</a></code> on the FIMO results <code>GRanges</code> object.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">fimo_results_with_seq</span> <span class="kw">&lt;-</span> <span class="no">fimo_results</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">plyranges</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyranges/man/overlap-joins.html">join_overlap_left</a></span>(<span class="no">summit_flank</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_sequence.html">add_sequence</a></span>(<span class="no">dm.genome</span>)</pre></body></html></div>
+<p>Returning the sequence of the matched regions can be used to re-derive PWMs from different match categories as follows (here done for different binding categories):</p>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">motifs_by_binding</span> <span class="kw">&lt;-</span> <span class="no">fimo_results_with_seq</span> <span class="kw">%&gt;%</span>
+  <span class="co"># Split on parameter of interest</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span>(<span class="fu">mcols</span>(<span class="no">.</span>)$<span class="no">peak_binding_description</span>) <span class="kw">%&gt;%</span>
+  <span class="co"># Convert GRangesList to regular list() to use `purrr`</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span>() <span class="kw">%&gt;%</span>
+  <span class="co"># imap passes the list entry as .x and the name of that object to .y</span>
+  <span class="kw pkg">purrr</span><span class="kw ns">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/imap.html">imap</a></span>(~{
+    <span class="co"># Pass the sequence column to create_motif to generate a PCM</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/create_motif.html">create_motif</a></span>(<span class="no">.x</span>$<span class="no">sequence</span>,
+                 <span class="co"># Append the binding description to the motif name</span>
+                 <span class="kw">name</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"E93_"</span>, <span class="no">.y</span>))
+    })</pre></body></html></div>
+<p>Motifs from each category can be visualized with <code><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">universalmotif::view_motifs()</a></code></p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">motifs_by_binding</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>()</pre></body></html></div>
+<p><img src="core_fimo_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<p>To allow better comparison to the reference motif, we can append it to the list as follows:</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">motifs_by_binding</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+  <span class="co"># Add the E93 FlyFactor motif to the list as a reference</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="st">"E93_FlyFactor"</span> <span class="kw">=</span> <span class="no">e93_motif</span>),
+  <span class="no">motifs_by_binding</span>
+)</pre></body></html></div>
+<p>Visualizing the motifs as ICMs reveals subtle differences in E93 motif sequence between each category.</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">motifs_by_binding</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>()</pre></body></html></div>
+<p><img src="core_fimo_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<p>Visualizing the results as a position-probability matrix (PPM) does a better job of demonstrating that the primary differences between each category are coming from positions 1-4 in the matched sequences.</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">motifs_by_binding</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>(<span class="kw">use.type</span> <span class="kw">=</span> <span class="st">"PPM"</span>)</pre></body></html></div>
+<p><img src="core_fimo_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+</div>
+<div id="importing-data-from-previous-fimo-runs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#importing-data-from-previous-fimo-runs" class="anchor"></a>Importing Data from previous FIMO Runs</h2>
+<p><code><a href="../reference/importFimo.html">importFimo()</a></code> can be used to import an <code>fimo.tsv</code> file from a previous run on the MEME server or on the commandline. Details for how to save data from the FIMO webserver are below.</p>
+<div id="saving-data-from-fimo-web-server" class="section level3">
+<h3 class="hasAnchor">
+<a href="#saving-data-from-fimo-web-server" class="anchor"></a>Saving data from FIMO Web Server</h3>
+<p>To download TSV data from the FIMO Server, right-click the FIMO TSV output link and “Save Target As” or “Save Link As” (see example image below), and save as <code>&lt;filename&gt;.tsv</code>. This file can be read using <code><a href="../reference/importFimo.html">importFimo()</a></code>.</p>
+<p><img src="save_fimo.png"></p>
 </div>
 </div>
 <div id="citation" class="section level1">
