@@ -101,7 +101,7 @@
       <a href="../articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
-      <a href="../articles/core_tomtom.html">Motif Matching</a>
+      <a href="../articles/core_tomtom.html">Motif Comparison</a>
     </li>
     <li>
       <a href="../articles/core_ame.html">Motif Enrichment</a>
@@ -185,16 +185,13 @@ containing a fasta score, used in AME in partitioning mode. (default: `NULL`)</p
 <span class='co'># Using character string as input</span>
 <span class='no'>genomeFasta</span> <span class='kw'>&lt;-</span> <span class='st'>"path/to/genome.fa"</span>
 <span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>genomeFasta</span>)
+}
 
 <span class='co'># using BSgenome object for genome</span>
 <span class='no'>drosophila.genome</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>BSgenome.Dmelanogaster.UCSC.dm6</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm6/man/package.html'>BSgenome.Dmelanogaster.UCSC.dm6</a></span>
-<span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>drosophila.genome</span>)
-
+<span class='fu'>get_sequence</span>(<span class='st'>"chr2L:100-200"</span>, <span class='no'>drosophila.genome</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("get_sequence"): no applicable method for 'get_sequence' applied to an object of class "character"</span></div><div class='input'>
 <span class='co'># using GRanges object for regions</span>
-<span class='no'>regions</span> <span class='kw'>&lt;-</span> <span class='fu'>GRanges</span>(<span class='kw'>seqnames</span><span class='kw'>=</span><span class='fu'>Rle</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'chrX'</span>, <span class='st'>'chr2L'</span>, <span class='st'>'chr3R'</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)), <span class='fu'>IRanges</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>5</span>))
-<span class='fu'>get_sequence</span>(<span class='no'>regions</span>, <span class='no'>drosophila.genome</span>)
-
-}</div></pre>
+<span class='no'>regions</span> <span class='kw'>&lt;-</span> <span class='fu'>GRanges</span>(<span class='kw'>seqnames</span><span class='kw'>=</span><span class='fu'>Rle</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'chrX'</span>, <span class='st'>'chr2L'</span>, <span class='st'>'chr3R'</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>4</span>)), <span class='fu'>IRanges</span>(<span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>width</span><span class='kw'>=</span><span class='fl'>5</span>))</div><div class='output co'>#&gt; <span class='error'>Error in GRanges(seqnames = Rle(c("chrX", "chr2L", "chr3R"), c(3, 3, 4)),     IRanges(1:10, width = 5)): could not find function "GRanges"</span></div><div class='input'><span class='fu'>get_sequence</span>(<span class='no'>regions</span>, <span class='no'>drosophila.genome</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get_sequence(regions, drosophila.genome): object 'regions' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

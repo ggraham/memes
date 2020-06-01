@@ -4,6 +4,12 @@
     <loc>https://snystrom.github.io/dremeR//index.html</loc>
   </url>
   <url>
+    <loc>https://snystrom.github.io/dremeR//reference/add_sequence.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//reference/ame_compare_heatmap_methods.html</loc>
+  </url>
+  <url>
     <loc>https://snystrom.github.io/dremeR//reference/ame_plot_heatmap.html</loc>
   </url>
   <url>
@@ -34,9 +40,6 @@
     <loc>https://snystrom.github.io/dremeR//reference/example_dreme_by_binding.html</loc>
   </url>
   <url>
-    <loc>https://snystrom.github.io/dremeR//reference/example_dreme_by_sens_vs_static.html</loc>
-  </url>
-  <url>
     <loc>https://snystrom.github.io/dremeR//reference/example_dreme_tomtom.html</loc>
   </url>
   <url>
@@ -44,6 +47,9 @@
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/example_peaks.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//reference/example_rnaseq.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/example_tomtom.html</loc>
@@ -64,7 +70,13 @@
     <loc>https://snystrom.github.io/dremeR//reference/importFimo.html</loc>
   </url>
   <url>
+    <loc>https://snystrom.github.io/dremeR//reference/importMeme.html</loc>
+  </url>
+  <url>
     <loc>https://snystrom.github.io/dremeR//reference/importTomTomXML.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//reference/meme_is_installed.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/nest_tomtom.html</loc>
@@ -77,6 +89,9 @@
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/runFimo.html</loc>
+  </url>
+  <url>
+    <loc>https://snystrom.github.io/dremeR//reference/runMeme.html</loc>
   </url>
   <url>
     <loc>https://snystrom.github.io/dremeR//reference/runTomTom.html</loc>

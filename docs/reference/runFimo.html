@@ -102,7 +102,7 @@ headers, and using parse_genomic_coord = TRUE." />
       <a href="../articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
-      <a href="../articles/core_tomtom.html">Motif Matching</a>
+      <a href="../articles/core_tomtom.html">Motif Comparison</a>
     </li>
     <li>
       <a href="../articles/core_ame.html">Motif Enrichment</a>
@@ -198,8 +198,8 @@ otherwise FIMO will count positions from 1 to length of fasta file.</p></td>
       <th>skip_matched_sequence</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether or not to include the DNA
 sequence of the match. Default: <code>FALSE</code>. Note: jobs will complete faster if
-set to FALSE. <code>get_sequences()</code> can be used to lookup the sequence after data import if
-<code>parse_genomic_coord</code> is <code>TRUE</code>, so setting this flag is not needed except for convenience.</p></td>
+set to FALSE. <code><a href='add_sequence.html'>add_sequence()</a></code> can be used to lookup the sequence after data import if
+<code>parse_genomic_coord</code> is <code>TRUE</code>, so setting this flag is not strictly needed.</p></td>
     </tr>
     <tr>
       <th>max_strand</th>
@@ -254,6 +254,12 @@ match. It is a good idea to use <code>parse_genomic_coords = TRUE</code> if usin
 <tr><td>thresh</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td><code>1e-4</code></td><td>output threshold for returning a match, only matches with values less than <code>thresh</code> are returned.</td></tr>
 </table>
 
+
+<h3>Licensing</h3>
+
+
+<p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
+license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite Copyright Page</a> for details.</p>
 
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 

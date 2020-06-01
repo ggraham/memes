@@ -60,7 +60,7 @@
       <a href="../articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
-      <a href="../articles/core_tomtom.html">Motif Matching</a>
+      <a href="../articles/core_tomtom.html">Motif Comparison</a>
     </li>
     <li>
       <a href="../articles/core_ame.html">Motif Enrichment</a>
@@ -117,13 +117,21 @@
 <div id="setting-a-default-database" class="section level3">
 <h3 class="hasAnchor">
 <a href="#setting-a-default-database" class="anchor"></a>Setting a default database</h3>
-<p>dremeR can be configured to use a default .meme format file as the query database, which it will use if the user does not provide a value to <code>database</code> when calling <code><a href="../reference/runTomTom.html">runTomTom()</a></code>. The following locations will be searched in order.</p>
+<p>dremeR can be configured to use a default .meme format file as the query database, which it will use if the user does not provide a value to <code>database</code> when calling <code><a href="../reference/runTomTom.html">runTomTom()</a></code>. The following locations will be searched in order:</p>
 <ol style="list-style-type: decimal">
 <li>The <code>meme_db</code> option, defined using <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code>
 </li>
+</ol>
+<ul>
+<li>The <code>meme_db</code> option can also be set to an R object, like a universalmotif list.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
 <li>The <code>MEME_DB</code> environment variable defined in <code>.Renviron</code>
 </li>
 </ol>
+<ul>
+<li>The <code>MEME_DB</code> variable will only accept a path to a .meme file</li>
+</ul>
 <p><strong>NOTE:</strong> if an invalid location is found at one option, <code><a href="../reference/runTomTom.html">runTomTom()</a></code> will fall back to the next location if valid (eg if the <code>meme_db</code> option is set to an invalid file, but the <code>MEME_DB</code> environment variable is a valid file, the <code>MEME_DB</code> path will be used.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))</pre></body></html></div>
 </div>
@@ -141,7 +149,7 @@
 </div>
 <div id="output-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#output-data" class="anchor"></a>output data</h2>
+<a href="#output-data" class="anchor"></a>Output data</h2>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># This is a pre-build dataset packaged with dremeR </span>
 <span class="co"># that mirrors running:</span>
 <span class="co"># options(meme_db = system.file("inst/extdata/db/fly_factor_survey_id.meme", package = "dremeR"))</span>
@@ -163,7 +171,7 @@
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">example_tomtom</span>$<span class="no">tomtom</span><span class="kw">[[</span><span class="fl">1</span>]])
 <span class="co">#&gt; [1] "match_name"    "match_altname" "match_pvalue"  "match_evalue" </span>
 <span class="co">#&gt; [5] "match_qvalue"  "db_name"       "match_motif"</span></pre></body></html></div>
-<p>the <code>best_match_motif</code> column contains the universalmotif representation of the best match motif.</p>
+<p>The <code>best_match_motif</code> column contains the universalmotif representation of the best match motif.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
 <span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
 <span class="co">#&gt;   method     from</span>
@@ -213,13 +221,13 @@
 <p>For example, below the example motif could match either “Eip93F_SANGER_10”, or “Lag1_Cell”.</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">example_tomtom</span>$<span class="no">tomtom</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fl">3</span>)
 <span class="co">#&gt;         match_name match_altname match_pvalue match_evalue match_qvalue</span>
-<span class="co">#&gt; 1 Eip93F_SANGER_10   FBgn0013948     6.29e-07     0.000382     0.000765</span>
-<span class="co">#&gt; 2        Lag1_Cell   FBgn0040918     1.67e-03     1.010000     0.791000</span>
-<span class="co">#&gt; 3     pho_SOLEXA_5 FBgn0002521_3     2.28e-03     1.390000     0.791000</span>
-<span class="co">#&gt;                db_name</span>
-<span class="co">#&gt; 1 fly_factor_survey_id</span>
-<span class="co">#&gt; 2 fly_factor_survey_id</span>
-<span class="co">#&gt; 3 fly_factor_survey_id</span>
+<span class="co">#&gt; 1 Eip93F_SANGER_10        Eip93F     8.26e-07     0.000467     0.000935</span>
+<span class="co">#&gt; 2        Lag1_Cell       schlank     1.81e-03     1.030000     0.729000</span>
+<span class="co">#&gt; 3     pho_SOLEXA_5           pho     2.48e-03     1.410000     0.729000</span>
+<span class="co">#&gt;                    db_name</span>
+<span class="co">#&gt; 1 flyFactorSurvey_database</span>
+<span class="co">#&gt; 2 flyFactorSurvey_database</span>
+<span class="co">#&gt; 3 flyFactorSurvey_database</span>
 <span class="co">#&gt;                                                            match_motif</span>
 <span class="co">#&gt; 1 &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span>
 <span class="co">#&gt; 2 &lt;S4 class 'universalmotif' [package "universalmotif"] with 20 slots&gt;</span>
@@ -265,6 +273,11 @@
 <p>dremeR is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing dremeR, please cite the MEME Suite tools corresponding to the tools you use.</p>
 <p>If you use <code><a href="../reference/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
 <p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford Noble, “Quantifying similarity between motifs”, Genome Biology, 8(2):R24, 2007. <a href="http://genomebiology.com/2007/8/2/R24">full text</a></p>
+<div id="licensing-restrictions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#licensing-restrictions" class="anchor"></a>Licensing Restrictions</h2>
+<p>The MEME Suite is free for non-profit use, but for-profit users should purchase a license. See the <a href="http://meme-suite.org/doc/copyright.html">MEME Suite Copyright Page</a> for details.</p>
+</div>
 </div>
   </div>
 

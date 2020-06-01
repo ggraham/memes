@@ -101,7 +101,7 @@
       <a href="../articles/core_dreme.html">De-Novo Motif Discovery</a>
     </li>
     <li>
-      <a href="../articles/core_tomtom.html">Motif Matching</a>
+      <a href="../articles/core_tomtom.html">Motif Comparison</a>
     </li>
     <li>
       <a href="../articles/core_ame.html">Motif Enrichment</a>
@@ -159,20 +159,20 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Data can be combined into 1 large data.frame using:</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span>(<span class='no'>example_ame_large</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='st'>"binding_type"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 519 x 18</span><span>
+<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span>(<span class='no'>example_ame_large</span>, <span class='kw'>.id</span> <span class='kw'>=</span> <span class='st'>"binding_type"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 505 x 18</span><span>
 #&gt;    binding_type  rank motif_db motif_id motif_alt_id consensus   pvalue
 #&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> ectopic          1 /nas/lo… Aef1_Fl… FBgn0005694  CAACWACW  6.87</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-23</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> ectopic          2 /nas/lo… CG4360-… FBgn0038787… KTTGTTGT… 1.24</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-20</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ectopic          3 /nas/lo… Aef1_SA… FBgn0005694… RCAACAAC… 1.69</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-20</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> ectopic          4 /nas/lo… Aef1_SO… FBgn0005694… KGTTGTTG… 3.65</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-16</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> ectopic          5 /nas/lo… CG7368_… FBgn0036179… KDGKGGGD… 2.71</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-15</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> ectopic          6 /nas/lo… klu_SOL… FBgn0013469… KGYGKGGG… 1.35</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> ectopic          7 /nas/lo… l(3)neo… FBgn0086910… DGKGGGKG… 2.10</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> ectopic          8 /nas/lo… AbdB_SO… FBgn0000015… NTTWATKR  6.63</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> ectopic          9 /nas/lo… Mes2_SA… FBgn0037207  TTTARGCC… 2.34</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> ectopic         10 /nas/lo… Cad_Cell FBgn0000251  WTTWATTR  3.41</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span>
-#&gt; </span><span style='color: #949494;'># … with 509 more rows, and 11 more variables: adj.pvalue </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, evalue </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> ectopic          1 /nas/lo… Aef1_Fl… Aef1         CAACWACW  6.87</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-23</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> ectopic          2 /nas/lo… Aef1_SA… Aef1         RCAACAAC… 1.69</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-20</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ectopic          3 /nas/lo… CG7368_… CG7368       KDGKGGGD… 2.71</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-15</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> ectopic          4 /nas/lo… klu_SOL… klu          KGYGKGGG… 1.35</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> ectopic          5 /nas/lo… l(3)neo… l(3)neo38    DGKGGGKG… 2.10</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> ectopic          6 /nas/lo… AbdB_SO… Abd-B        NTTWATKR  6.63</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-14</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> ectopic          7 /nas/lo… Mes2_SA… Mes2         TTTARGCC… 2.34</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> ectopic          8 /nas/lo… Cad_Cell cad          WTTWATTR  3.41</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> ectopic          9 /nas/lo… Cad_SOL… cad          DTTWATTR  4.67</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-13</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> ectopic         10 /nas/lo… klu_SAN… klu          TGYGKGGG… 3.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-12</span><span>
+#&gt; </span><span style='color: #949494;'># … with 495 more rows, and 11 more variables: adj.pvalue </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, evalue </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
 #&gt; </span><span style='color: #949494;'>#   tests </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, fasta_max </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, pos </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, neg </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, pwm_min </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,</span><span>
 #&gt; </span><span style='color: #949494;'>#   tp </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, tp_percent </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, fp </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span style='color: #949494;'>, fp_percent </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span></div></span></pre>
   </div>
