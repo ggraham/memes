@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An R Interface to the MEME Suite • dremeR</title>
+<title>An R Interface to the MEME Suite • memes</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -31,7 +31,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">dremeR</a>
+        <a class="navbar-link" href="index.html">memes</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
       </span>
     </div>
@@ -80,7 +80,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/snystrom/dremeR/">
+  <a href="https://github.com/snystrom/memes/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -98,43 +98,43 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="dremer" class="section level1">
+<div id="memes" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#dremer" class="anchor"></a>dremeR</h1></div>
+<a href="#memes" class="anchor"></a>memes</h1></div>
 <!-- badges: start -->
 
-<p>An R interface to the <a href="http://meme-suite.org/">MEME Suite</a> family of tools, which provides several utilities for performing motif analysis on DNA, RNA, and protein sequences. dremeR works by detecting a local install of the MEME suite, running the commands, then importing the results directly into R.</p>
+<p>An R interface to the <a href="http://meme-suite.org/">MEME Suite</a> family of tools, which provides several utilities for performing motif analysis on DNA, RNA, and protein sequences. memes works by detecting a local install of the MEME suite, running the commands, then importing the results directly into R.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div id="development-version" class="section level3">
 <h3 class="hasAnchor">
 <a href="#development-version" class="anchor"></a>Development Version</h3>
-<p>You can install the development version of dremeR from <a href="https://github.com/snystrom/dremeR">GitHub</a> with:</p>
+<p>You can install the development version of memes from <a href="https://github.com/snystrom/memes">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"remotes"</span>, <span class="kw">quietly</span><span class="kw">=</span><span class="fl">TRUE</span>))
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
-<span class="co"># dremeR currently requires the development version of universalmotif:</span>
+<span class="co"># memes currently requires the development version of universalmotif:</span>
 <span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"bjmt/universalmotif"</span>)
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"snystrom/dremeR"</span>)</pre></div>
+<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"snystrom/memes"</span>)</pre></div>
 </div>
 </div>
 <div id="detecting-the-meme-suite" class="section level2">
 <h2 class="hasAnchor">
 <a href="#detecting-the-meme-suite" class="anchor"></a>Detecting the MEME Suite</h2>
-<p>dremeR relies on a local install of the <a href="http://meme-suite.org/">MEME Suite</a>. For installation instructions for the MEME suite, see the <a href="http://meme-suite.org/doc/install.html?man_type=web">MEME Suite Installation Guide</a>.</p>
-<p>dremeR needs to know the location of the <code>meme/bin/</code> directory on your local machine. You can tell dremeR the location of your MEME suite install in 4 ways. dremeR will always prefer the more specific definition if it is a valid path. Here they are ranked from most- to least-specific:</p>
+<p>memes relies on a local install of the <a href="http://meme-suite.org/">MEME Suite</a>. For installation instructions for the MEME suite, see the <a href="http://meme-suite.org/doc/install.html?man_type=web">MEME Suite Installation Guide</a>.</p>
+<p>memes needs to know the location of the <code>meme/bin/</code> directory on your local machine. You can tell memes the location of your MEME suite install in 4 ways. memes will always prefer the more specific definition if it is a valid path. Here they are ranked from most- to least-specific:</p>
 <ol>
-<li>Manually passing the install path to the <code>meme_path</code> argument of all dremeR functions</li>
+<li>Manually passing the install path to the <code>meme_path</code> argument of all memes functions</li>
 <li>Setting the path using <code><a href="https://rdrr.io/r/base/options.html">options(meme_bin = "/path/to/meme/bin/")</a></code> inside your R script</li>
 <li>Setting <code>MEME_BIN=/path/to/meme/bin/</code> in your <code>.Renviron</code> file</li>
-<li>dremeR will try the default MEME install location <code>~/meme/bin/</code>
+<li>memes will try the default MEME install location <code>~/meme/bin/</code>
 </li>
 </ol>
-<p>If dremeR fails to detect your install at the specified location, it will fall back to the next option.</p>
-<p>To verify dremeR can detect your MEME install, use <code><a href="reference/check_meme_install.html">check_meme_install()</a></code> which uses the search herirarchy above to find a valid MEME install. It will report whether any tools are missing, and print the path to MEME that it sees. This can be useful for troubleshooting issues with your install.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
+<p>If memes fails to detect your install at the specified location, it will fall back to the next option.</p>
+<p>To verify memes can detect your MEME install, use <code><a href="reference/check_meme_install.html">check_meme_install()</a></code> which uses the search herirarchy above to find a valid MEME install. It will report whether any tools are missing, and print the path to MEME that it sees. This can be useful for troubleshooting issues with your install.</p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">memes</span>)
 
-<span class="co"># Verify that dremeR detects your meme install</span>
+<span class="co"># Verify that memes detects your meme install</span>
 <span class="co"># (returns all green checks if so)</span>
 <span class="co"># (I have MEME installed to the default location)</span>
 <span class="fu"><a href="reference/check_meme_install.html">check_meme_install</a></span>()
@@ -237,7 +237,7 @@
 <li>qval</li>
 <li>eval</li>
 </ul>
-<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif package</a> which provides a framework for manipulating motifs in R. The <code>motif</code> columns from <code><a href="reference/runDreme.html">runDreme()</a></code> and <code><a href="reference/runTomTom.html">runTomTom()</a></code> can be used natively with all <code>universalmotif</code> functions (eg <code><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">universalmotif::view_motifs(dreme_results$motif)</a></code>).</p>
+<p>memes is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif package</a> which provides a framework for manipulating motifs in R. The <code>motif</code> columns from <code><a href="reference/runDreme.html">runDreme()</a></code> and <code><a href="reference/runTomTom.html">runTomTom()</a></code> can be used natively with all <code>universalmotif</code> functions (eg <code><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">universalmotif::view_motifs(dreme_results$motif)</a></code>).</p>
 <p><code><a href="reference/runTomTom.html">runTomTom()</a></code> returns a special column: <code>tomtom</code> which is a <code>data.frame</code> of all match data for each input motif. This can be expanded out using <code><a href="https://tidyr.tidyverse.org/reference/nest.html">tidyr::unnest(tomtom_results, "tomtom")</a></code>.</p>
 </div>
 <div id="quick-examples" class="section level2">
@@ -250,7 +250,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">GenomicRanges</span>))
 
 <span class="co"># Example transcription factor peaks as GRanges</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_peaks"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_peaks"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"memes"</span>)
 
 <span class="co"># Genome object</span>
 <span class="no">dm.genome</span> <span class="kw">&lt;-</span> <span class="kw pkg">BSgenome.Dmelanogaster.UCSC.dm6</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/BSgenome.Dmelanogaster.UCSC.dm6/man/package.html">BSgenome.Dmelanogaster.UCSC.dm6</a></span></pre></div>
@@ -266,7 +266,7 @@
 <span class="co">#&gt; Registered S3 method overwritten by 'treeio':</span>
 <span class="co">#&gt;   method     from</span>
 <span class="co">#&gt;   root.phylo ape</span></pre></div>
-<p>dremeR is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif</a> package. The <code>motif</code> column of the runDreme results object contains <code>universalmotif</code> objects which can be used natively in all <code>universalmotif</code> functions.</p>
+<p>memes is built around the <a href="https://www.bioconductor.org/packages/release/bioc/html/universalmotif.html">universalmotif</a> package. The <code>motif</code> column of the runDreme results object contains <code>universalmotif</code> objects which can be used natively in all <code>universalmotif</code> functions.</p>
 <div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">universalmotif</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/view_motifs.html">view_motifs</a></span>(<span class="no">dreme_results</span>$<span class="no">motif</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png"><!-- --></p>
@@ -276,8 +276,8 @@
 <a href="#matching-motifs-using-tomtom" class="anchor"></a>Matching motifs using TOMTOM</h3>
 <p>Discovered motifs can be matched to known TF motifs using <code><a href="reference/runTomTom.html">runTomTom()</a></code>, which can accept as input a path to a .meme formatted file, a <code>universalmotif</code> list, or the results of <code><a href="reference/runDreme.html">runDreme()</a></code>.</p>
 <p>TomTom uses a database of known motifs which can be passed to the <code>database</code> parameter as a path to a .meme format file, or a <code>universalmotif</code> object.</p>
-<p>Optionally, you can set the environment variable <code>MEME_DB</code> in <code>.Renviron</code>, or the <code>meme_db</code> value in <code>options</code> to a valid .meme format file and dremeR will use that file as the database. dremeR will always prefer user input to the function call.</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))
+<p>Optionally, you can set the environment variable <code>MEME_DB</code> in <code>.Renviron</code>, or the <code>meme_db</code> value in <code>options</code> to a valid .meme format file and memes will use that file as the database. memes will always prefer user input to the function call.</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"memes"</span>))
 <span class="no">m</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/universalmotif/man/create_motif.html">create_motif</a></span>(<span class="st">"CMATTACN"</span>, <span class="kw">altname</span> <span class="kw">=</span> <span class="st">"testMotif"</span>)
 <span class="no">tomtom_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/runTomTom.html">runTomTom</a></span>(<span class="no">m</span>)</pre></div>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="no">tomtom_results</span>
@@ -335,7 +335,7 @@
 <div id="importing-data-from-previous-runs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importing-data-from-previous-runs" class="anchor"></a>Importing Data from previous runs</h2>
-<p>dremeR also supports importing results generated using the MEME suite outside of R (for example, running jobs on <a href="meme-suite.org">meme-suite.org</a>, or running on the commandline).</p>
+<p>memes also supports importing results generated using the MEME suite outside of R (for example, running jobs on <a href="meme-suite.org">meme-suite.org</a>, or running on the commandline).</p>
 <table class="table">
 <thead><tr class="header">
 <th align="center">MEME Tool</th>
@@ -379,16 +379,16 @@
 <div id="faqs" class="section level1">
 <h1 class="hasAnchor">
 <a href="#faqs" class="anchor"></a>FAQs</h1>
-<div id="how-do-i-use-dremermeme-on-windows" class="section level3">
+<div id="how-do-i-use-memesmeme-on-windows" class="section level3">
 <h3 class="hasAnchor">
-<a href="#how-do-i-use-dremermeme-on-windows" class="anchor"></a>How do I use dremeR/MEME on Windows?</h3>
-<p>The MEME Suite does not currently support Windows, although it can be installed under <a href="https://www.cygwin.com/">Cygwin</a> or the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows Linux Subsytem</a> (WSL). Please note that if MEME is installed on Cygwin or WSL, you must also run R inside Cygwin or WSL to use dremeR.</p>
+<a href="#how-do-i-use-memesmeme-on-windows" class="anchor"></a>How do I use memes/MEME on Windows?</h3>
+<p>The MEME Suite does not currently support Windows, although it can be installed under <a href="https://www.cygwin.com/">Cygwin</a> or the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">Windows Linux Subsytem</a> (WSL). Please note that if MEME is installed on Cygwin or WSL, you must also run R inside Cygwin or WSL to use memes.</p>
 </div>
 </div>
 <div id="citation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h1>
-<p>dremeR is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing dremeR, please cite the MEME Suite tools corresponding to the tools you use.</p>
+<p>memes is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing memes, please cite the MEME Suite tools corresponding to the tools you use.</p>
 <p>If you use <code><a href="reference/runDreme.html">runDreme()</a></code> in your analysis, please cite:</p>
 <p>Timothy L. Bailey, “DREME: Motif discovery in transcription factor ChIP-seq data”, Bioinformatics, 27(12):1653-1659, 2011. <a href="https://academic.oup.com/bioinformatics/article/27/12/1653/257754">full text</a></p>
 <p>If you use <code><a href="reference/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
@@ -410,9 +410,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/snystrom/dremeR/">https://​github.com/​snystrom/​dremeR/​</a>
+<li>Browse source code at <br><a href="https://github.com/snystrom/memes/">https://​github.com/​snystrom/​memes/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/snystrom/dremeR">https://​github.com/​snystrom/​dremeR</a>
+<li>Report a bug at <br><a href="https://github.com/snystrom/memes">https://​github.com/​snystrom/​memes</a>
 </li>
 </ul>
 </div>
