@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Motif Comparison using TomTom • dremeR</title>
+<title>Motif Comparison using TomTom • memes</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Motif Comparison using TomTom">
-<meta property="og:description" content="dremeR">
+<meta property="og:description" content="memes">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -30,7 +30,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">dremeR</a>
+        <a class="navbar-link" href="../index.html">memes</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9001</span>
       </span>
     </div>
@@ -79,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/snystrom/dremeR/">
+  <a href="https://github.com/snystrom/memes/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Motif Comparison using TomTom</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/snystrom/dremeR/blob/master/vignettes/core_tomtom.Rmd"><code>vignettes/core_tomtom.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/snystrom/memes/blob/master/vignettes/core_tomtom.Rmd"><code>vignettes/core_tomtom.Rmd</code></a></small>
       <div class="hidden name"><code>core_tomtom.Rmd</code></div>
 
     </div>
@@ -108,7 +108,7 @@
     
     
 <p>TomTom is a tool for comparing motifs to a known set of motifs. It takes as input a set of motifs and a database of known motifs to return a ranked list of the significance of the match between the input and known motifs. TomTom can be run using the <code><a href="../reference/runTomTom.html">runTomTom()</a></code> function.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dremeR</span>)
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">memes</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">magrittr</span>)</pre></body></html></div>
 <div id="accepted-database-formats" class="section level2">
 <h2 class="hasAnchor">
@@ -117,7 +117,7 @@
 <div id="setting-a-default-database" class="section level3">
 <h3 class="hasAnchor">
 <a href="#setting-a-default-database" class="anchor"></a>Setting a default database</h3>
-<p>dremeR can be configured to use a default .meme format file as the query database, which it will use if the user does not provide a value to <code>database</code> when calling <code><a href="../reference/runTomTom.html">runTomTom()</a></code>. The following locations will be searched in order:</p>
+<p>memes can be configured to use a default .meme format file as the query database, which it will use if the user does not provide a value to <code>database</code> when calling <code><a href="../reference/runTomTom.html">runTomTom()</a></code>. The following locations will be searched in order:</p>
 <ol style="list-style-type: decimal">
 <li>The <code>meme_db</code> option, defined using <code><a href="https://rdrr.io/r/base/options.html">options(meme_db = "path/to/database.meme")</a></code>
 </li>
@@ -133,7 +133,7 @@
 <li>The <code>MEME_DB</code> variable will only accept a path to a .meme file</li>
 </ul>
 <p><strong>NOTE:</strong> if an invalid location is found at one option, <code><a href="../reference/runTomTom.html">runTomTom()</a></code> will fall back to the next location if valid (eg if the <code>meme_db</code> option is set to an invalid file, but the <code>MEME_DB</code> environment variable is a valid file, the <code>MEME_DB</code> path will be used.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"dremeR"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">meme_db</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata/db/fly_factor_survey_id.meme"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"memes"</span>))</pre></body></html></div>
 </div>
 </div>
 <div id="input-types" class="section level2">
@@ -150,9 +150,9 @@
 <div id="output-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#output-data" class="anchor"></a>Output data</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># This is a pre-build dataset packaged with dremeR </span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># This is a pre-build dataset packaged with memes </span>
 <span class="co"># that mirrors running:</span>
-<span class="co"># options(meme_db = system.file("inst/extdata/db/fly_factor_survey_id.meme", package = "dremeR"))</span>
+<span class="co"># options(meme_db = system.file("inst/extdata/db/fly_factor_survey_id.meme", package = "memes"))</span>
 <span class="co"># example_motif &lt;- create_motif("CCRAAAW")</span>
 <span class="co"># example_tomtom &lt;- runTomTom(example_motif)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"example_tomtom"</span>)</pre></body></html></div>
@@ -215,7 +215,7 @@
 <div id="manipulating-the-assigned-best-match" class="section level3">
 <h3 class="hasAnchor">
 <a href="#manipulating-the-assigned-best-match" class="anchor"></a>Manipulating the assigned best match</h3>
-<p>While TomTom can be useful for limiting the search-space for potential true motif matches, often times the default “best match” is not the correct assignment. Users should use their domain-specific knowledge in conjunction with the data returned by TomTom to make this judgement (see below for more details). dremeR provides a few convenience functions for reassigning these values.</p>
+<p>While TomTom can be useful for limiting the search-space for potential true motif matches, often times the default “best match” is not the correct assignment. Users should use their domain-specific knowledge in conjunction with the data returned by TomTom to make this judgement (see below for more details). memes provides a few convenience functions for reassigning these values.</p>
 <p>First, the <code><a href="../reference/update_best_match.html">update_best_match()</a></code> function will update the values of the <code>best_match*</code> columns to reflect the values stored in the first row of the <code>tomtom</code> data.frame entry. This means that <strong>the rank of the <code>tomtom</code> data is meaningful</strong>, and users should only manipulate it if intending to create side-effects.</p>
 <p>If the user can force motifs to contain a certain motif as their best match using the <code><a href="../reference/force_best_match.html">force_best_match()</a></code> function. <code><a href="../reference/force_best_match.html">force_best_match()</a></code> takes a named vector as input, where the name corresponds to the input motif <code>name</code>, and the value corresponds to a <code>match_name</code> found in the <code>tomtom</code> list data (<strong>NOTE:</strong> this means that users cannot force the best match to be a motif that TomTom did not return as a potential match).</p>
 <p>For example, below the example motif could match either “Eip93F_SANGER_10”, or “Lag1_Cell”.</p>
@@ -270,7 +270,7 @@
 <div id="citation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h1>
-<p>dremeR is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing dremeR, please cite the MEME Suite tools corresponding to the tools you use.</p>
+<p>memes is a wrapper for a select few tools from the MEME Suite, which were developed by another group. In addition to citing memes, please cite the MEME Suite tools corresponding to the tools you use.</p>
 <p>If you use <code><a href="../reference/runTomTom.html">runTomTom()</a></code> in your analysis, please cite:</p>
 <p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford Noble, “Quantifying similarity between motifs”, Genome Biology, 8(2):R24, 2007. <a href="http://genomebiology.com/2007/8/2/R24">full text</a></p>
 <div id="licensing-restrictions" class="section level2">
