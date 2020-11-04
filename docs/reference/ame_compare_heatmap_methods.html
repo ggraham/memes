@@ -73,7 +73,7 @@ to help understand the implications of using different values in `ame_plot_heatm
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -149,7 +149,7 @@ to help understand the implications of using different values in `ame_plot_heatm
 to help understand the implications of using different values in `ame_plot_heatmap()`</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ame_compare_heatmap_methods</span>(<span class='no'>ame</span>, <span class='no'>group</span>, <span class='kw'>value</span> <span class='kw'>=</span> -<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log10</a></span>(<span class='no'>adj.pvalue</span>))</pre>
+    <pre class="usage"><span class='fu'>ame_compare_heatmap_methods</span><span class='op'>(</span><span class='va'>ame</span>, <span class='va'>group</span>, value <span class='op'>=</span> <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log10</a></span><span class='op'>(</span><span class='va'>adj.pvalue</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +172,10 @@ to help understand the implications of using different values in `ame_plot_heatm
 
     <p>a cowplot 2 panel plot comparing the distribution of `value` to normalized rank values</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"example_ame"</span>, package <span class='op'>=</span> <span class='st'>"memes"</span><span class='op'>)</span>
+<span class='fu'>ame_compare_heatmap_methods</span><span class='op'>(</span><span class='va'>example_ame</span><span class='op'>$</span><span class='va'>Decreasing</span><span class='op'>)</span>
+</div><div class='img'><img src='ame_compare_heatmap_methods-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -187,7 +191,7 @@ to help understand the implications of using different values in `ame_plot_heatm
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -74,7 +74,7 @@ column. Can be useful if you want to unnest the `tomtom` data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@ by "best_match_" and the "best_db_name" column. Keeps the "tomtom" data.frame
 column. Can be useful if you want to unnest the `tomtom` data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>drop_best_match</span>(<span class='no'>res</span>)</pre>
+    <pre class="usage"><span class='fu'>drop_best_match</span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,15 +167,17 @@ column. Can be useful if you want to unnest the `tomtom` data.</p>
     <p>`res` without the tomtom best_match_ columns</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"example_dreme_tomtom"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>example_dreme_tomtom</span>)</div><div class='output co'>#&gt;  [1] "rank"               "name"               "altname"           
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"example_dreme_tomtom"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>example_dreme_tomtom</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] "rank"               "name"               "altname"           
 #&gt;  [4] "seq"                "length"             "nsites"            
 #&gt;  [7] "positive_hits"      "negative_hits"      "pvalue"            
 #&gt; [10] "evalue"             "unerased_evalue"    "positive_total"    
 #&gt; [13] "negative_total"     "pos_frac"           "neg_frac"          
 #&gt; [16] "motif"              "best_match_name"    "best_match_altname"
 #&gt; [19] "best_match_pvalue"  "best_match_evalue"  "best_match_qvalue" 
-#&gt; [22] "best_db_name"       "best_match_motif"   "tomtom"            </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'>drop_best_match</span>(<span class='no'>example_dreme_tomtom</span>))</div><div class='output co'>#&gt;  [1] "rank"            "name"            "altname"         "seq"            
+#&gt; [22] "best_db_name"       "best_match_motif"   "tomtom"            </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='fu'>drop_best_match</span><span class='op'>(</span><span class='va'>example_dreme_tomtom</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] "rank"            "name"            "altname"         "seq"            
 #&gt;  [5] "length"          "nsites"          "positive_hits"   "negative_hits"  
 #&gt;  [9] "pvalue"          "evalue"          "unerased_evalue" "positive_total" 
 #&gt; [13] "negative_total"  "pos_frac"        "neg_frac"        "motif"          
@@ -195,7 +197,7 @@ column. Can be useful if you want to unnest the `tomtom` data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

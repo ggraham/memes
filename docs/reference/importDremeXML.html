@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@
     <p>Import Dreme output from previous run</p>
     </div>
 
-    <pre class="usage"><span class='fu'>importDremeXML</span>(<span class='no'>dreme_xml_path</span>)</pre>
+    <pre class="usage"><span class='fu'>importDremeXML</span><span class='op'>(</span><span class='va'>dreme_xml_path</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,9 +165,52 @@
   each DREME motif. If no motifs are discovered, returns NULL.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>importDremeXML</span>(<span class='st'>"dreme.xml"</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>dreme_xml</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/dreme.xml"</span>, package <span class='op'>=</span> <span class='st'>"memes"</span><span class='op'>)</span>
+<span class='fu'>importDremeXML</span><span class='op'>(</span><span class='va'>dreme_xml</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    rank         name  altname      seq length nsites positive_hits
+#&gt; 1     1   m01_DGCARC  DREME-1   DGCARC      6   1977           922
+#&gt; 2     2 m02_CACACRCA  DREME-2 CACACRCA      8    314           215
+#&gt; 3     3  m03_TTKTTGB  DREME-3  TTKTTGB      7    946           615
+#&gt; 4     4 m04_AGWGMGAG  DREME-4 AGWGMGAG      8    349           209
+#&gt; 5     5   m05_GCVAAM  DREME-5   GCVAAM      6   1262           806
+#&gt; 6     6 m06_AAAHRAAA  DREME-6 AAAHRAAA      8    406           329
+#&gt; 7     7   m07_CASACA  DREME-7   CASACA      6    508           397
+#&gt; 8     8  m08_AAADTKG  DREME-8  AAADTKG      7    415           308
+#&gt; 9     9  m09_CTCTCTB  DREME-9  CTCTCTB      7    265           213
+#&gt; 10   10   m10_MAAAAY DREME-10   MAAAAY      6    970           628
+#&gt;    negative_hits  pvalue  evalue unerased_evalue positive_total negative_total
+#&gt; 1            464 6.7e-71 3.0e-66         3.0e-66           1351           1351
+#&gt; 2             19 6.8e-47 3.0e-42         9.9e-36           1351           1351
+#&gt; 3            255 8.0e-51 3.6e-46         9.7e-62           1351           1351
+#&gt; 4             25 1.3e-40 5.6e-36         1.5e-36           1351           1351
+#&gt; 5            482 3.6e-36 1.6e-31         3.4e-45           1351           1351
+#&gt; 6            118 1.0e-28 4.5e-24         1.4e-41           1351           1351
+#&gt; 7            216 4.5e-17 1.9e-12         2.0e-27           1351           1351
+#&gt; 8            149 1.4e-16 6.1e-12         9.5e-19           1351           1351
+#&gt; 9             86 2.4e-15 9.9e-11         2.3e-24           1351           1351
+#&gt; 10           431 4.9e-15 2.1e-10         2.4e-26           1351           1351
+#&gt;     pos_frac   neg_frac
+#&gt; 1  0.6824574 0.34344930
+#&gt; 2  0.1591414 0.01406366
+#&gt; 3  0.4552184 0.18874907
+#&gt; 4  0.1547002 0.01850481
+#&gt; 5  0.5965951 0.35677276
+#&gt; 6  0.2435233 0.08734271
+#&gt; 7  0.2938564 0.15988157
+#&gt; 8  0.2279793 0.11028868
+#&gt; 9  0.1576610 0.06365655
+#&gt; 10 0.4648409 0.31902295
+#&gt;                                                                   motif
+#&gt; 1  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 2  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 3  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 4  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 5  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 6  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 7  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 8  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 9  &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt; 10 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -183,7 +226,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

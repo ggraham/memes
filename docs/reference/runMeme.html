@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -147,31 +147,71 @@
     <p>NOTE: add note about the hsfrac issue</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runMeme</span>(
-  <span class='no'>input</span>,
-  <span class='kw'>control</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>alph</span> <span class='kw'>=</span> <span class='st'>"dna"</span>,
-  <span class='kw'>parse_genomic_coord</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>combined_sites</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>meme_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>runMeme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='cn'>NA</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  alph <span class='op'>=</span> <span class='st'>"dna"</span>,
+  parse_genomic_coord <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  combined_sites <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for list</span>
+<span class='fu'>runMeme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='cn'>NA</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  alph <span class='op'>=</span> <span class='st'>"dna"</span>,
+  parse_genomic_coord <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  combined_sites <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for BStringSetList</span>
+<span class='fu'>runMeme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='cn'>NA</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  alph <span class='op'>=</span> <span class='st'>"dna"</span>,
+  parse_genomic_coord <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  combined_sites <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>runMeme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='cn'>NA</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  alph <span class='op'>=</span> <span class='st'>"dna"</span>,
+  parse_genomic_coord <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  combined_sites <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input</th>
-      <td><p>path to fasta, Biostrings::BStringSet list, or list of Biostrings::BStringSet (can generate using `get_sequence()`)</p></td>
+      <td><p>path to fasta, Biostrings::BStringSet list, or list of
+Biostrings::BStringSet (can generate using <code><a href='get_sequence.html'>get_sequence()</a></code>)</p></td>
     </tr>
     <tr>
       <th>control</th>
-      <td><p>any data type as in `input`, or a character vector of
-`names(input)` to use those regions as control sequences. Using sequences
+      <td><p>any data type as in <code>input</code>, or a character vector of
+<code><a href='https://rdrr.io/r/base/names.html'>names(input)</a></code> to use those regions as control sequences. Using sequences
 as background requires an alternative objective function. Users must pass a non-default value of
-`objfun` to `...` if using a non-NA control set (default: NA)</p></td>
+<code>objfun</code> to <code>...</code> if using a non-NA control set (default: NA)</p></td>
     </tr>
     <tr>
       <th>outdir</th>
@@ -183,15 +223,15 @@ as background requires an alternative objective function. Users must pass a non-
     </tr>
     <tr>
       <th>parse_genomic_coord</th>
-      <td><p>`logical(1)` whether to parse genomic coordinates
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether to parse genomic coordinates
 from fasta headers. Requires headers are in the form: "chr:start-end", or
-will result in an error. Automatically set to `FALSE` if `alph =
-"protein"`. This setting only needs to be changed if using a custom-built
+will result in an error. Automatically set to <code>FALSE</code> if <code>alph = "protein"</code>. This setting only needs to be changed if using a custom-built
 fasta file without genomic coordinates in the header.</p></td>
     </tr>
     <tr>
       <th>combined_sites</th>
-      <td><p>`logical(1)` whether to return combined sites information (coerces output to list) (default: FALSE)</p></td>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether to return combined sites
+information (coerces output to list) (default: FALSE)</p></td>
     </tr>
     <tr>
       <th>silent</th>
@@ -200,45 +240,69 @@ fasta file without genomic coordinates in the header.</p></td>
     <tr>
       <th>meme_path</th>
       <td><p>path to "meme/bin/". If unset, will use default search
-behavior:
-1. `meme_path` setting in `options()`
-2. `MEME_PATH` setting in `.Renviron`</p></td>
+behavior:</p><ol>
+<li><p><code>meme_path</code> setting in <code><a href='https://rdrr.io/r/base/options.html'>options()</a></code></p></li>
+<li><p><code>MEME_PATH</code> setting in <code>.Renviron</code></p></li>
+</ol></td>
     </tr>
     <tr>
       <th>...</th>
-      <td></td>
+      <td><p>additional arguments passed to MEME (see below)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>MEME results in universalmotif data.frame format (see:
+<code><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe()</a></code>). <code>sites_hits</code> is a nested data.frame
+column containing the position within each input sequence of matches to the
+identified motif.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Additional arguments</p>
-<p>`runMeme()` accepts all valid arguments to meme as arguments passed to `...`.
-For flags without values, pass them as `flag = TRUE`. The `dna`, `rna`, and
-`protein` flags should instead be passed to the `alph` argument of
-`runMeme()`.
-The arguments passed to MEME often have many interactions with eachother, for
-a detailed description of each argument see
-the [MEME Help Page](meme-suite.org/doc/meme.html).</p>
-<p>For use with ChIP-seq data, the suggestion is to set: `revcomp = TRUE, minw = 5, maxw = 20`.
-See [using MEME with ChIP-Seq Data Tips](https://groups.google.com/forum/#<!-- %21topic/meme-suite/rIbjIHbcpAE) -->
+    
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Additional arguments</h3>
+
+
+<p><code>runMeme()</code> accepts all valid arguments to meme as arguments passed to <code>...</code>.
+For flags without values, pass them as <code>flag = TRUE</code>. The <code>dna</code>, <code>rna</code>, and
+<code>protein</code> flags should instead be passed to the <code>alph</code> argument of
+<code>runMeme()</code>.
+The arguments passed to MEME often have many interactions with each other,
+for a detailed description of each argument
+see the <a href='meme-suite.org/doc/meme.html'>MEME Help Page</a>.</p>
+<p>For use with ChIP-seq data, the suggestion is to set: <code>revcomp = TRUE, minw = 5, maxw = 20</code>.
+See using MEME with ChIP-Seq Data Tips: <a href='https://groups.google.com/forum/#%21topic/meme-suite/rIbjIHbcpAE'>https://groups.google.com/forum/#%21topic/meme-suite/rIbjIHbcpAE</a>
 for additional details.</p>
-<p># Citation</p>
-<p>If you use `runMeme()` in your analysis, please cite:</p>
+
+    <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
+
+    <p>If you use <code>runMeme()</code> in your analysis, please cite:</p>
 <p>Timothy L. Bailey and Charles Elkan, "Fitting a mixture model by expectation
 maximization to discover motifs in biopolymers", Proceedings of the Second
 International Conference on Intelligent Systems for Molecular Biology, pp.
 28-36, AAAI Press, Menlo Park, California, 1994.
-[pdf](https://tlbailey.bitbucket.io/papers/ismb94.pdf)</p>
-<p>## Licensing
-The MEME Suite is free for non-profit use, but for-profit users should purchase a
-license. See the [MEME Suite Copyright Page](http://meme-suite.org/doc/copyright.html) for details.</p>
+<a href='https://tlbailey.bitbucket.io/papers/ismb94.pdf'>pdf</a></p>
+    <h2 class="hasAnchor" id="licensing"><a class="anchor" href="#licensing"></a>Licensing</h2>
 
+    <p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
+license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite Copyright Page</a> for details.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='meme_is_installed.html'>meme_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>seqs</span> <span class='op'>&lt;-</span> <span class='fu'>universalmotif</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_sequences.html'>create_sequences</a></span><span class='op'>(</span><span class='st'>"CCRAAAW"</span>, seqnum <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>seqs</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>seqs</span><span class='op'>)</span>
+<span class='fu'>runMeme</span><span class='op'>(</span><span class='va'>seqs</span>, parse_genomic_coord <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/ </div><div class='output co'>#&gt;       name altname family organism consensus alphabet strand  icscore nsites
+#&gt; 1 AMACMAMC  MEME-1   &lt;NA&gt;     &lt;NA&gt;  AMMCMAMC      DNA      + 4.569835      2
+#&gt;   bkgsites pval qval  eval
+#&gt; 1       NA   NA   NA 47000
+#&gt;                                                                  motif width
+#&gt; 1 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;     8
+#&gt;                                         sites_hits
+#&gt; 1 1, 3, 19, 70, 0.0124, 0.0268, AWACAARC, ARRCCAWC</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,7 +318,7 @@ license. See the [MEME Suite Copyright Page](http://meme-suite.org/doc/copyright
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
