@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@
     <p>Denovo motif discovery of target regions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runDreme</span>(<span class='no'>input</span>, <span class='no'>control</span>, <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>meme_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>runDreme</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>control</span>, outdir <span class='op'>=</span> <span class='st'>"auto"</span>, meme_path <span class='op'>=</span> <span class='cn'>NULL</span>, silent <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -279,7 +279,7 @@ setting evalue = 1. For additional details about each DREME flag, see the
 </table>
 
 
-<h3>Licensing</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Licensing</h3>
 
 
 <p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
@@ -287,21 +287,24 @@ license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite C
 
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 
-    
-
-<p>If you use <code>runDreme()</code> in your analysis, please cite:</p>
+    <p>If you use <code>runDreme()</code> in your analysis, please cite:</p>
 <p>Timothy L. Bailey, "DREME: Motif discovery in transcription factor ChIP-seq
 data", Bioinformatics, 27(12):1653-1659, 2011.
 <a href='https://academic.oup.com/bioinformatics/article/27/12/1653/257754'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='meme_is_installed.html'>meme_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># Create random named sequences as input for example</span>
+<span class='va'>seqs</span> <span class='op'>&lt;-</span> <span class='fu'>universalmotif</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_sequences.html'>create_sequences</a></span><span class='op'>(</span>rng.seed <span class='op'>=</span> <span class='fl'>123</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>seqs</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>seqs</span><span class='op'>)</span>
+
 <span class='co'># Runs dreme with default settings, shuffles input as background</span>
-<span class='fu'>runDreme</span>(<span class='st'>"input.fa"</span>, <span class='st'>"shuffle"</span>)
+<span class='fu'>runDreme</span><span class='op'>(</span><span class='va'>seqs</span>, <span class='st'>"shuffle"</span><span class='op'>)</span>
 
 <span class='co'># Runs searching for max 2 motifs, e-value cutoff = 0.1, explicitly using the DNA alphabet</span>
-<span class='fu'>runDreme</span>(<span class='st'>"input.fa"</span>, <span class='st'>"shuffle"</span>, <span class='kw'>nmotifs</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>e</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>dna</span> <span class='kw'>=</span> <span class='no'>T</span>)
-}</div></pre>
+<span class='fu'>runDreme</span><span class='op'>(</span><span class='va'>seqs</span>, <span class='st'>"shuffle"</span>, nmotifs <span class='op'>=</span> <span class='fl'>2</span>, e <span class='op'>=</span> <span class='fl'>0.1</span>, dna <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; -\|/-\ -\|/-\ </div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -317,7 +320,7 @@ data", Bioinformatics, 27(12):1653-1659, 2011.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

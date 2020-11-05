@@ -74,7 +74,7 @@ location, `FALSE` if not." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@ Returns `TRUE` if all supported utilities are found in the meme install
 location, `FALSE` if not.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>meme_is_installed</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>meme_is_installed</span><span class='op'>(</span>path <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,8 +170,8 @@ location, `FALSE` if not.</p>
     <div class='dont-index'><p>search_meme_path check_meme_install</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Will return TRUE if "meme/bin/" is detected</span>
-<span class='fu'>meme_is_installed</span>()</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fu'>meme_is_installed</span>(<span class='st'>"bad/path"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in file.exists(x): invalid 'file' argument</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>meme_is_installed</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -187,7 +187,7 @@ location, `FALSE` if not.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

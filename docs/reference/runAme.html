@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Motif enrichment using AME — runAme • memes</title>
+<title>See runAme Generic for details — runAme.list • memes</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Motif enrichment using AME — runAme" />
-<meta property="og:description" content="Motif enrichment using AME" />
+<meta property="og:title" content="See runAme Generic for details — runAme.list" />
+<meta property="og:description" content="See runAme Generic for details
+Motif enrichment using AME" />
 
 
 
@@ -72,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -138,26 +139,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Motif enrichment using AME</h1>
-    <small class="dont-index">Source: <a href='https://github.com/snystrom/memes/blob/master/R/generics.R'><code>R/generics.R</code></a></small>
+    <h1>See runAme Generic for details</h1>
+    <small class="dont-index">Source: <a href='https://github.com/snystrom/memes/blob/master/R/ame.R'><code>R/ame.R</code></a>, <a href='https://github.com/snystrom/memes/blob/master/R/generics.R'><code>R/generics.R</code></a></small>
     <div class="hidden name"><code>runAme.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Motif enrichment using AME</p>
+    <p>See runAme Generic for details</p>
+<p>Motif enrichment using AME</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runAme</span>(
-  <span class='no'>input</span>,
-  <span class='kw'>control</span> <span class='kw'>=</span> <span class='st'>"shuffle"</span>,
-  <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"fisher"</span>,
-  <span class='kw'>database</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>meme_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sequences</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='co'># S3 method for list</span>
+<span class='fu'>runAme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='st'>"shuffle"</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  method <span class='op'>=</span> <span class='st'>"fisher"</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sequences <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for BStringSetList</span>
+<span class='fu'>runAme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='st'>"shuffle"</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  method <span class='op'>=</span> <span class='st'>"fisher"</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sequences <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>runAme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='st'>"shuffle"</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  method <span class='op'>=</span> <span class='st'>"fisher"</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sequences <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>runAme</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  control <span class='op'>=</span> <span class='st'>"shuffle"</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  method <span class='op'>=</span> <span class='st'>"fisher"</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sequences <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,7 +220,9 @@ control is set to "shuffle", it will use the <code>input</code> entry, not the A
 shuffle algorithm). If <code>control</code> is a Biostrings::BStringSetList (generated
 using <code>get_sequence</code>), all sequences in the list will be combined as the
 control set. Set to <code>NA</code> for partitioning based on input fasta score (see
-<code><a href='get_sequence.html'>get_sequence()</a></code> for assigning fasta score).</p></td>
+<code><a href='get_sequence.html'>get_sequence()</a></code> for assigning fasta score). If input sequences are not
+assigned fasta scores but AME is run in partitioning mode, the sequence
+order will be used as the score.</p></td>
     </tr>
     <tr>
       <th>outdir</th>
@@ -189,7 +232,7 @@ write to a temporary directory. default: "auto"</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p>default: fisher (allowed values: fisher, ranksum, pearson , spearman, 3dmhg, 4dmhg)</p></td>
+      <td><p>default: fisher (allowed values: fisher, ranksum, pearson, spearman, 3dmhg, 4dmhg)</p></td>
     </tr>
     <tr>
       <th>database</th>
@@ -221,15 +264,14 @@ webpage for more information.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td></td>
+      <td><p>additional arguments passed to AME (see AME Flag table below)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>a data.frame of AME enrichment results. If run using a BStringsSetList
+input, returns a list of data.frames.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Additional AME arguments</p>
@@ -257,7 +299,7 @@ below:</p><table class='table'>
 </table>
 
 
-<h3>Licensing</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Licensing</h3>
 
 
 <p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
@@ -265,19 +307,31 @@ license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite C
 
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 
-    
-
-<p>If you use <code>runAme()</code> in your analysis, please cite:</p>
+    <p>If you use <code>runAme()</code> in your analysis, please cite:</p>
 <p>Robert McLeay and Timothy L. Bailey, "Motif Enrichment Analysis: A unified
 framework and method evaluation", BMC Bioinformatics, 11:165, 2010,
 doi:10.1186/1471-2105-11-165. <a href='http://www.biomedcentral.com/1471-2105/11/165'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>dreme_out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='runDreme.html'>runDreme</a></span>(<span class='st'>"input.fa"</span>)
-<span class='fu'>runAme</span>(<span class='st'>"input.fa"</span>, <span class='kw'>database</span> <span class='kw'>=</span> <span class='st'>"jasparmotifs.meme"</span>)
-<span class='fu'>runAme</span>(<span class='st'>"input.fa"</span>, <span class='kw'>database</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"jasparmotifs.meme"</span>, <span class='st'>"my_dreme_motifs"</span> <span class='kw'>=</span> <span class='no'>dreme_out</span>))
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='meme_is_installed.html'>meme_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='co'># Create random named sequences as input for example</span>
+<span class='va'>seqs</span> <span class='op'>&lt;-</span> <span class='fu'>universalmotif</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_sequences.html'>create_sequences</a></span><span class='op'>(</span>rng.seed <span class='op'>=</span> <span class='fl'>123</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>seqs</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>seqs</span><span class='op'>)</span>
+
+<span class='co'># An example path to a motif database file in .meme format</span>
+<span class='va'>motif_file</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/flyFactorSurvey_cleaned.meme"</span>, package <span class='op'>=</span> <span class='st'>"memes"</span><span class='op'>)</span>
+
+<span class='fu'>runAme</span><span class='op'>(</span><span class='va'>seqs</span>, database <span class='op'>=</span> <span class='va'>motif_file</span><span class='op'>)</span>
+
+
+<span class='co'># Dreme results dataset for example</span>
+<span class='va'>dreme_xml</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/dreme.xml"</span>, package <span class='op'>=</span> <span class='st'>"memes"</span><span class='op'>)</span>
+<span class='va'>dreme_results</span> <span class='op'>&lt;-</span> <span class='fu'><a href='importDremeXML.html'>importDremeXML</a></span><span class='op'>(</span><span class='va'>dreme_xml</span><span class='op'>)</span>
+
+<span class='co'># database can be set to multiple values like so: </span>
+<span class='fu'>runAme</span><span class='op'>(</span><span class='va'>seqs</span>, database <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>motif_file</span>, <span class='st'>"my_dreme_motifs"</span> <span class='op'>=</span> <span class='va'>dreme_results</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\ </div><div class='output co'>#&gt; <span class='message'>AME detected no enrichment</span></div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/- </div><div class='output co'>#&gt; <span class='message'>AME detected no enrichment</span></div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -293,7 +347,7 @@ doi:10.1186/1471-2105-11-165. <a href='http://www.biomedcentral.com/1471-2105/11
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

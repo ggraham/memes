@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@
     <p>Import MEME results</p>
     </div>
 
-    <pre class="usage"><span class='fu'>importMeme</span>(<span class='no'>meme_txt</span>, <span class='kw'>parse_genomic_coord</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>combined_sites</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>importMeme</span><span class='op'>(</span><span class='va'>meme_txt</span>, parse_genomic_coord <span class='op'>=</span> <span class='cn'>FALSE</span>, combined_sites <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,26 +162,41 @@
 coordinates for motif position information, only works if fasta files were
 written such that the sequence headers are in the form: "chr:start-end", or
 some variation of this form (delimiters can be any of: "[^[:alnum:]]+" (ie
-non-alphanumeric characters)).</p></td>
+non-alphanumeric characters)), (default = FALSE).</p></td>
     </tr>
     <tr>
       <th>combined_sites</th>
-      <td><p>whether to add `combined_sites` output which contains coordinates of each sequence, the motif sequence</p></td>
+      <td><p>whether to add `combined_sites` output which contains
+coordinates of each sequence, the motif sequence</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>MEME results in universalmotif data.frame format (see:
+  [as_universalmotif_dataframe()]). `sites_hits` is a nested data.frame
+  column containing the position within each input sequence of matches to the
+  identified motif.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># If fasta headers do not have sequence information, parse_genomic_coord must be set to FALSE</span>
-<span class='no'>example_no_sequence</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata/meme_full.txt"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"universalmotif"</span>, <span class='kw'>mustwork</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='fu'>importMeme</span>(<span class='no'>example_no_sequence</span>, <span class='kw'>parse_genomic_coord</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get_custom_meme_alph(raw_lines): Alphabet type cannot be detected, custom alphabets are not currently supported</span></div><div class='input'>
-#TODO: Add example of file w/ sequence headers
-</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>example_meme_txt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/meme_full.txt"</span>, package <span class='op'>=</span> <span class='st'>"universalmotif"</span><span class='op'>)</span>
+<span class='fu'>importMeme</span><span class='op'>(</span><span class='va'>example_meme_txt</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   name altname family organism                     consensus alphabet strand
+#&gt; 1    1    MEME   &lt;NA&gt;     &lt;NA&gt;               AAAAAAAAAARAAAS      DNA     +-
+#&gt; 2    2    MEME   &lt;NA&gt;     &lt;NA&gt; YNHTCNCNNYNTSACNCKTBYYYTYCNTY      DNA     +-
+#&gt; 3    3    MEME   &lt;NA&gt;     &lt;NA&gt;                   CAMMAMAAAAA      DNA     +-
+#&gt;    icscore nsites bkgsites pval qval    eval
+#&gt; 1 19.23570     50       NA   NA   NA 5.3e-32
+#&gt; 2 13.88457     44       NA   NA   NA 4.8e-07
+#&gt; 3 14.81432     48       NA   NA   NA 7.6e+01
+#&gt;                                                                  motif width
+#&gt; 1 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;    15
+#&gt; 2 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;    29
+#&gt; 3 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;    11
+#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         sites_hits
+#&gt; 1                                                                                                                                                                                                                                                                                                                                                                       AT1G21910, AT5G57560, AT4G29780, AT4G29780, AT3G48650, AT2G25735, AT2G20670, AT2G20670, AT2G40000, AT1G80440, AT1G80440, AT1G27730, AT3G04640, AT1G56060, AT1G66090, AT1G25400, AT4G24570, AT1G24140, AT5G25240, AT1G56240, AT4G14450, AT4G08950, AT3G48650, AT1G80440, AT3G46090, AT5G56550, AT5G52050, AT3G48650, AT2G20670, AT2G20670, AT1G25400, AT3G04640, AT2G44840, AT5G25240, AT3G55980, AT5G61600, AT4G27654, AT3G55980, AT2G44840, AT1G66090, AT3G48650, AT2G40000, AT1G24140, AT1G66090, AT1G56240, AT3G55980, AT2G32200, AT2G40000, AT4G13395, AT4G08950, 744, 377, 510, 131, 951, 56, 455, 141, 853, 292, 911, 528, 766, 99, 197, 578, 762, 659, 30, 461, 572, 883, 166, 255, 363, 737, 640, 203, 356, 41, 630, 64, 313, 781, 52, 948, 48, 943, 873, 896, 5, 810, 622, 506, 123, 905, 343, 256, 889, 386, 5.51e-08, 1.35e-07, 1.35e-07, 1.35e-07, 1.35e-07, 1.35e-07, 1.35e-07, 1.35e-07, 1.35e-07, 1.35e-07, 2.35e-07, 2.45e-07, 3.77e-07, 7.55e-07, 8.88e-07, 8.88e-07, 1.22e-06, 1.22e-06, 1.39e-06, 1.39e-06, 1.58e-06, 1.75e-06, 1.75e-06, 1.75e-06, 1.99e-06, 2.13e-06, 2.13e-06, 2.13e-06, 2.36e-06, 2.36e-06, 2.9e-06, 3.15e-06, 3.15e-06, 3.62e-06, 3.92e-06, 4.35e-06, 4.35e-06, 4.35e-06, 4.35e-06, 4.35e-06, 4.64e-06, 4.64e-06, 5.39e-06, 5.87e-06, 5.87e-06, 6.72e-06, 7.08e-06, 7.65e-06, 8.74e-06, 1.15e-05, GAAAAAAAAAGAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAAAAAAAAAC, AAAAAAGAAAGAAAC, AAAAAAGAAAGAAAG, AAAAAAAAAAGAGAG, AAAAAAAAGAGCAAG, AAAAGAAAAAAAAAC, CAAGAAAAAAGAAAC, GAAAACAAAAGAAAC, AAAAAAAACAAAAAC, CAAAAAAAGAAAAAG, CAAAAAAAAAACAAG, CAAAACAAAAGAAAG, GAAAAAAAGAGAGAG, AAAAAAGAAAACAAC, AAAAAAAAGAACAAG, GAAAAAAACAGCAAC, CAAAAAAACAAAAAC, CAAGAAAAAAAAAAC, AAAAGAAGAAGAAAG, AAAAAAAAAAAAAAA, AAAAAAAAAAAAAAA, GAAAGAAGAAGAAAC, AAAAATAAAAGAAAG, AAAAAAGAGAGAGAG, AAAGAGAAAAGAAAG, CAAAAAAAAAAAAAA, AAAAAACAAAGAGAG, AAAAGAAACAAAAAG, AAAAAAAAGACCAAG, AAAAAAAGAAGAAAA, GAAAAAAGAACAAAC, CAAAAAAAAAGGAAG, AAAAACGAAAAAAAG, AAAAAGAAAAAAGAC, AAAAATAAAAAAAAG, AAAAGAAAAACCAAG, GAAGAACAAAGAAAG, AAAAGAAAAAGCAAA, GAAAAAGAGAGAAAA, GAAGAAGAAACAAAC, GAAAAGAGAAGAGAG
+#&gt; 2 AT4G29780, AT5G25240, AT4G25490, AT3G55980, AT2G40000, AT1G74930, AT4G24570, AT4G25490, AT1G76650, AT1G74930, AT1G35140, AT4G32480, AT4G13395, AT3G44260, AT1G25400, AT5G45630, AT4G25490, AT4G25490, AT2G32200, AT2G20670, AT3G55980, AT2G44130, AT1G74930, AT3G15500, AT5G45630, AT1G72910, AT1G80840, AT1G21910, AT4G14450, AT1G27730, AT1G56240, AT4G32480, AT4G25490, AT3G15500, AT1G27730, AT1G72910, AT5G56550, AT1G35140, AT5G57560, AT4G27270, AT5G25240, AT1G35210, AT1G32920, AT1G80840, 887, 805, 149, 128, 924, 517, 846, 827, 159, 937, 494, 815, 939, 884, 702, 280, 921, 71, 2, 880, 804, 936, 53, 409, 322, 273, 813, 925, 959, 920, 39, 899, 210, 488, 746, 806, 115, 579, 880, 178, 856, 935, 140, 916, 1.47e-12, 2.43e-09, 2.43e-09, 1.02e-08, 2.73e-08, 4.37e-08, 7.76e-08, 8.68e-08, 8.68e-08, 1.21e-07, 1.35e-07, 1.68e-07, 1.88e-07, 1.88e-07, 2.09e-07, 2.87e-07, 4.35e-07, 4.81e-07, 4.81e-07, 5.33e-07, 5.9e-07, 5.9e-07, 5.9e-07, 6.52e-07, 7.96e-07, 7.96e-07, 7.96e-07, 9.69e-07, 1.18e-06, 1.18e-06, 1.3e-06, 1.43e-06, 1.89e-06, 1.89e-06, 1.89e-06, 2.74e-06, 3.01e-06, 3.01e-06, 3.29e-06, 3.6e-06, 4.31e-06, 4.71e-06, 6.13e-06, 1.21e-05, CGTTCACACCTTCACGCGCTTCCTTCGTC, CGCTCCCGCCTTCACAGCTGTCTTTCATC, TCTTCACCTTACCACTCTTTTTTTCCCTC, CTCACACAACATGACTCTCCTCCTTGGTT, CACACGCCTTTTTTCTCGTCCCCATCCTC, TGATCAACAGACGACTCGCTTCTTTCTTC, CTGTCTCACTCACACACGCGTTTTCCTAC, CACTCGCTGTCTGACGTGTGTCCTTTGAC, CATTCACTTTCTCACCCTTGCTCTCTTCT, TCTTCCTCACTTGCCACTTCCACTTCTTC, TCTTCGCCACATAAATCTTGCACTTTCTC, CAATCATATACTGACACGTCATCTTCTTC, CGCGTCCGACATCACACGCTCTCTTCTAT, ACCCCACCACTTGACGCGTTTCTCGTCCC, TCGTCACCTCCTCAGTGATTCCTCCGATC, CATTCTCAACGTCACGCGTGTACGCGGTT, TGCTCCCCACATATCCGTTATCTCTCCTC, CCCACCAGCCTTCACTGGCCCCATACGTC, CCATCTTCACTTGTCTCTTTTCCATCATG, CAATCACAGTTTCACACGTCACCATTCGC, CGCTCTTGTGCTGACTCTTCTACTCGTAT, CAACCGCAAGCAAACTCATCCTCCTCTTT, CGACCACAACAACAAGAATCTTCTCCTTC, CTACCACAAGCCGACACATGTCTTGTGTC, GCGTTTCCTCCTGACGCGCCGCTCTGTTT, CATCCACATCCTCTCTCACTTTCTTTATG, TCAACTCGGCTTCTATCGGGTCCACCCGC, TCATCTCTTCCTCTCCCATACCCCTCCCA, TCAACATGTTACAAGTCGTGGCCCTCCTC, CCTACCACTTGTCACGCAACTTCCTTCTC, CAGTTCACTAATCACACTTTCTCTTGTTC, TCTCCCACCTCTCAGGCGGGTCCCTAACC, CTCTCTCGTTACCTCTCGCTCTCACGTTA, CCATCATTCACTTACACGTGTTTTTTCTT, CTTGCACACACACACACGTGTACTAGGTC, CTTTGGCGGCCCATCTATTCTCTTCCCTC, TCCTTAAACCAAGAATCTTGTCCCTCTTT, CGAACATTACATGACTTTCTTCTTCCCAC, TGTTGCCTCAAAGACGCGGCTTCTTCTTT, CAACCCAATTTCCACGATTTTCTTCCTAC, CGCTCCTCTCACATCACTGTCACACTCTT, CCATCCACGACCAAATCATTCTCTCCATT, TCGACCCTCCAACTCCATTGCCTATCTAC, GCTCCTCTCTCTCTCTTCTGCCTCTTTCC
+#&gt; 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                AT4G13395, AT3G46090, AT1G66090, AT1G80440, AT4G24570, AT1G24140, AT5G54490, AT4G24570, AT1G35140, AT1G56240, AT1G69490, AT2G32200, AT5G25240, AT5G35777, AT4G32480, AT4G14450, AT3G15500, AT3G46090, AT1G76650, AT1G27730, AT2G44840, AT1G80440, AT4G27654, AT2G25735, AT1G27730, AT5G45630, AT4G27270, AT4G29780, AT3G50050, AT4G25490, AT1G56240, AT1G80840, AT1G80840, AT3G50050, AT1G33760, AT5G57560, AT5G25240, AT3G15500, AT3G55980, AT2G44840, AT5G51190, AT4G27270, AT3G48650, AT3G04640, AT1G66090, AT5G45630, AT1G21910, AT4G14450, 693, 611, 58, 524, 351, 150, 986, 983, 987, 893, 286, 442, 301, 641, 183, 853, 756, 659, 899, 811, 719, 892, 34, 289, 244, 190, 422, 989, 145, 296, 710, 354, 187, 747, 385, 402, 544, 525, 765, 804, 986, 761, 550, 3, 794, 174, 499, 467, 2.36e-06, 2.36e-06, 2.36e-06, 2.36e-06, 3.44e-06, 3.44e-06, 4.52e-06, 4.52e-06, 4.52e-06, 6.1e-06, 6.1e-06, 7.67e-06, 1.33e-05, 1.33e-05, 1.33e-05, 1.33e-05, 1.33e-05, 1.33e-05, 1.33e-05, 1.38e-05, 1.64e-05, 1.64e-05, 1.93e-05, 1.93e-05, 2e-05, 2.34e-05, 2.34e-05, 2.34e-05, 2.34e-05, 2.6e-05, 2.6e-05, 2.6e-05, 2.6e-05, 2.71e-05, 2.71e-05, 3.08e-05, 3.08e-05, 3.08e-05, 3.08e-05, 3.08e-05, 3.18e-05, 3.94e-05, 3.94e-05, 4.25e-05, 4.25e-05, 5.18e-05, 5.18e-05, 7.17e-05, CACAAAAAAAA, CACAAAAAAAA, CACAAAAAAAA, CACAACAAAAA, CACCAAAAAAA, CACCAAAAAAA, CACAACACAAA, CACAAAACAAA, CACAACACAAA, CACCAAACAAA, CACAACCAAAA, CCCAAAAAAAA, CAAAAAAAAAA, CAAAACAAAAA, CAAAAAAAAAA, CAAAACAAAAA, CAAAAAAAAAA, CAAAAAAAAAA, CAAAAAAAAAA, CCCCAAAAAAA, CAACAAAAAAA, CAACACAAAAA, CAAAAAACAAA, CAAAAAACAAA, CCCAACCAAAA, CAAAACCAAAA, CAACACACAAA, CAAAACCAAAA, CAAAAACAAAA, GACAAAAAAAA, GACAAAAAAAA, GACAAAAAAAA, GACAAAAAAAA, CAACAACAAAA, CAACAACAAAA, GACCACAAAAA, GACCAAAAAAA, CCAAAAAAAAA, GACCAAAAAAA, CCAAACAAAAA, CAAAAACCAAA, CACACAAAAAA, CCAAAAACAAA, CACCCCAAAAA, CCAAAACAAAA, CACAACACAAC, CACAAAACAAC, CACGAACAAAA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -197,7 +212,7 @@ non-alphanumeric characters)).</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

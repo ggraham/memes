@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
       </span>
     </div>
 
@@ -147,17 +147,43 @@
     <p>Run TomTom on target motifs</p>
     </div>
 
-    <pre class="usage"><span class='fu'>runTomTom</span>(
-  <span class='no'>input</span>,
-  <span class='kw'>database</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
-  <span class='kw'>thresh</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>min_overlap</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>dist</span> <span class='kw'>=</span> <span class='st'>"pearson"</span>,
-  <span class='kw'>evalue</span> <span class='kw'>=</span> <span class='no'>T</span>,
-  <span class='kw'>meme_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>runTomTom</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  thresh <span class='op'>=</span> <span class='fl'>10</span>,
+  min_overlap <span class='op'>=</span> <span class='fl'>5</span>,
+  dist <span class='op'>=</span> <span class='st'>"pearson"</span>,
+  evalue <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for list</span>
+<span class='fu'>runTomTom</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  thresh <span class='op'>=</span> <span class='fl'>10</span>,
+  min_overlap <span class='op'>=</span> <span class='fl'>5</span>,
+  dist <span class='op'>=</span> <span class='st'>"pearson"</span>,
+  evalue <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>runTomTom</span><span class='op'>(</span>
+  <span class='va'>input</span>,
+  database <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
+  thresh <span class='op'>=</span> <span class='fl'>10</span>,
+  min_overlap <span class='op'>=</span> <span class='fl'>5</span>,
+  dist <span class='op'>=</span> <span class='st'>"pearson"</span>,
+  evalue <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -235,7 +261,7 @@ their description.</p><table class='table'>
 </table>
 
 
-<h3>Licensing</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Licensing</h3>
 
 
 <p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
@@ -243,17 +269,32 @@ license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite C
 
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 
-    
-
-<p>If you use <code>runTomTom()</code> in your analysis, please cite:</p>
+    <p>If you use <code>runTomTom()</code> in your analysis, please cite:</p>
 <p>Shobhit Gupta, JA Stamatoyannopolous, Timothy Bailey and William Stafford
 Noble, "Quantifying similarity between motifs", Genome Biology, 8(2):R24,
 2007. <a href='http://genomebiology.com/2007/8/2/R24'>full text</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>runTomTom</span>(<span class='st'>"searchmotifs.meme"</span>, <span class='st'>"jasparMotifs.meme"</span>)
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='meme_is_installed.html'>meme_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>motif</span> <span class='op'>&lt;-</span> <span class='fu'>universalmotif</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span><span class='op'>(</span><span class='st'>"CCRAAAW"</span><span class='op'>)</span>
+<span class='va'>database</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/flyFactorSurvey_cleaned.meme"</span>, package <span class='op'>=</span> <span class='st'>"memes"</span><span class='op'>)</span>
+
+<span class='fu'>runTomTom</span><span class='op'>(</span><span class='va'>motif</span>, <span class='va'>database</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; -\|/-\| </div><div class='output co'>#&gt;    name altname family organism consensus alphabet strand icscore nsites
+#&gt; 1 motif    &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;   CCRAAAW      DNA     +-      12     NA
+#&gt;   bkgsites pval qval eval  best_match_name best_match_altname
+#&gt; 1       NA   NA   NA   NA Eip93F_SANGER_10             Eip93F
+#&gt;                                                       best_match_motif
+#&gt; 1 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt;              best_db_name best_match_offset best_match_pvalue best_match_evalue
+#&gt; 1 flyFactorSurvey_cleaned                 4          8.75e-07             5e-04
+#&gt;   best_match_qvalue best_match_strand
+#&gt; 1          0.000999                 +
+#&gt;                                                                  motif
+#&gt; 1 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
+#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            tomtom
+#&gt; 1 Eip93F_SANGER_10, Lag1_Cell, pho_SOLEXA_5, rib_SANGER_5, Mes2_SANGER_5, CG2052_SANGER_2.5, foxo_SANGER_10, Lag1_SOLEXA, Cf2-PA_SANGER_2.5, phol_SOLEXA_5, CG12768_SANGER_5, salr-F3-5_SOLEXA_FBgn0000287, hb_NAR, Eip93F, schlank, pho, rib, Mes2, CG2052, foxo, schlank, Cf2, phol, CG12768, salr, hb, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, 4, 3, 1, 1, 6, 4, 0, 3, 3, 1, 5, 9, -1, 8.75e-07, 0.00181, 0.00249, 0.00258, 0.0052, 0.00534, 0.00854, 0.00893, 0.00936, 0.00996, 0.0105, 0.0117, 0.0171, 5e-04, 1.03, 1.42, 1.47, 2.97, 3.05, 4.88, 5.1, 5.34, 5.69, 6, 6.65, 9.74, 0.000999, 0.735, 0.735, 0.735, 1, 1, 1, 1, 1, 1, 1, 1, 1, +, +, +, +, +, +, -, +, +, +, +, -, +</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -269,7 +310,7 @@ Noble, "Quantifying similarity between motifs", Genome Biology, 8(2):R24,
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
