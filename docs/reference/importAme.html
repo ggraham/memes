@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse ame output — importAme • memes</title>
+<title>Parse AME output — importAme • memes</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,11 @@
 
 
 
-<meta property="og:title" content="Parse ame output — importAme" />
-<meta property="og:description" content="Parse ame output" />
+<meta property="og:title" content="Parse AME output — importAme" />
+<meta property="og:description" content="This imports AME results using the &quot;ame.tsv&quot; output, and optionally the
+&quot;sequences.tsv&quot; output if run with &quot;method = fisher&quot;. AME results differ
+based on the method used, thus this must be set on import or the column
+names will be incorrect." />
 
 
 
@@ -138,13 +141,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse ame output</h1>
+    <h1>Parse AME output</h1>
     <small class="dont-index">Source: <a href='https://github.com/snystrom/memes/blob/master/R/ame.R'><code>R/ame.R</code></a></small>
     <div class="hidden name"><code>importAme.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse ame output</p>
+    <p>This imports AME results using the "ame.tsv" output, and optionally the
+"sequences.tsv" output if run with "method = fisher". AME results differ
+based on the method used, thus this must be set on import or the column
+names will be incorrect.</p>
     </div>
 
     <pre class="usage"><span class='fu'>importAme</span><span class='op'>(</span><span class='va'>path</span>, method <span class='op'>=</span> <span class='st'>"fisher"</span>, sequences <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
@@ -159,7 +165,7 @@
     <tr>
       <th>method</th>
       <td><p>ame run method used (one of: c("fisher", "ranksum", "dmhg3",
-"dmhg4", "pearson", "spearman")). Default: "fisher". **NOTE:**</p></td>
+"dmhg4", "pearson", "spearman")). Default: "fisher".</p></td>
     </tr>
     <tr>
       <th>sequences</th>
@@ -174,6 +180,9 @@
   information. If sequences is set to a path to the sequences.tsv and method
   = "fisher", the list-column `sequences` will be appended to resulting
   data.frame.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[runAme()]</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>ame_tsv</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/ame.tsv"</span>, package <span class='op'>=</span> <span class='st'>"memes"</span><span class='op'>)</span>

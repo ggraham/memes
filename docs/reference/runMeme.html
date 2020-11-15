@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Identify motifs with MEME — runMeme" />
-<meta property="og:description" content="NOTE: add note about the hsfrac issue" />
+<meta property="og:description" content="MEME performs de-novo discovery of ungapped motifs present in the input
+sequences. It can be used in both discriminative and non-discriminative
+modes." />
 
 
 
@@ -144,7 +146,9 @@
     </div>
 
     <div class="ref-description">
-    <p>NOTE: add note about the hsfrac issue</p>
+    <p>MEME performs <em>de-novo</em> discovery of ungapped motifs present in the input
+sequences. It can be used in both discriminative and non-discriminative
+modes.</p>
     </div>
 
     <pre class="usage"><span class='fu'>runMeme</span><span class='op'>(</span>
@@ -215,7 +219,7 @@ as background requires an alternative objective function. Users must pass a non-
     </tr>
     <tr>
       <th>outdir</th>
-      <td><p>(default: "auto")</p></td>
+      <td><p>(default: "auto") Directory where output data will be stored.</p></td>
     </tr>
     <tr>
       <th>alph</th>
@@ -242,7 +246,7 @@ information (coerces output to list) (default: FALSE)</p></td>
       <td><p>path to "meme/bin/". If unset, will use default search
 behavior:</p><ol>
 <li><p><code>meme_path</code> setting in <code><a href='https://rdrr.io/r/base/options.html'>options()</a></code></p></li>
-<li><p><code>MEME_PATH</code> setting in <code>.Renviron</code></p></li>
+<li><p><code>MEME_PATH</code> setting in <code>.Renviron</code> or <code>.bashrc</code></p></li>
 </ol></td>
     </tr>
     <tr>
@@ -257,23 +261,6 @@ behavior:</p><ol>
 <code><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe()</a></code>). <code>sites_hits</code> is a nested data.frame
 column containing the position within each input sequence of matches to the
 identified motif.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Additional arguments</h3>
-
-
-<p><code>runMeme()</code> accepts all valid arguments to meme as arguments passed to <code>...</code>.
-For flags without values, pass them as <code>flag = TRUE</code>. The <code>dna</code>, <code>rna</code>, and
-<code>protein</code> flags should instead be passed to the <code>alph</code> argument of
-<code>runMeme()</code>.
-The arguments passed to MEME often have many interactions with each other,
-for a detailed description of each argument
-see the <a href='meme-suite.org/doc/meme.html'>MEME Help Page</a>.</p>
-<p>For use with ChIP-seq data, the suggestion is to set: <code>revcomp = TRUE, minw = 5, maxw = 20</code>.
-See using MEME with ChIP-Seq Data Tips: <a href='https://groups.google.com/forum/#%21topic/meme-suite/rIbjIHbcpAE'>https://groups.google.com/forum/#%21topic/meme-suite/rIbjIHbcpAE</a>
-for additional details.</p>
-
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 
     <p>If you use <code>runMeme()</code> in your analysis, please cite:</p>
@@ -294,7 +281,7 @@ license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite C
 <span class='fu'>runMeme</span><span class='op'>(</span><span class='va'>seqs</span>, parse_genomic_coord <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/ </div><div class='output co'>#&gt;       name altname family organism consensus alphabet strand  icscore nsites
+</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\| </div><div class='output co'>#&gt;       name altname family organism consensus alphabet strand  icscore nsites
 #&gt; 1 AMACMAMC  MEME-1   &lt;NA&gt;     &lt;NA&gt;  AMMCMAMC      DNA      + 4.569835      2
 #&gt;   bkgsites pval qval  eval
 #&gt; 1       NA   NA   NA 47000

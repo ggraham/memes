@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Drop best match info from tomtom results — drop_best_match • memes</title>
+<title>Drop best match columns from tomtom results — drop_best_match • memes</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,11 @@
 
 
 
-<meta property="og:title" content="Drop best match info from tomtom results — drop_best_match" />
+<meta property="og:title" content="Drop best match columns from tomtom results — drop_best_match" />
 <meta property="og:description" content="Convenience function for dropping all columns created by runTomTom prefixed
 by &quot;best_match_&quot; and the &quot;best_db_name&quot; column. Keeps the &quot;tomtom&quot; data.frame
-column. Can be useful if you want to unnest the `tomtom` data." />
+column. Can be useful if you want to unnest the `tomtom` data without
+propagating these columns." />
 
 
 
@@ -140,7 +141,7 @@ column. Can be useful if you want to unnest the `tomtom` data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Drop best match info from tomtom results</h1>
+    <h1>Drop best match columns from tomtom results</h1>
     <small class="dont-index">Source: <a href='https://github.com/snystrom/memes/blob/master/R/match_utils.R'><code>R/match_utils.R</code></a></small>
     <div class="hidden name"><code>drop_best_match.Rd</code></div>
     </div>
@@ -148,7 +149,8 @@ column. Can be useful if you want to unnest the `tomtom` data." />
     <div class="ref-description">
     <p>Convenience function for dropping all columns created by runTomTom prefixed
 by "best_match_" and the "best_db_name" column. Keeps the "tomtom" data.frame
-column. Can be useful if you want to unnest the `tomtom` data.</p>
+column. Can be useful if you want to unnest the `tomtom` data without
+propagating these columns.</p>
     </div>
 
     <pre class="usage"><span class='fu'>drop_best_match</span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></pre>

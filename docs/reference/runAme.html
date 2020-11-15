@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="See runAme Generic for details — runAme.list" />
-<meta property="og:description" content="See runAme Generic for details
-Motif enrichment using AME" />
+<meta property="og:description" content="AME identifies known motifs (provided by the user) that are enriched in your input sequences." />
 
 
 
@@ -145,8 +144,7 @@ Motif enrichment using AME" />
     </div>
 
     <div class="ref-description">
-    <p>See runAme Generic for details</p>
-<p>Motif enrichment using AME</p>
+    <p>AME identifies known motifs (provided by the user) that are enriched in your input sequences.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for list</span>
@@ -238,13 +236,13 @@ write to a temporary directory. default: "auto"</p></td>
       <th>database</th>
       <td><p>path to .meme format file, universalmotif list object, dreme
 results data.frame, or list() of multiple of these. If objects are assigned names in the list,
-that name will be used as the database id. It is highly recommended you set
-a name if not using a file path so the database name will be informative,
-otherwise the position in the list will be used as the database id. For
-example, if the input is: list("motifs.meme", list_of_motifs), the database
-id's will be: "motifs.meme" and "2". If the input is list("motifs.meme",
-"customMotifs" = list_of_motifs), the database id's will be "motifs.meme"
-and "customMotifs".</p></td>
+that name will be used as the database id in the output. It is highly
+recommended you set a name if not using a file path so the database name
+will be informative, otherwise the position in the list will be used as the
+database id. For example, if the input is: list("motifs.meme",
+list_of_motifs), the database id's will be: "motifs.meme" and "2". If the
+input is list("motifs.meme", "customMotifs" = list_of_motifs), the database
+id's will be "motifs.meme" and "customMotifs".</p></td>
     </tr>
     <tr>
       <th>meme_path</th>
@@ -256,7 +254,7 @@ search behavior as described in <code><a href='check_meme_install.html'>check_me
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> add results from <code>sequences.tsv</code> to <code>sequences</code>
 list column to returned data.frame. Valid only if method = "fisher". See
 <a href='http://alternate.meme-suite.org/doc/ame-output-format.html'>AME outputs</a>
-webpage for more information.</p></td>
+webpage for more information (Default: FALSE).</p></td>
     </tr>
     <tr>
       <th>silent</th>
@@ -274,7 +272,15 @@ webpage for more information.</p></td>
 input, returns a list of data.frames.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Additional AME arguments</p>
+    <p>AME can be run using several modes:</p><ol>
+<li><p>Discriminative mode: to discover motifs enriched relative to shuffled
+input, or a set of provided control sequences</p></li>
+<li><p>Partitioning mode: in which AME uses some biological signal to identify
+the association between the signal and motif presence.</p></li>
+</ol>
+
+<p>To read more about how AME works, see the <a href='http://meme-suite.org/doc/ame-tutorial.html'>AME Tutorial</a></p>
+<p>Additional AME arguments</p>
 <p>memes allows passing any valid flag to it's target programs via <code>...</code>. For
 additional details for all valid AME arguments, see the <a href='http://meme-suite.org/doc/ame.html'>AME Manual</a> webpage. For convenience, a table
 of valid parameters, and brief descriptions of their function are provided
@@ -299,18 +305,17 @@ below:</p><table class='table'>
 </table>
 
 
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Licensing</h3>
-
-
-<p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
-license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite Copyright Page</a> for details.</p>
-
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 
     <p>If you use <code>runAme()</code> in your analysis, please cite:</p>
 <p>Robert McLeay and Timothy L. Bailey, "Motif Enrichment Analysis: A unified
 framework and method evaluation", BMC Bioinformatics, 11:165, 2010,
-doi:10.1186/1471-2105-11-165. <a href='http://www.biomedcentral.com/1471-2105/11/165'>full text</a></p>
+doi:10.1186/1471-2105-11-165. <a href='http://www.biomedcentral.com/1471-2105/11/165'>full text</a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Licensing</h3>
+
+
+<p>The MEME Suite is free for non-profit use, but for-profit users should purchase a
+license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite Copyright Page</a> for details.</p>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='meme_is_installed.html'>meme_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
@@ -331,7 +336,7 @@ doi:10.1186/1471-2105-11-165. <a href='http://www.biomedcentral.com/1471-2105/11
 <span class='co'># database can be set to multiple values like so: </span>
 <span class='fu'>runAme</span><span class='op'>(</span><span class='va'>seqs</span>, database <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>motif_file</span>, <span class='st'>"my_dreme_motifs"</span> <span class='op'>=</span> <span class='va'>dreme_results</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\ </div><div class='output co'>#&gt; <span class='message'>AME detected no enrichment</span></div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/- </div><div class='output co'>#&gt; <span class='message'>AME detected no enrichment</span></div><div class='output co'>#&gt; NULL</div></pre>
+</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/- </div><div class='output co'>#&gt; <span class='message'>AME detected no enrichment</span></div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\ </div><div class='output co'>#&gt; <span class='message'>AME detected no enrichment</span></div><div class='output co'>#&gt; NULL</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Returns logical vector indicating valid MEME-Suite install status — meme_is_installed" />
-<meta property="og:description" content="Checks for a valid meme install using same heirarchy as `search_meme_path()`.
+<meta property="og:description" content="Checks for a valid meme install using same heirarchy as `check_meme_install()`.
 Returns `TRUE` if all supported utilities are found in the meme install
 location, `FALSE` if not." />
 
@@ -146,7 +146,7 @@ location, `FALSE` if not." />
     </div>
 
     <div class="ref-description">
-    <p>Checks for a valid meme install using same heirarchy as `search_meme_path()`.
+    <p>Checks for a valid meme install using same heirarchy as `check_meme_install()`.
 Returns `TRUE` if all supported utilities are found in the meme install
 location, `FALSE` if not.</p>
     </div>
@@ -165,6 +165,13 @@ location, `FALSE` if not.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>`logical(1)` indicating whether meme is installed with all supported utilities</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The search heirarchy is as follows:
+ 1. the `meme_path` function argument if set
+ 2. the `meme_bin` option
+ 3. the `MEME_BIN` environment variable
+ 4. the default location at `~/meme/bin`</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>search_meme_path check_meme_install</p></div>

@@ -158,11 +158,15 @@
     </tr>
     <tr>
       <th>genome</th>
-      <td><p>BSgenome object or any other valid input to `Biostrings::getSeq()` (Do `showMethods(Biostrings::getSeq)` to show valid types)</p></td>
+      <td><p>BSgenome object or any other valid input to
+`Biostrings::getSeq()` (Do `showMethods(Biostrings::getSeq)` to show valid
+types)</p></td>
     </tr>
     <tr>
       <th>name</th>
-      <td><p>name of metadata column to hold sequence information (default: "sequence")</p></td>
+      <td><p>name of metadata column to hold sequence information (default:
+"sequence"). Note, this will overwrite existing columns without warning if
+the name already exists.</p></td>
     </tr>
     </table>
 

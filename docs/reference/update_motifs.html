@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Update the `motif` column to data.frame values — update_motifs • memes</title>
+<title>Update the motif column to data.frame values — update_motifs • memes</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Update the `motif` column to data.frame values — update_motifs" />
-<meta property="og:description" content="Update the `motif` column to data.frame values" />
+<meta property="og:title" content="Update the motif column to data.frame values — update_motifs" />
+<meta property="og:description" content="Update the motif column to data.frame values" />
 
 
 
@@ -138,13 +138,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Update the `motif` column to data.frame values</h1>
+    <h1>Update the <code>motif</code> column to data.frame values</h1>
     <small class="dont-index">Source: <a href='https://github.com/snystrom/memes/blob/master/R/motif_utils.R'><code>R/motif_utils.R</code></a></small>
     <div class="hidden name"><code>update_motifs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Update the `motif` column to data.frame values</p>
+    <p>Update the <code>motif</code> column to data.frame values</p>
     </div>
 
     <pre class="usage"><span class='fu'>update_motifs</span><span class='op'>(</span><span class='va'>.data</span><span class='op'>)</span></pre>
@@ -154,21 +154,23 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>data.frame with `motif` column</p></td>
+      <td><p>data.frame with <code>motif</code> column</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>.data where `motif` column has been updated to reflect the values
-  from columns sharing names with unprotected universalmotif slots. Names of
-  `motif` list are updated to reflect name.</p>
+    <p>.data where <code>motif</code> column has been updated to reflect the values
+from columns sharing names with unprotected universalmotif slots. Names of
+<code>motif</code> list are updated to reflect name.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>**NOTE** that `consensus`, `alphabet`, `multifreq`, and `icscore` are protected columns and
-cannot be updated. Any changes to these columns will be ignored when updating motifs.</p>
-<p>## Table of values updated</p>
-<p>| `motif`  | `data.frame` |
+    <p><strong>NOTE</strong> that <code>consensus</code>, <code>alphabet</code>, <code>multifreq</code>, and <code>icscore</code> are protected columns and
+cannot be updated. Any changes to these columns will be <strong>ignored</strong> when updating motifs.</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Table of values updated</h3>
+
+
+<p>TODO: change this table to be all universalmotif.dataframe names, w/ second column of "updated: yes/no".
+| <code>motif</code>  | <code>data.frame</code> |
 |:--------:|:------------:|
 | name     | name         |
 | altname  | altname      |
@@ -180,6 +182,7 @@ cannot be updated. Any changes to these columns will be ignored when updating mo
 | pval     | pval         |
 | qval     | qval         |
 | eval     | eval         |</p>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>motif</span> <span class='op'>&lt;-</span> <span class='fu'>universalmotif</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span><span class='op'>(</span><span class='op'>)</span>

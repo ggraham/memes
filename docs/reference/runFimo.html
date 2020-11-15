@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run FIMO on input sequences — runFimo • memes</title>
+<title>Find instances of motifs using FIMO — runFimo • memes</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Run FIMO on input sequences — runFimo" />
-<meta property="og:description" content="NOTE: runs best using text = TRUE, setting genomic coordinates in fasta
-headers, and using parse_genomic_coord = TRUE." />
+<meta property="og:title" content="Find instances of motifs using FIMO — runFimo" />
+<meta property="og:description" content="FIMO scans input sequences to identify the positions of matches to each input
+motif. FIMO has no sequence length or motif number restrictions." />
 
 
 
@@ -139,14 +139,14 @@ headers, and using parse_genomic_coord = TRUE." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run FIMO on input sequences</h1>
+    <h1>Find instances of motifs using FIMO</h1>
     <small class="dont-index">Source: <a href='https://github.com/snystrom/memes/blob/master/R/fimo.R'><code>R/fimo.R</code></a></small>
     <div class="hidden name"><code>runFimo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>NOTE: runs best using <code>text = TRUE</code>, setting genomic coordinates in fasta
-headers, and using <code>parse_genomic_coord = TRUE</code>.</p>
+    <p>FIMO scans input sequences to identify the positions of matches to each input
+motif. FIMO has no sequence length or motif number restrictions.</p>
     </div>
 
     <pre class="usage"><span class='fu'>runFimo</span><span class='op'>(</span>
@@ -176,8 +176,8 @@ headers, and using <code>parse_genomic_coord = TRUE</code>.</p>
     </tr>
     <tr>
       <th>bfile</th>
-      <td><p>path to background file, or special values: "motif", or
-"uniform" to use 0-order frequencies contained in the motif, or a uniform
+      <td><p>path to background file, or special values: "motif" to use
+0-order frequencies contained in the motif, or "uniform" to use a uniform
 letter distribution. (default: "motif")</p></td>
     </tr>
     <tr>
@@ -189,10 +189,11 @@ input, this will be a temporary location unless explicity set.</p></td>
     <tr>
       <th>parse_genomic_coord</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether to parse genomic position
-from fasta name. Fasta names must be UCSC format positions (ie
-"chr:start-end"). If names of fasta entries are genomic coordinates and
-parse_genomic_coord == TRUE, results will contain positions of motif matches,
-otherwise FIMO will count positions from 1 to length of fasta file.</p></td>
+from fasta headers. Fasta headers must be UCSC format positions (ie
+"chr:start-end"), but base 1 indexed (GRanges format). If names of fasta
+entries are genomic coordinates and parse_genomic_coord == TRUE, results
+will contain genomic coordinates of motif matches, otherwise FIMO will return
+relative coordinates (i.e. positions from 1 to length of the fasta entry).</p></td>
     </tr>
     <tr>
       <th>skip_matched_sequence</th>
@@ -204,43 +205,51 @@ set to FALSE. <code><a href='add_sequence.html'>add_sequence()</a></code> can be
     <tr>
       <th>max_strand</th>
       <td><p>if match is found on both strands, only report strand with
-best match.</p></td>
+best match (default: TRUE).</p></td>
     </tr>
     <tr>
       <th>text</th>
-      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> (default: <code>TRUE</code>). No output files will be created on the filesystem.
-The results are unsorted and no q-values are computed. This setting allows
-fast searches on very large inputs.</p></td>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> (default: <code>TRUE</code>). No output files will be created
+on the filesystem. The results are unsorted and no q-values are computed.
+This setting allows fast searches on very large inputs. When set to <code>FALSE</code>
+FIMO will discard 50% of the lower significance matches if &gt;100,000 matches are
+detected. <code>text = FALSE</code> will also incur a performance penalty because it
+must first read a file to disk, then read it into memory. For these reasons,
+I suggest keeping <code>text = TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>meme_path</th>
       <td><p>path to <code>meme/bin/</code> (optional). Defaut: <code>NULL</code>, searches
-"MEME_PATH" environment variable or "meme_path" option.</p></td>
+"MEME_PATH" environment variable or "meme_path" option for path to "meme/bin/".</p></td>
     </tr>
     <tr>
       <th>silent</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether to suppress stdout/stderr printing to
-terminal (default: TRUE). NOTE: if <code>text = TRUE</code>, setting <code>silent = TRUE</code>
-will print all FIMO matches to terminal if the run is successful. Can be
-useful for troubleshooting.</p></td>
+console (default: TRUE). If the command is failing or giving unexpected
+output, setting <code>silent = FALSE</code> can aid troubleshooting.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional commandline arguments to fimo see:
-<a href='http://meme-suite.org/doc/fimo.html?man_type=web'>Fimo web manual</a> and the FIMO Flag table below</p></td>
+      <td><p>additional commandline arguments to fimo. See the FIMO Flag table below.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>GenomicRanges object contining positions of each match. Note: if
-<code>parse_genomic_coords = FALSE</code>, each <code>seqnames</code> entry will be the fasta
-header, and start/end will be the position within that sequence of the
-match. It is a good idea to use <code>parse_genomic_coords = TRUE</code> if using
-<code><a href='get_sequence.html'>get_sequence()</a></code> to create input sequences.</p>
+    <p>GRanges object containing positions of each match. Note: if
+<code>parse_genomic_coords = FALSE</code>, each <code>seqnames</code> entry will be the full fasta
+header, and start/end will be the relative position within that sequence of the
+match. The GRanges object has the following additional <code>mcols</code>:
+* motif_id = primary name of matched motif
+* motif_alt_id = alternate name of matched motif
+* score = score of match (higher score is a better match)
+* pvalue = pvalue of the match
+* qvalue = qvalue of the match
+* matched_sequence = sequence that matches the motif</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Additional arguments passed to <code>...</code></p><table class='table'>
+    <p>Additional arguments passed to <code>...</code>. See: <a href='http://meme-suite.org/doc/fimo.html?man_type=web'>Fimo web manual</a>
+for a complete description of FIMO flags.</p><table class='table'>
 <tr><td>FIMO Flag</td><td>allowed values</td><td>default</td><td>description</td></tr>
 <tr><td>alpha</td><td><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code></td><td>1</td><td>alpha for calculating position-specific priors. Represents fraction of sites that are binding sites of TF of interest. Used in conjunction with <code>psp</code></td></tr>
 <tr><td>bfile</td><td>"motif", "motif-file", "uniform", file path,</td><td>"motif"</td><td>If "motif" or "motif-file", use 0-order letter frequencies from motif. "uniform" sets uniform letter frequencies.</td></tr>
@@ -278,6 +287,7 @@ Scanning for occurrences of a given motif", Bioinformatics, 27(7):1017-1018,
 <span class='va'>motif</span> <span class='op'>&lt;-</span> <span class='fu'>universalmotif</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/universalmotif/man/create_motif.html'>create_motif</a></span><span class='op'>(</span><span class='op'>)</span>
 
 <span class='co'># Search for motif in sequences</span>
+<span class='co'># parse_genomic_coord set to FALSE since fasta headers aren't in "chr:start-end" format.</span>
 <span class='fu'>runFimo</span><span class='op'>(</span><span class='va'>seq</span>, <span class='va'>motif</span>, parse_genomic_coord <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; GRanges object with 2 ranges and 6 metadata columns:
