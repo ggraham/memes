@@ -40,9 +40,9 @@
 
 
 <meta property="og:title" content="Returns logical vector indicating valid MEME-Suite install status — meme_is_installed" />
-<meta property="og:description" content="Checks for a valid meme install using same heirarchy as `check_meme_install()`.
-Returns `TRUE` if all supported utilities are found in the meme install
-location, `FALSE` if not." />
+<meta property="og:description" content="Checks for a valid meme install using same heirarchy as check_meme_install().
+Returns TRUE if all supported utilities are found in the meme install
+location, FALSE if not." />
 
 
 
@@ -146,9 +146,9 @@ location, `FALSE` if not." />
     </div>
 
     <div class="ref-description">
-    <p>Checks for a valid meme install using same heirarchy as `check_meme_install()`.
-Returns `TRUE` if all supported utilities are found in the meme install
-location, `FALSE` if not.</p>
+    <p>Checks for a valid meme install using same heirarchy as <code><a href='check_meme_install.html'>check_meme_install()</a></code>.
+Returns <code>TRUE</code> if all supported utilities are found in the meme install
+location, <code>FALSE</code> if not.</p>
     </div>
 
     <pre class="usage"><span class='fu'>meme_is_installed</span><span class='op'>(</span>path <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
@@ -164,17 +164,19 @@ location, `FALSE` if not.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>`logical(1)` indicating whether meme is installed with all supported utilities</p>
+    <p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> indicating whether meme is installed with all supported utilities</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The search heirarchy is as follows:
- 1. the `meme_path` function argument if set
- 2. the `meme_bin` option
- 3. the `MEME_BIN` environment variable
- 4. the default location at `~/meme/bin`</p>
+    <p>The search heirarchy is as follows:</p><ol>
+<li><p>the <code>meme_path</code> function argument if set</p></li>
+<li><p>the <code>meme_bin</code> option</p></li>
+<li><p>the <code>MEME_BIN</code> environment variable</p></li>
+<li><p>the default location at <code>~/meme/bin</code></p></li>
+</ol>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>search_meme_path check_meme_install</p></div>
+    <div class='dont-index'><p><code>search_meme_path()</code> <code><a href='check_meme_install.html'>check_meme_install()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>meme_is_installed</span><span class='op'>(</span><span class='op'>)</span>
