@@ -74,7 +74,7 @@ modes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
       </span>
     </div>
 
@@ -261,6 +261,33 @@ behavior:</p><ol>
 <code><a href='as_universalmotif_dataframe.html'>as_universalmotif_dataframe()</a></code>). <code>sites_hits</code> is a nested data.frame
 column containing the position within each input sequence of matches to the
 identified motif.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Note that MEME can take a long time to run. The more input sequences used,
+the wider the motifs searched for, and the more motifs MEME is asked to
+discover will drastically affect runtime. For this reason, MEME usually
+performs best on a few (&lt;50) short (100-200 bp) sequences, although this is
+not a requirement. Additional details on how data size affects runtime can be
+found <a href='https://groups.google.com/g/meme-suite/c/7b7PBr6RzJk'>here</a>.</p>
+<p>MEME works best when specifically tuned to the analysis question. The default
+settings are unlikely to be ideal. It has several complex arguments
+<a href='http://meme-suite.org/doc/meme.html'>documented here</a>, which <code>runMeme()</code>
+accepts as R function arguments (see details below).</p>
+<p>If discovering motifs within ChIP-seq, ATAC-seq, or similar peaks, MEME may perform
+best if using sequences flaking the summit (the site of maximum signal) of
+each peak rather than the center. ChIP-seq or similar data can also benefit
+from setting <code>revcomp = TRUE, minw = 5, maxw = 20</code>. For more tips on using
+MEME to analyze ChIP-seq data, see the following
+<a href='https://groups.google.com/forum/#%21topic/meme-suite/rIbjIHbcpAE'>tips page</a>.</p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Additional arguments</h3>
+
+
+<p><code>runMeme()</code> accepts all valid arguments to meme as arguments passed to <code>...</code>.
+For flags without values, pass them as <code>flag = TRUE</code>. The <code>dna</code>, <code>rna</code>, and
+<code>protein</code> flags should instead be passed to the <code>alph</code> argument of
+<code>runMeme()</code>.  The arguments passed to MEME often have many interactions
+with each other, for a detailed description of each argument see
+<a href='meme-suite.org/doc/meme.html'>MEME Help Documentation</a>.</p>
+
     <h2 class="hasAnchor" id="citation"><a class="anchor" href="#citation"></a>Citation</h2>
 
     <p>If you use <code>runMeme()</code> in your analysis, please cite:</p>
@@ -281,7 +308,7 @@ license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite C
 <span class='fu'>runMeme</span><span class='op'>(</span><span class='va'>seqs</span>, parse_genomic_coord <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\| </div><div class='output co'>#&gt;       name altname family organism consensus alphabet strand  icscore nsites
+</div><div class='output co'>#&gt; -\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/- </div><div class='output co'>#&gt;       name altname family organism consensus alphabet strand  icscore nsites
 #&gt; 1 AMACMAMC  MEME-1   &lt;NA&gt;     &lt;NA&gt;  AMMCMAMC      DNA      + 4.569835      2
 #&gt;   bkgsites pval qval  eval
 #&gt; 1       NA   NA   NA 47000

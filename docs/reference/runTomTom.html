@@ -73,7 +73,7 @@ identify matches." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">memes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
       </span>
     </div>
 
@@ -155,34 +155,9 @@ identify matches.</p>
   outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
   thresh <span class='op'>=</span> <span class='fl'>10</span>,
   min_overlap <span class='op'>=</span> <span class='fl'>5</span>,
-  dist <span class='op'>=</span> <span class='st'>"ed"</span>,
+  dist <span class='op'>=</span> <span class='st'>"pearson"</span>,
   evalue <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span>
-
-<span class='co'># S3 method for list</span>
-<span class='fu'>runTomTom</span><span class='op'>(</span>
-  <span class='va'>input</span>,
-  database <span class='op'>=</span> <span class='cn'>NULL</span>,
-  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
-  thresh <span class='op'>=</span> <span class='fl'>10</span>,
-  min_overlap <span class='op'>=</span> <span class='fl'>5</span>,
-  dist <span class='op'>=</span> <span class='st'>"ed"</span>,
-  evalue <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span>
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>runTomTom</span><span class='op'>(</span>
-  <span class='va'>input</span>,
-  database <span class='op'>=</span> <span class='cn'>NULL</span>,
-  outdir <span class='op'>=</span> <span class='st'>"auto"</span>,
-  thresh <span class='op'>=</span> <span class='fl'>10</span>,
-  min_overlap <span class='op'>=</span> <span class='fl'>5</span>,
-  dist <span class='op'>=</span> <span class='st'>"ed"</span>,
-  evalue <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  silent <span class='op'>=</span> <span class='cn'>TRUE</span>,
   meme_path <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -197,7 +172,9 @@ or a universalmotif data.frame object (such as the output of <code><a href='runD
     </tr>
     <tr>
       <th>database</th>
-      <td><p>path to .meme format file to use as reference database (or list of universalmotifs)</p></td>
+      <td><p>path to .meme format file to use as reference database (or
+list of universalmotifs). <strong>NOTE:</strong> p-value estimates are inaccurate when
+the database has fewer than 50 entries.</p></td>
     </tr>
     <tr>
       <th>outdir</th>
@@ -219,12 +196,16 @@ the minimum value</p></td>
     <tr>
       <th>dist</th>
       <td><p>distance metric. Valid arguments: <code>allr | ed | kullback | pearson | sandelin | blic1 | blic5 | llr1 | llr5</code>.
-Default: <code>ed</code>.</p></td>
+Default: <code>pearson</code>.</p></td>
     </tr>
     <tr>
       <th>evalue</th>
       <td><p>whether to use E-value as significance threshold (default:
 <code>TRUE</code>). If evalue = FALSE, uses <em>q-value</em> instead.</p></td>
+    </tr>
+    <tr>
+      <th>silent</th>
+      <td><p>suppress printing stderr to console (default: TRUE).</p></td>
     </tr>
     <tr>
       <th>meme_path</th>
@@ -298,13 +279,13 @@ license. See the <a href='http://meme-suite.org/doc/copyright.html'>MEME Suite C
 #&gt;                                                       best_match_motif
 #&gt; 1 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
 #&gt;              best_db_name best_match_offset best_match_pvalue best_match_evalue
-#&gt; 1 flyFactorSurvey_cleaned                 4          1.74e-07          9.94e-05
+#&gt; 1 flyFactorSurvey_cleaned                 4          8.75e-07             5e-04
 #&gt;   best_match_qvalue best_match_strand
-#&gt; 1          0.000199                 +
+#&gt; 1          0.000999                 +
 #&gt;                                                                  motif
 #&gt; 1 &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;
-#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                tomtom
-#&gt; 1 Eip93F_SANGER_10, rib_SANGER_5, salr-F3-5_SOLEXA_FBgn0000287, Ets65A_SANGER_10, CG12768_SANGER_5, Eip93F, rib, salr, Ets65A, CG12768, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, 4, 1, 9, 0, 5, 1.74e-07, 0.00159, 0.00722, 0.0119, 0.015, 9.94e-05, 0.91, 4.12, 6.78, 8.57, 0.000199, 0.91, 1, 1, 1, +, +, -, +, +</div></pre>
+#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            tomtom
+#&gt; 1 Eip93F_SANGER_10, Lag1_Cell, pho_SOLEXA_5, rib_SANGER_5, Mes2_SANGER_5, CG2052_SANGER_2.5, foxo_SANGER_10, Lag1_SOLEXA, Cf2-PA_SANGER_2.5, phol_SOLEXA_5, CG12768_SANGER_5, salr-F3-5_SOLEXA_FBgn0000287, hb_NAR, Eip93F, schlank, pho, rib, Mes2, CG2052, foxo, schlank, Cf2, phol, CG12768, salr, hb, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, &lt;S4 class ‘universalmotif’ [package “universalmotif”] with 20 slots&gt;, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, flyFactorSurvey_cleaned, 4, 3, 1, 1, 6, 4, 0, 3, 3, 1, 5, 9, -1, 8.75e-07, 0.00181, 0.00249, 0.00258, 0.0052, 0.00534, 0.00854, 0.00893, 0.00936, 0.00996, 0.0105, 0.0117, 0.0171, 5e-04, 1.03, 1.42, 1.47, 2.97, 3.05, 4.88, 5.1, 5.34, 5.69, 6, 6.65, 9.74, 0.000999, 0.735, 0.735, 0.735, 1, 1, 1, 1, 1, 1, 1, 1, 1, +, +, +, +, +, +, -, +, +, +, +, -, +</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
