@@ -25,6 +25,7 @@ Imports:
     methods,
     processx,
     purrr,
+    plyranges (>= 1.9.1),
     rlang,
     readr,
     stats,
@@ -45,7 +46,6 @@ Suggests:
     MotifDb,
     pheatmap,
     PMCMRplus,
-    plyranges (>= 1.9.1),
     rmarkdown,
     covr
 biocViews: DataImport, FunctionalGenomics, GeneRegulation, MotifAnnotation, MotifDiscovery, SequenceMatching, Software
